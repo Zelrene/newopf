@@ -1,14 +1,12 @@
-from turtle import title
-from markupsafe import escape
 from flask import Flask, abort, render_template, request, redirect
 from src import controller
+from src.models import tickets
+
 app = Flask(__name__)
 
+def index():
+	return '<h1>Hello, World!</h1>'
 
-@app.route('/')
-def hello():
-		return '<h1>Hello World!</h1>'
-		
 @app.route('/create_tickets.html', methods = ['GET', 'POST'])
 def create_tickets():
 	if request.method == 'GET':
@@ -30,3 +28,7 @@ def create_tickets():
 @app.route('/view_tickets.html')
 def view_tickets():
 	return render_template('view_tickets.html')
+
+
+if __name__ == '__main__':
+    app.run()
