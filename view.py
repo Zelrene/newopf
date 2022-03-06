@@ -7,9 +7,9 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def index():
-	return render_template('index.html')
-
+def hello():
+		return '<h1>Hello World!</h1>'
+		
 @app.route('/create_tickets.html', methods = ['GET', 'POST'])
 def create_tickets():
 	if request.method == 'GET':
@@ -30,4 +30,4 @@ def create_tickets():
 
 @app.route('/view_tickets.html')
 def view_tickets():
-	return render_template('view_tickets.html', tickets = tickets)
+	return render_template('view_tickets.html')
