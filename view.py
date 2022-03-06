@@ -1,8 +1,7 @@
-from turtle import title
-from markupsafe import escape
-from flask import Flask, abort, render_template, request, redirect
+from flask import Flask, render_template, request, redirect
 from src import controller
-from src import tickets
+from src.models import tickets
+
 app = Flask(__name__)
 
 
@@ -31,3 +30,6 @@ def create_tickets():
 @app.route('/view_tickets.html')
 def view_tickets():
 	return render_template('view_tickets.html')
+
+if __name__ == '__main__':
+    app.run()
