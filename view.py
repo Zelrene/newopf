@@ -22,7 +22,7 @@ def create_tickets():
 		contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
 
-		return redirect('/')
+		return redirect('view_tickets.html')
 
 
 
