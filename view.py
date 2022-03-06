@@ -7,9 +7,9 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def index():
-	return render_template('index.html')
-
+def hello():
+		return '<h1>Hello World!</h1>'
+		
 @app.route('/create_tickets.html', methods = ['GET', 'POST'])
 def create_tickets():
 	if request.method == 'GET':
