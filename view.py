@@ -1,8 +1,10 @@
-from turtle import title
-from markupsafe import escape
+#from turtle import title
+#from markupsafe import escape
 from flask import Flask, abort, render_template, request, redirect
 from src import controller
-from src import tickets
+from src.models import tickets
+from src.templates import layout
+
 app = Flask(__name__)
 
 
