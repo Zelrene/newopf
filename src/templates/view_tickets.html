@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
     <head>
 
@@ -12,20 +13,69 @@
             <tr>
                 <th>
                     <p>
-
+                        Title
                     </p>
                 </th>
                 <th>
                     <p>
-                        
+                        Status
                     </p>   
                 </th>
                 <th>
-                    <p>x
-                        
+                    <p>
+                        ID
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        Severity
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        Date Requested
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        Location
                     </p>
                 </th>
             </tr>
+            {% for ticket in tickets %}
+            <tr>
+                <th>
+                    <p>
+                        {{ ticket.title }}
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        {{ ticket.status }}
+                    </p>   
+                </th>
+                <th>
+                    <p>
+                        {{ ticket.id }}
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        {{ ticket.severity }}
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        {{ ticket.date_requested }}
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        {{ ticket.location }}
+                    </p>
+                </th>
+            </tr>
+            {% endfor %}
         </table>
     </body>
 </html>
