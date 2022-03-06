@@ -23,8 +23,7 @@ def create_tickets():
 		unit = request.form['Unit#']
 		contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
-		tickets = tickets(title=title, description=description, location=location, building=building, unit=unit, contact=contact, additonalNotes=additonalNotes)
-		return redirect('/')
+		return redirect('view_tickets.html')
 
 
 
@@ -46,7 +45,7 @@ def view_tickets():
 	"contact": "student2@nevada.unr.edu", 
 	"additionalNotes": "N/A"},
 	]
-	return render_template('view_tickets.html')
+	return render_template('view_tickets.html', tickets=ticket_list)
 
 
 if __name__ == '__main__':
