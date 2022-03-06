@@ -2,7 +2,6 @@ from turtle import title
 from markupsafe import escape
 from flask import Flask, abort, render_template, request, redirect
 from src import controller
-from src import tickets
 app = Flask(__name__)
 
 
