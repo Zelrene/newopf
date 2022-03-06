@@ -1,11 +1,12 @@
-<!doctype html>
 {% include "layout.html" %}
+
+<!doctype html>
 
 <html>
     <head>
 
     </head>
-    <body>
+    {% block content %}
         <div>
             <!--<p>
                 View All Tickets
@@ -80,5 +81,5 @@
             </tr>
             {% endfor %}
         </table>
-    </body>
+    {% endblock %}
 </html>
