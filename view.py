@@ -1,9 +1,9 @@
 from flask import Flask, abort, render_template, request, redirect
 from src import controller
 from src.models import tickets
-
+from bootstrap_flask import Bootstrap
 app = Flask(__name__)
-
+bootstrap = Bootstrap(app)
 @app.route('/')
 def index():
 	return '<h1>Hello, World!</h1>'
