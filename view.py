@@ -1,10 +1,17 @@
 
 from re import T
 from flask import Flask, abort, render_template, request, redirect
+from flask_sqlalchemy import SQLAlchemy
 from src import controller
-from src.models import tickets
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db= SQLAlchemy(app)
+
+from src.models import ticket
+from src import db_connector as dbc
+
+db_c = dbc.DB_Connector()
 
 @app.route('/')
 def index():
