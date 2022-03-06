@@ -2,6 +2,7 @@ from turtle import title
 from markupsafe import escape
 from flask import Flask, abort, render_template, request, redirect
 from src import controller
+from src import tickets
 app = Flask(__name__)
 
 
@@ -15,13 +16,13 @@ def create_tickets():
 		return render_template('create_tickets.html')
 	
 	if request.method == 'POST':
-		Title = request.form['Title']
-		Description = request.form['Description']
-		Location = request.form['Location']
-		Building = request.form['Building']
-		Unit = request.form['Unit#']
-		Contact = request.form['Contact']
-		AdditonalNotes = request.form['AdditionalNotes']
+		title = request.form['Title']
+		description = request.form['Description']
+		location = request.form['Location']
+		building = request.form['Building']
+		unit = request.form['Unit#']
+		contact = request.form['Contact']
+		additonalNotes = request.form['AdditionalNotes']
 
 		return redirect('/')
 
