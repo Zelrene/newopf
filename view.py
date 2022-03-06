@@ -30,4 +30,4 @@ def create_tickets():
 
 @app.route('/view_tickets.html')
 def view_tickets():
-	return render_template('view_tickets.html', tickets = tickets)
+	return render_template('view_tickets.html')
