@@ -3,7 +3,7 @@ from re import T
 from flask import Flask, abort, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from src import controller
-from src.models import tickets
+from src.models import ticket
 from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
@@ -15,7 +15,6 @@ from src.models import ticket
 from src import db_connector as dbc
 
 db_c = dbc.DB_Connector()
->>>>>>> main
 
 @app.route('/')
 def index():
