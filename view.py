@@ -7,6 +7,7 @@ app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db= SQLAlchemy(app)
+database_engine =  create_engine('sqlite:///app/database.db')
 
 from src.models import ticket
 from src import db_connector as dbc
