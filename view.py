@@ -37,7 +37,7 @@ def create_tickets():
 
 @app.route('/view_tickets.html')
 def view_tickets():
-	ticket_list = [tickets.tickets(title="Faucet Leak", 
+	ticket_list = [ticket.Ticket(title="Faucet Leak", 
 	description="Water leaking", 
 	location="Bathroom", 
 	building="Argenta Hall", 
