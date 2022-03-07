@@ -14,6 +14,8 @@ from src.models import ticket
 from src import db_connector as dbc
 
 db_c = dbc.DB_Connector()
+#controller_1 = controller.Controller()
+
 
 @app.route('/')
 def index():
@@ -29,11 +31,13 @@ def create_tickets():
 		description = request.form['Description']
 		location = request.form['Location']
 		building = request.form['Building']
+		severity_level = request.form['Severity_level']
 		unit = request.form['Unit#']
 		contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
-
-		db_c.add_ticket(title, "pending", description, "low", building, unit, location, additonalNotes, contact)
+		
+		db_c.add_ticket(title, "pending", description, severity_level, building, unit, location, additonalNotes, contact)
+		#controller_1.add_ticket_to_db( db_c, title, description, location, building, severity_level, unit, contact, additonalNotes)
 
 		return redirect('view_tickets.html')
 
