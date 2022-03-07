@@ -1,13 +1,17 @@
+{% include "layout.html" %}
+
 <!doctype html>
+
 <html>
     <head>
 
     </head>
-    <body>
+    {% block content %}
         <div>
-            <p>
+            <!--<p>
                 View All Tickets
-            </p>
+            </p> -->
+            {% block title %}View All Tickets{% endblock %}
         </div>
         <table>
             <tr>
@@ -77,5 +81,5 @@
             </tr>
             {% endfor %}
         </table>
-    </body>
+    {% endblock %}
 </html>

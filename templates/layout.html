@@ -1,14 +1,16 @@
-<!DOCTYPE html>
 {% extends "bootstrap/base.html" %}
 
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        {% block title %} Example Page Title {% endblock %}
+        <title>{% block title %}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        {% block content %}
-            <h1>Heading 1: Bootstrap</h1>
-        {% endblock %}
     </head>
+    <body>
+        {% block content %}
+            <div class="container">
+                <h1>Optimum Property Fix</h1>
+            </div>
+        {% endblock %}
+    </body>
 </html>
