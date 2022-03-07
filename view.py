@@ -6,7 +6,7 @@ from flask_bootstrap import Bootstrap
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-db= SQLAlchemy(app)
+db = SQLAlchemy(app)
 #the create_engine is creating an error so, i'll comment it out for now  
 #database_engine =  create_engine('sqlite:///app/database.db')
 
@@ -32,6 +32,9 @@ def create_tickets():
 		unit = request.form['Unit#']
 		contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
+
+		db_c.add_ticket(title, "pending", description, "low", building, unit, location, additonalNotes, contact)
+
 		return redirect('view_tickets.html')
 
 
