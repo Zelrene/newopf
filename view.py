@@ -14,6 +14,7 @@ from src import db_connector as dbc
 
 db_c = dbc.DB_Connector()
 
+
 @app.route('/')
 def index():
 	return '<h1>Hello, World!</h1>'
@@ -26,6 +27,9 @@ def create_tickets():
 	if request.method == 'POST':
 		title = request.form['Title']
 		description = request.form['Description']
+		status = request.form['Status']
+		severity_level = request.form['SeverityLevel']
+		id = request.form['ID']
 		location = request.form['Location']
 		building = request.form['Building']
 		unit = request.form['Unit#']
@@ -37,22 +41,17 @@ def create_tickets():
 
 @app.route('/view_tickets.html')
 def view_tickets():
-	tickets = []
-	ticket_list = [{"title": "Faucet Leak",
-	 "description": "Faucet is broken and leaking water", 
-	"location": "Bathroom", 
-	"building": "Argenta Hall", 
-	"unit": "23A", 
-	"contact": "student@nevada.unr.edu", 
-	"additionalNotes": "N/A"},
-	{"title": "Clogged Drain",
-	 "description": "Drain is clogged and sink floods", 
-	"location": "Bathroom", 
-	"building": "Canada Hall", 
-	"unit": "24B", 
-	"contact": "student2@nevada.unr.edu", 
-	"additionalNotes": "N/A"},
-	]
+	ticket_list = [ticket.Ticket(title="Faucet Leak",
+	description="Faucet is broken and leaking water", 
+	status="Completed",
+	severity_level="MILD",
+	id="2",
+	location="Bathroom", 
+	building="Argenta Hall", 
+	unit="23A", 
+	contact="student@nevada.unr.edu", 
+	additionalNotes="N/A"),]
+
 	return render_template('view_tickets.html', tickets=ticket_list)
 
 
