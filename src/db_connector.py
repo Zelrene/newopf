@@ -1,7 +1,7 @@
 from multiprocessing import connection
 from src.models import ticket
 from view import db
-from models.ticket import Ticket
+from src.models.ticket import Ticket
 
 class DB_Connector():
     def __init__(self):

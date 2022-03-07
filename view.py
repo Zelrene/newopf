@@ -7,13 +7,13 @@ app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db= SQLAlchemy(app)
-database_engine =  create_engine('sqlite:///app/database.db')
+#the create_engine is creating an error so, i'll comment it out for now  
+#database_engine =  create_engine('sqlite:///app/database.db')
 
 from src.models import ticket
 from src import db_connector as dbc
 
 db_c = dbc.DB_Connector()
-
 
 @app.route('/')
 def index():
@@ -27,9 +27,6 @@ def create_tickets():
 	if request.method == 'POST':
 		title = request.form['Title']
 		description = request.form['Description']
-		status = request.form['Status']
-		severity_level = request.form['SeverityLevel']
-		id = request.form['ID']
 		location = request.form['Location']
 		building = request.form['Building']
 		unit = request.form['Unit#']
@@ -41,17 +38,22 @@ def create_tickets():
 
 @app.route('/view_tickets.html')
 def view_tickets():
-	ticket_list = [ticket.Ticket(title="Faucet Leak",
-	description="Faucet is broken and leaking water", 
-	status="Completed",
-	severity_level="MILD",
-	id="2",
-	location="Bathroom", 
-	building="Argenta Hall", 
-	unit="23A", 
-	contact="student@nevada.unr.edu", 
-	additionalNotes="N/A"),]
-
+	tickets = []
+	ticket_list = [{"title": "Faucet Leak",
+	 "description": "Faucet is broken and leaking water", 
+	"location": "Bathroom", 
+	"building": "Argenta Hall", 
+	"unit": "23A", 
+	"contact": "student@nevada.unr.edu", 
+	"additionalNotes": "N/A"},
+	{"title": "Clogged Drain",
+	 "description": "Drain is clogged and sink floods", 
+	"location": "Bathroom", 
+	"building": "Canada Hall", 
+	"unit": "24B", 
+	"contact": "student2@nevada.unr.edu", 
+	"additionalNotes": "N/A"},
+	]
 	return render_template('view_tickets.html', tickets=ticket_list)
 
 
