@@ -13,6 +13,7 @@ from src import db_connector as dbc
 
 db_c = dbc.DB_Connector()
 
+
 @app.route('/')
 def index():
 	return '<h1>Hello, World!</h1>'
@@ -25,6 +26,9 @@ def create_tickets():
 	if request.method == 'POST':
 		title = request.form['Title']
 		description = request.form['Description']
+		status = request.form['Status']
+		severity_level = request.form['SeverityLevel']
+		id = request.form['ID']
 		location = request.form['Location']
 		building = request.form['Building']
 		unit = request.form['Unit#']
@@ -36,17 +40,18 @@ def create_tickets():
 
 @app.route('/view_tickets.html')
 def view_tickets():
-	ticket_list = [ticket.Ticket(title="Faucet Leak", 
-	description="Water leaking", 
+	ticket_list = [ticket.Ticket(title="Faucet Leak",
+	description="Faucet is broken and leaking water", 
+	status="Completed",
+	severity_level="MILD",
+	id="2",
 	location="Bathroom", 
 	building="Argenta Hall", 
 	unit="23A", 
-	contact="student1@nevada.unr.edu", 
-	additionalNotes="N/A"),
-	]
+	contact="student@nevada.unr.edu", 
+	additionalNotes="N/A"),]
 
 	return render_template('view_tickets.html', tickets=ticket_list)
-
 
 
 if __name__ == '__main__':
