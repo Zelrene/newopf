@@ -34,5 +34,14 @@ class Ticket(db.Model):
     additionalNotes = db.Column(db.Text, nullable = True)
     contact = db.Column(db.Text, nullable = True)
     
-
+    def __init__(self, status, severity_level, description, building, unit, title, location, additionalNotes, contact):
+        self.status = status
+        self.severity_level = severity_level
+        self.description = description
+        self.building = building
+        self.unit = unit
+        self. title = title
+        self.location = location
+        self.additionalNotes = additionalNotes
+        self.contact = contact  
 
