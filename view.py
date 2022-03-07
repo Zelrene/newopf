@@ -29,23 +29,17 @@ def create_tickets():
 
 @app.route('/view_tickets.html')
 def view_tickets():
-	tickets = []
-	ticket_list = [{"title": "Faucet Leak",
-	 "description": "Faucet is broken and leaking water", 
-	"location": "Bathroom", 
-	"building": "Argenta Hall", 
-	"unit": "23A", 
-	"contact": "student@nevada.unr.edu", 
-	"additionalNotes": "N/A"},
-	{"title": "Clogged Drain",
-	 "description": "Drain is clogged and sink floods", 
-	"location": "Bathroom", 
-	"building": "Canada Hall", 
-	"unit": "24B", 
-	"contact": "student2@nevada.unr.edu", 
-	"additionalNotes": "N/A"},
+	ticket_list = [tickets.tickets(title="Faucet Leak", 
+	description="Water leaking", 
+	location="Bathroom", 
+	building="Argenta Hall", 
+	unit="23A", 
+	contact="student1@nevada.unr.edu", 
+	additionalNotes="N/A"),
 	]
+
 	return render_template('view_tickets.html', tickets=ticket_list)
+
 
 
 if __name__ == '__main__':
