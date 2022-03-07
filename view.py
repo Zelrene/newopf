@@ -1,4 +1,3 @@
-from re import T
 from flask import Flask, abort, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from src import controller

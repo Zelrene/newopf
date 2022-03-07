@@ -32,6 +32,7 @@ class Ticket(db.Model):
     title = db.Column(db.String(75), nullable = False)
     location = db.Column(db.String(50), nullable = False)
     additionalNotes = db.Column(db.Text, nullable = True)
+    contact = db.Column(db.Text, nullable = True)
     
 
 
