@@ -9,3 +9,4 @@ src/models/__pycache__
 __pycache__/__init__.cpython-310.pyc
 __pycache__/controller.cpython-310.pyc
 models/__pycache__/__init__.cpython-310.pyc
+/database.db
