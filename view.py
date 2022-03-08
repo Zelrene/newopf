@@ -1,25 +1,19 @@
 from flask import Flask, abort, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from src import controller
 from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
-#the create_engine is creating an error so, i'll comment it out for now  
-#database_engine =  create_engine('sqlite:///app/database.db')
 
-from src.models import ticket
-from src import db_connector as dbc
+from src import TicketController
 
-db_c = dbc.DB_Connector()
-#controller_1 = controller.Controller()
-
+ticket_controller = TicketController.TicketController()
 
 @app.route('/')
 def index():
-	return '<h1>Hello, World!</h1>'
+	return redirect('/create_tickets.html')
 
 @app.route('/create_tickets.html', methods = ['GET', 'POST'])
 def create_tickets():
@@ -35,11 +29,11 @@ def create_tickets():
 		unit = request.form['Unit#']
 		contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
+		status = "pending"
 		
-		db_c.add_ticket(title, "pending", description, severity_level, building, unit, location, additonalNotes, contact)
-		#controller_1.add_ticket_to_db( db_c, title, description, location, building, severity_level, unit, contact, additonalNotes)
+		ticket_controller.create_ticket()
 
-		return redirect('view_tickets.html')
+		return redirect('/view_tickets.html')
 
 
 
