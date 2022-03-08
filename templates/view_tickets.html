@@ -1,10 +1,7 @@
-{% include "layout.html" %}
 <!doctype html>
-<html>
-    <head>
-        <link rel="stylesheet" href="/static/tickets_table.css"/>
-    </head>
-    {% block content %}
+{% extends "layout.html" %}
+
+{% block content %}
         <div>
             {% block title %}View All Tickets{% endblock %}
         </div>
@@ -26,4 +23,3 @@
             {% endfor %}
         </table>
     {% endblock %}
-</html>

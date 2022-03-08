@@ -2,15 +2,27 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>{% block title %}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- Style Sheets for Formatting w/ CSS -->
+        <link rel="stylesheet" href="../static/layout.css"/>
+        <link rel="stylesheet" href="/static/ticket_form.css"/>
         <link rel="stylesheet" href="/static/layout.css"/>
+        <link rel="stylesheet" href="/static/tickets_table.css"/>
+        
+        <title>{% block title %}{% endblock %}</title>
     </head>
+
     <body>
-        {% block content %}
-            <div class="container">
-                <h1>Optimum Property Fix</h1>
+        <div class="wrapper">
+            <div class="header"></div>
+            <div class="sidebar">
+                {% include "side_nav.html" %}
             </div>
-        {% endblock %}
+            
+            <div class="main_content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
     </body>
 </html>
