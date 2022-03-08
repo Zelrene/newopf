@@ -5,9 +5,10 @@ database = DB_Connector()
 
 class TicketController(): 
 
-    def get_tickets():
+    def get_tickets(self):
         
         tickets = database.select_all_tickets()
+        return tickets
 
     def create_ticket(self, title, status, description, severity_level, building, unit, location, additionalNotes, contact): 
 

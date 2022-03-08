@@ -47,7 +47,9 @@ def create_tickets():
 
 @app.route('/view_tickets.html')
 def view_tickets():
+	
 	tickets = []
+	'''
 	ticket_list = [{"title": "Faucet Leak",
 	 "description": "Faucet is broken and leaking water", 
 	"location": "Bathroom", 
@@ -63,7 +65,9 @@ def view_tickets():
 	"contact": "student2@nevada.unr.edu", 
 	"additionalNotes": "N/A"},
 	]
-	return render_template('view_tickets.html', tickets=ticket_list)
+	'''
+	tickets = ticket_controller.get_tickets()
+	return render_template('view_tickets.html', tickets=tickets)
 
 
 if __name__ == '__main__':
