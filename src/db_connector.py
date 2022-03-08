@@ -11,8 +11,17 @@ class DB_Connector():
 
         return db.session.query(Ticket).all()
     
-    def add_ticket(self, title, status, description, severity_level,  building, unit, location, additionalNotes, contact):
-        new_ticket = Ticket(status, severity_level, description, building, unit, title, location, additionalNotes, contact)
+    def insert_ticket(self, title, status, description, severity_level, building, unit, location, additionalNotes, contact):
+        new_ticket = Ticket(
+            title = title, 
+            status = status, 
+            severity_level = severity_level, 
+            description = description, 
+            building = building, 
+            unit = unit, 
+            location = location, 
+            additionalNotes = additionalNotes, 
+            contact = contact)
         db.session.add(new_ticket)
         db.session.commit()
 
