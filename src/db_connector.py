@@ -7,9 +7,6 @@ class DB_Connector():
     def __init__(self):
         db.create_all()
 
-    def select_all_tickets():
-
-        return db.session.query(Ticket).all()
     
     def insert_ticket(self, title, status, description, severity_level, building, unit, location, additionalNotes, contact):
         new_ticket = Ticket(
@@ -25,4 +22,8 @@ class DB_Connector():
         db.session.add(new_ticket)
         db.session.commit()
 
+    def select_all_tickets(self):
+
+        #return db.session.query(Ticket).all()
+        return Ticket.query.all()
 
