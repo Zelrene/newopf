@@ -7,7 +7,8 @@
 }
 
 body {
-    background: #f3f5f9;
+    background-color: #efefef;
+    font-family: effra, sans-serif;
 }
 
 .wrapper {
@@ -45,4 +46,9 @@ body {
     padding: 20px;
     width: 100%;
     margin-left: 200px;
+}
+
+h1{
+    font-family: effra, sans-serif;
+    color: #313131;
 }
