@@ -31,7 +31,15 @@ def create_tickets():
 		additonalNotes = request.form['AdditionalNotes']
 		status = "pending"
 		
-		ticket_controller.create_ticket()
+		ticket_controller.create_ticket(title=title,
+		description=description, 
+		location=location,
+		building=building,
+		severity_level=severity_level,
+		unit=unit,
+		contact=contact,
+		additionalNotes=additonalNotes,
+		status=status)
 
 		return redirect('/view_tickets.html')
 
