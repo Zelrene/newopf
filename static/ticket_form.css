@@ -1,0 +1,51 @@
+
+h1{
+    font-family: effra, sans-serif;
+    color: #313131;
+}
+
+p{
+    font-family: effra, sans-serif;
+    font-weight: bold;
+    color: #313131;
+    font-size: 12px;
+}
+
+span{
+    color: #7c7c7c;
+}
+.btn{
+    background-color: #ee6c4d;
+    font-weight: 700;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 7px 20px;
+    cursor: pointer;
+    
+}
+
+input[type=text]{
+    border-radius: 5px;
+    border-width: .5px;
+    border-color: #dfdfdf;
+    margin: 10px 0;
+    display: block;
+    height: 20px;
+    width: 200px;
+} 
+
+textarea{
+    border-radius: 5px;
+    border-color: #dfdfdf;
+    margin: 10px 0;
+    height: 150px;
+    width: 300px;
+    font-family: effra, sans-serif;
+} 
+
+.sub-entry{
+    width: auto;
+    float: left;
+    display: inline-block;
+}
