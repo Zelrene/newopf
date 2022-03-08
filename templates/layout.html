@@ -1,16 +1,25 @@
-{% extends "bootstrap/base.html" %}
+<!DOCTYPE html>
 
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>{% block title %}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/layout.css"/>
+
+        <title>{% block title %}{% endblock %}</title>
     </head>
+
     <body>
-        {% block content %}
-            <div class="container">
-                <h1>Optimum Property Fix</h1>
+        <div class="wrapper">
+            <div class="header"></div>
+            <div class="sidebar">
+                {% include "side_nav.html" %}
             </div>
-        {% endblock %}
+            {% block content %}
+            <div class="content">
+                {% include "create_ticket_form.html" %}
+            </div>
+            {% endblock %}
+        </div>
     </body>
 </html>
