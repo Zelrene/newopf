@@ -1,10 +1,24 @@
-# newopf
-new opf
+# New OPF
 
-install comamands for the libraries
+This is a new version to Optimum Property Fix.
 
-    pip install flask
-    pip install flask-SQLAlchemy
-    pip install SQLAlchemy
-    pip install flask-bootstrap 
-    pip install jinja2
+## Installations
+Please install the following using package manager pip.
+
+```bash
+pip install flask
+pip install flask-SQLAlchemy
+pip install SQLAlchemy
+pip install flask-bootstrap 
+pip install jinja2
+```
+
+## Collaborators
+
+### Team Members:
+    Aisha Co
+    Melissa Flores
+    Nasrin Juana
+
+### Advisor
+    Erin Keith
