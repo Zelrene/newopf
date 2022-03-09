@@ -9,7 +9,6 @@ Please install the following using package manager pip.
 pip install flask
 pip install flask-SQLAlchemy
 pip install SQLAlchemy
-pip install flask-bootstrap 
 pip install jinja2
 ```
 
