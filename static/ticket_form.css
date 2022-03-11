@@ -1,8 +1,22 @@
+form{
+    display: flex;
+    height:100vh;
+    justify-content: center;
+    align-items: center;
+
+}
 
 h1{
+    text-align: center;
     font-family: effra, sans-serif;
     color: #313131;
 }
+
+.container-left{
+    padding-bottom: 70px;
+    padding-right: 20px;
+}
+
 
 p{
     font-family: effra, sans-serif;
@@ -13,6 +27,7 @@ p{
 
 span{
     color: #7c7c7c;
+    font-weight: 400;
 }
 .btn{
     background-color: #ee6c4d;
@@ -44,8 +59,9 @@ textarea{
     font-family: effra, sans-serif;
 } 
 
-.sub-entry{
-    width: auto;
-    float: left;
-    display: inline-block;
+
+select{
+    background-color: none;
+
+
 }
