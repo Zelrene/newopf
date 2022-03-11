@@ -1,16 +1,17 @@
-from multiprocessing import connection
 from src.models.ticket import Ticket
 from view import db
 from src.models.ticket import Ticket
+from src.models.user import User
 
 class DB_Connector():
     def __init__(self):
         db.create_all()
 
     
-    def insert_ticket(self, title, status, description, severity_level, building, unit, location, additionalNotes, contact):
+    def insert_ticket(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, contact):
         new_ticket = Ticket(
-            title = title, 
+            title = title,
+            creator_id = creator_id, 
             status = status, 
             severity_level = severity_level, 
             description = description, 
@@ -24,6 +25,5 @@ class DB_Connector():
 
     def select_all_tickets(self):
 
-        #return db.session.query(Ticket).all()
         return Ticket.query.all()
 
