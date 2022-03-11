@@ -14,7 +14,6 @@ body {
 .wrapper {
     display: flex;
     position: relative;
-    background-color: red;
 }
 
 .wrapper .sidebar {
@@ -34,38 +33,30 @@ body {
 
 .wrapper .sidebar ul li {
     padding: 15px;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    border-top: 1px solid rgba(225,225,225,0.05);
 }
 
 .wrapper .sidebar ul li a{
     color: #bdb8d7;
-    display: block
+    display: block;
 }
 
-.wrapper .content {
-    position: fixed;
-    width: 100%;
-}
-
-.wrapper .content .header {
+.content {
     margin-left: 200px;
-    overflow: hidden;
+}
+
+.header {
     padding: 20px;
     background-color: #FCFAFB;
 }
 
-.wrapper .content .header .header-right {
+.header-right {
     float: right;
 }
 
-.wrapper .content .main_content {
+.main_content {
     padding: 20px;
-    width: 100%;
-    margin-left: 200px;
 }
 
 h1{
-    font-family: effra, sans-serif;
     color: #313131;
 }
