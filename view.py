@@ -15,6 +15,11 @@ ticket_controller = TicketController.TicketController()
 def index():
 	return redirect('/create_tickets.html')
 
+@app.route('/log_in.html', methods = ['GET', 'POST'])
+def log_in():
+	if request.method == 'GET':
+		return render_template('log_in.html')
+
 @app.route('/create_tickets.html', methods = ['GET', 'POST'])
 def create_tickets():
 	if request.method == 'GET':
@@ -68,7 +73,6 @@ def view_tickets():
 	'''
 	tickets = ticket_controller.get_tickets()
 	return render_template('view_tickets.html', tickets=tickets)
-
 
 if __name__ == '__main__':
     app.run()
