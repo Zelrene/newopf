@@ -35,6 +35,7 @@ def create_tickets():
 		contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
 		status = "pending"
+		creator_id = "Student John"
 		
 		ticket_controller.create_ticket(title=title,
 		description=description, 
@@ -44,7 +45,8 @@ def create_tickets():
 		unit=unit,
 		contact=contact,
 		additionalNotes=additonalNotes,
-		status=status)
+		status=status,
+		creator_id= creator_id)
 
 		return redirect('/view_tickets.html')
 
