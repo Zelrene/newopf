@@ -14,6 +14,7 @@ body {
 .wrapper {
     display: flex;
     position: relative;
+    background-color: red;
 }
 
 .wrapper .sidebar {
@@ -42,7 +43,23 @@ body {
     display: block
 }
 
-.wrapper .main_content {
+.wrapper .content {
+    position: fixed;
+    width: 100%;
+}
+
+.wrapper .content .header {
+    margin-left: 200px;
+    overflow: hidden;
+    padding: 20px;
+    background-color: #FCFAFB;
+}
+
+.wrapper .content .header .header-right {
+    float: right;
+}
+
+.wrapper .content .main_content {
     padding: 20px;
     width: 100%;
     margin-left: 200px;
