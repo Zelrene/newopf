@@ -13,14 +13,14 @@ ticket_controller = TicketController.TicketController()
 
 @app.route('/')
 def index():
-	return redirect('/create_tickets')
+	return redirect('/create_tickets.html')
 
-@app.route('/log_in', methods = ['GET', 'POST'])
+@app.route('/log_in.html', methods = ['GET', 'POST'])
 def log_in():
 	if request.method == 'GET':
 		return render_template('log_in.html')
 
-@app.route('/create_tickets', methods = ['GET', 'POST'])
+@app.route('/create_tickets.html', methods = ['GET', 'POST'])
 def create_tickets():
 	if request.method == 'GET':
 		return render_template('create_tickets.html')
@@ -52,7 +52,7 @@ def create_tickets():
 
 
 
-@app.route('/view_tickets')
+@app.route('/view_tickets.html')
 def view_tickets():
 	
 	tickets = []
