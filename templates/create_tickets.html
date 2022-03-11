@@ -2,12 +2,12 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<h1>Create New Ticket</h1>
     <form action = "/create_tickets.html" method = "POST">
-        <h1>Create New Ticket</h1>
-        <div class="sub-entry">
+        <div class="container-left">
+            <br>
             <p>Title
-                <br>
-            <span>"ex. Faucet Leak"</span>
+            <span>ex. "Faucet Leak"</span>
             <br> <input type = "text" 
                 name = "Title" 
                 value="{{ request.form['Title'] }}">
@@ -17,13 +17,33 @@
                 name = "Description"
                 value="{{ request.form['Description'] }}">
             </textarea></p>
+            <p>Severity of the problem <br>
+              <!--  <input type ="text" 
+                name = "Severity_level"  
+                value="{{ request.form['Severity_level'] }}">
+            </input></p> -->
+            <div class="custom-select">
+            <select name = "Severity_level"
+            value="{{request.form['Severity_level']}}">
+            <option>LOW</option>
+            <option>MILD</option>
+            <option>HIGH</option>
+            </select>
+        </div>
             <p>Location of problem <br>
-                <input type = "text" 
+              <!--  <input type = "text" 
                 name = "Location"  
                 value="{{ request.form['Location'] }}">
-            </input></p>
+            </input></p> -->
+            <select name = "Location"
+            value="{{request.form['Location']}}">
+            <option>Bathroom</option>
+            <option>Bedroom</option>
+            <option>Kitchen</option>
+            <option>Living Room</option>
+            </select>
         </div>
-        <div class="sub-entry">
+        <div class="container-right">
             <p>Your Building <br>
                 <input type ="text" 
                 name = "Building"  
@@ -34,13 +54,7 @@
                 name = "Unit#"  
                 value="{{ request.form['Unit#'] }}">
             </input></p>
-
-            <p>Severity of the problem <br>
-                <input type ="text" 
-                name = "Severity_level"  
-                value="{{ request.form['Severity_level'] }}">
-            </input></p>
-            <p>Prefered Contact Number <br>
+            <p>Prefered Contact Email <br>
                 <input type ="text" 
                 name = "Contact"  
                 value="{{ request.form['Contact'] }}">
@@ -55,3 +69,4 @@
         </div>
     </form>
 {% endblock %}
+
