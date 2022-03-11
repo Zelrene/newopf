@@ -1,81 +1,25 @@
 <!doctype html>
-<html>
-    <head>
+{% extends "layout.html" %}
 
-    </head>
-    <body>
+{% block content %}
         <div>
-            <p>
-                View All Tickets
-            </p>
+            {% block title %}View All Tickets{% endblock %}
         </div>
+        <br>
         <table>
             <tr>
-                <th>
-                    <p>
-                        Title
-                    </p>
-                </th>
-                <th>
-                    <p>
-                        Status
-                    </p>   
-                </th>
-                <th>
-                    <p>
-                        ID
-                    </p>
-                </th>
-                <th>
-                    <p>
-                        Severity
-                    </p>
-                </th>
-                <th>
-                    <p>
-                        Date Requested
-                    </p>
-                </th>
-                <th>
-                    <p>
-                        Location
-                    </p>
-                </th>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Building</th>
+                <th>Unit</th>
             </tr>
             {% for ticket in tickets %}
-            <tr>
-                <th>
-                    <p>
-                        {{ ticket.title }}
-                    </p>
-                </th>
-                <th>
-                    <p>
-                        {{ ticket.status }}
-                    </p>   
-                </th>
-                <th>
-                    <p>
-                        {{ ticket.id }}
-                    </p>
-                </th>
-                <th>
-                    <p>
-                        {{ ticket.severity }}
-                    </p>
-                </th>
-                <th>
-                    <p>
-                        {{ ticket.date_requested }}
-                    </p>
-                </th>
-                <th>
-                    <p>
-                        {{ ticket.location }}
-                    </p>
-                </th>
+            
+                <td>{{ ticket.title }}</td>
+                <td>{{ ticket.location }}</td>
+                <td>{{ ticket.building }}</td>
+                <td>{{ ticket.unit }}</td>
             </tr>
             {% endfor %}
         </table>
-    </body>
-</html>
+    {% endblock %}

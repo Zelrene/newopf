@@ -1,12 +1,58 @@
-<html>
-<form action = "/create_tickets.html" method = "POST">
-    <p>Title <input type = "text" name = "Title" /></p>
-    <p>Please describe the problem <input type = "text" name = "Description"/></p>
-    <p>Location of problem <input type = "text" name = "Location" /></p>
-    <p>Your Building <input type ="text" name = "Building" /></p>
-    <p>Your Unit # <input type ="text" name = "Unit#" /></p>
-    <p>Prefered Contact Number <input type ="text" name = "Contact" /></p>
-    <p>Additional Notes <input type ="text" name = "AdditionalNotes" /></p>
-    <button type="submit" class="btn btn-default">Submit</button>
- </form>
- </html>
+<!doctype html>
+{% extends "layout.html" %}
+
+{% block content %}
+    <form action = "/create_tickets.html" method = "POST">
+        <h1>Create New Ticket</h1>
+        <div class="sub-entry">
+            <p>Title
+                <br>
+            <span>"ex. Faucet Leak"</span>
+            <br> <input type = "text" 
+                name = "Title" 
+                value="{{ request.form['Title'] }}">
+            </input></p>
+            <p>Please describe the problem <br>
+                <textarea
+                name = "Description"
+                value="{{ request.form['Description'] }}">
+            </textarea></p>
+            <p>Location of problem <br>
+                <input type = "text" 
+                name = "Location"  
+                value="{{ request.form['Location'] }}">
+            </input></p>
+        </div>
+        <div class="sub-entry">
+            <p>Your Building <br>
+                <input type ="text" 
+                name = "Building"  
+                value="{{ request.form['Building'] }}">
+            </input></p>
+            <p>Your Unit # <br>
+                <input type ="text" 
+                name = "Unit#"  
+                value="{{ request.form['Unit#'] }}">
+            </input></p>
+
+            <p>Severity of the problem <br>
+                <input type ="text" 
+                name = "Severity_level"  
+                value="{{ request.form['Severity_level'] }}">
+            </input></p>
+            <p>Prefered Contact Number <br>
+                <input type ="text" 
+                name = "Contact"  
+                value="{{ request.form['Contact'] }}">
+            </input></p>
+            <p>Additional Notes <br>
+                <textarea 
+                name = "AdditionalNotes"  
+                value="{{ request.form['AdditionalNotes'] }}">
+            </textarea></p>
+            <button type="submit" 
+                class="btn btn-default">Submit Ticket</button>
+        </div>
+    </form>
+{% endblock %}
+

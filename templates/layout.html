@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-{% extends "bootstrap/base.html" %}
-
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        {% block title %} Example Page Title {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        {% block content %}
-            <h1>Heading 1: Bootstrap</h1>
-        {% endblock %}
+        
+        <!-- Style Sheets for Formatting w/ CSS -->
+        <link rel="stylesheet" href="../static/layout.css"/>
+        <link rel="stylesheet" href="/static/ticket_form.css"/>
+        <link rel="stylesheet" href="/static/layout.css"/>
+        <link rel="stylesheet" href="/static/tickets_table.css"/>
+        
+        <title>{% block title %}{% endblock %}</title>
     </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="header"></div>
+            <div class="sidebar">
+                {% include "side_nav.html" %}
+            </div>
+            
+            <div class="main_content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </body>
 </html>
