@@ -1,9 +1,7 @@
 from flask import Flask, abort, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
-Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
@@ -35,7 +33,7 @@ def create_tickets():
 		contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
 		status = "pending"
-		creator_id = "Student John"
+		creator_id = 1234
 		
 		ticket_controller.create_ticket(title=title,
 		description=description, 
