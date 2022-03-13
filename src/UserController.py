@@ -4,11 +4,6 @@ database = DB_Connector()
 
 class UserController(): 
 
-    def get_user(self):
-        
-        #user = database.select_user()
-        #return user
-
     def create_user(self, first_name, last_name, isStudent, contact_email, net_id, nshe_id, gender, year, password): 
 
         if gender == 'Male':
