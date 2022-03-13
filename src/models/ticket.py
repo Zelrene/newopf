@@ -5,7 +5,7 @@ class Ticket(db.Model):
     __tablename__ = 'ticket'
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(75), nullable = False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable = False)
+    creator_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
     status = db.Column(db.String(25), nullable = False)
     description = db.Column(db.Text, nullable = False)
     severity_level = db.Column(db.String(50), nullable = False)

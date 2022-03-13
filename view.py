@@ -2,6 +2,7 @@ from flask import Flask, abort, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
@@ -43,16 +44,15 @@ def sign_up():
 		net_id = request.form['Net_Id']
 		nshe_id = request.form['Nshe_Id']
 		gender = request.form['Gender']
-		year = request.form['Year']
+		student_year = request.form['Year']
 		password = request.form['Password']
 
 		user_controller.create_user( first_name = first_name,
 		last_name = last_name,
 		contact_email = contact_email,
 		net_id = net_id,
-		nshe_id = nshe_id,
 		gender = gender,
-		year = year,
+		student_year = student_year,
 		password = password,
 		isStudent = isStudent)
 
