@@ -2,4 +2,27 @@
 {% block content %}
     <h1>Welcome To Optimum Property Fix</h1>
     <p>Please sign in to continue.</p>
+    <form action="/log_in.html" method="POST">
+        <div class="container-right">
+            <input type="text"
+            name="Net_Id"
+            placeholder="Net_Id"
+            value="{{ request.form['Net_Id'] }}">
+            </input>
+            <br>
+            <input type="text"
+            name="Password"
+            placeholder="Password"
+            value="{{ request.form['Password'] }}">
+            </input>
+            <br>
+            <button type="submit">Log In</button>
+            <h1>New Here?</h1>
+            <p>Sign up now to report your first maintenance issue and receive Optimum Service!</p>
+            <a href = sign_up.html>
+                <button type="submit">Sign Up</button>
+            </a>
+
+        </div>
+    </form>
 {% endblock %}
