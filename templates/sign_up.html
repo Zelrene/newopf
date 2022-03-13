@@ -8,11 +8,11 @@
         placeholder = "Net ID"
         value = "{{ request.form['Net_Id'] }}">
         </input>
-        <input type = "text"
-        name = "Is_Student"
-        placeholder = "Who are you?"
-        value = "{{ request.form['Is_Student'] }}">
-        </input>
+        <select name ="Is_Student"
+        value="{{ request.form['Is_Student'] }}">
+        <option>Student</option>
+        <option>Admin</option>
+        </select>
         <br>
         <input type = "text"
         name = "First_Name"
@@ -26,16 +26,18 @@
         </input>
         <br>
         <select name = "Gender"
-        value name="{{ request.form['Gender'] }}">
+        value="{{ request.form['Gender'] }}">
         <option>Male</option>
         <option>Female</option>
         <option>Do not wish to answer</option>
         </select>
-        <input type = "text"
-        name = "Year"
-        placeholder="Date of Birth"
-        value= "{{ request.form['Year'] }}">
-        </input>
+        <select name="Year"
+        value="{{ request.form['Year'] }}">
+        <option>Freshman</option>
+        <option>Sophomore</option>
+        <option>Junior</option>
+        <option>Senior</option>
+        </select>
         <br>
         <input type = "text"
         name = "Contact_Email"
