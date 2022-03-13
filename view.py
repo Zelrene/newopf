@@ -5,18 +5,47 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
-from src import TicketController
+from src import TicketController, UserController
 
 ticket_controller = TicketController.TicketController()
+user_controller = UserController.UserController()
 
 @app.route('/')
 def index():
-	return redirect('/create_tickets.html')
+	return redirect('/log_in.html')
 
 @app.route('/log_in.html', methods = ['GET', 'POST'])
 def log_in():
 	if request.method == 'GET':
 		return render_template('log_in.html')
+
+@app.route('/signup.html', methods = ['GET', 'POST'])
+def signup():
+	if request.method == 'GET':
+		return render_template('signup.html')
+
+	if request.method == 'POST':
+		first_name = request.form['first_name']
+		last_name = request.form['last_name']
+		contact_email = request.form['contact_email']
+		net_id = request.form['net_id']
+		nshe_id = request.form['nshe_id']
+		gender = request.form['gender']
+		year = request.form['year']
+		password = request.form['password']
+		isStudent = True
+
+		user_controller.create_user( first_name = first_name,
+		last_name = last_name,
+		contact_email = contact_email,
+		net_id = net_id,
+		nshe_id = nshe_id,
+		gender = gender,
+		year = year,
+		password = password,
+		isStudent = isStudent)
+
+		return redirect('/log_in.html')
 
 @app.route('/create_tickets.html', methods = ['GET', 'POST'])
 def create_tickets():
