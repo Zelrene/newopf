@@ -18,12 +18,17 @@ def index():
 def log_in():
 	if request.method == 'GET':
 		return render_template('log_in.html')
+		'''
+		need if-statement to check if log-in is valid. if so,
+			redirect to create_tickets
+		return redirect('create_tickets.html')
+		'''
 
 	if request.method == 'POST':
 		net_id = request.form['Net_Id']
 		password = request.form['Password']
 		
-		return render_template('/create_tickets.html')
+		return render_template('sign_up.html')
 
 @app.route('/sign_up.html', methods = ['GET', 'POST'])
 def sign_up():

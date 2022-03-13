@@ -4,7 +4,7 @@
 {% block content %}
     <h1>Welcome To Optimum Property Fix</h1>
     <p>Please sign in to continue.</p>
-    <form action="/log_in.html" method="POST">
+    <form action="/log_in.html" method="GET">
         <div class="container-right">
             <input type="text"
             name="Net_Id"
@@ -19,12 +19,10 @@
             </input>
             <br>
             <button type="submit">Log In</button>
+            
             <h1>New Here?</h1>
             <p>Sign up now to report your first maintenance issue and receive Optimum Service!</p>
-            <a href = sign_up.html>
-                <button type="submit">Sign Up</button>
-            </a>
-
+            <button type="submit" formaction="{{url_for('sign_up')}}">Sign Up</button>
         </div>
     </form>
 {% endblock %}
