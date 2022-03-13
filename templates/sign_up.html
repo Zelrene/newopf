@@ -37,6 +37,7 @@
         <option>Sophomore</option>
         <option>Junior</option>
         <option>Senior</option>
+        <option>Not Applicable</option>
         </select>
         <br>
         <input type = "text"
@@ -50,20 +51,14 @@
         placeholder = "Password"
         value = "{{ request.form['Password'] }}">
         </input>
-        <input type = "text"
-        name = "Nshe_Id"
-        placeholder = "NSHE Id"
-        value = "{{ request.form['Nshe_Id'] }}">
-        </input>
-        
         <br>
+        <a href = log_in.html>
         <button type="submit" class="btn btn-default">Sign Up</button>
+    </a>
         <br>
         <h1>Already Here?</h1>
         <p>Log in to your existing account to access dashboard</p>
-        <a href = log_in.html>
-            <button type="submit">Log In</button>
-        </a>
+        <button type="submit" formaction="{{url_for('log_in')}}">Log In</button>
         </div>
 
 

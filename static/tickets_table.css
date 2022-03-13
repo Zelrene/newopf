@@ -21,6 +21,7 @@ tr:nth-child(odd){
 
 tr{
     text-align: center;
+    background-color: white;
     
 }
 

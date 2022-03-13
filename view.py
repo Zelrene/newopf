@@ -22,8 +22,11 @@ def log_in():
 		'''
 		need if-statement to check if log-in is valid. if so,
 			redirect to create_tickets
-		return redirect('create_tickets.html')
 		'''
+		
+
+		return redirect('create_tickets.html')
+		
 
 	if request.method == 'POST':
 		net_id = request.form['Net_Id']
@@ -42,7 +45,6 @@ def sign_up():
 		isStudent = request.form['Is_Student']
 		contact_email= request.form['Contact_Email']
 		net_id = request.form['Net_Id']
-		nshe_id = request.form['Nshe_Id']
 		gender = request.form['Gender']
 		student_year = request.form['Year']
 		password = request.form['Password']
@@ -56,7 +58,7 @@ def sign_up():
 		password = password,
 		isStudent = isStudent)
 
-		return redirect('/log_in.html')
+		return render_template('log_in.html')
 
 @app.route('/create_tickets.html', methods = ['GET', 'POST'])
 def create_tickets():
