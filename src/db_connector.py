@@ -1,4 +1,3 @@
-from src.models.ticket import Ticket
 from view import db
 from src.models.ticket import Ticket
 from src.models.user import User
@@ -24,6 +23,19 @@ class DB_Connector():
         db.session.commit()
 
     def select_all_tickets(self):
-
         return Ticket.query.all()
 
+
+    def insert_user(self, first_name, last_name, isStudent, contact_email, net_id, nshe_id, gender, year, password):
+        new_user = User(
+            first_name = first_name,
+            last_name = last_name,
+            contact_email = contact_email,
+            net_id = net_id,
+            nshe_id = nshe_id,
+            gender = gender,
+            year = year,
+            password = password,
+            isStudent = isStudent)
+        db.session.add(new_user)
+        db.session.commit()

@@ -5,23 +5,14 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
-from src import TicketController
-'''
-		Once controller is made, add this:
-from src import UserController
-
-'''
+from src import TicketController, UserController
 
 ticket_controller = TicketController.TicketController()
-'''
-		Once controller is made, add this: 
 user_controller = UserController.UserController()
-
-'''
 
 @app.route('/')
 def index():
-	return redirect('/create_tickets.html')
+	return redirect('/log_in.html')
 
 @app.route('/log_in.html', methods = ['GET', 'POST'])
 def log_in():
@@ -50,20 +41,15 @@ def sign_up():
 		year = request.form['Year']
 		password = request.form['Password']
 
-		'''
-		Once controller is made, add this: 
-
-		user_controller.sign_up(first_name=first_name,
-		last_name=last_name,
-		isStudent=isStudent,
-		contact_email=contact_email,
-		net_id=net_id,
-		nshe_id=nshe_id,
-		gender=gender,
-		year=year,
-		password=password)
-
-		'''
+		user_controller.create_user( first_name = first_name,
+		last_name = last_name,
+		contact_email = contact_email,
+		net_id = net_id,
+		nshe_id = nshe_id,
+		gender = gender,
+		year = year,
+		password = password,
+		isStudent = isStudent)
 
 		return redirect('/log_in.html')
 
