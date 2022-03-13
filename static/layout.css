@@ -18,7 +18,7 @@ body {
 
 .wrapper .sidebar {
     position: fixed;
-    width: 200px;
+    width: 160px;
     height: 100%;
     background: #293241;
     padding: 30px 0;
@@ -41,23 +41,7 @@ body {
 }
 
 .content {
-    margin-left: 200px;
-    width: 100%;
+    margin: auto;
 }
 
-.header {
-    padding: 20px;
-    background-color: #FCFAFB;
-}
 
-.header-right {
-    float: right;
-}
-
-.main_content {
-    padding: 20px;
-}
-
-h1{
-    color: #313131;
-}
