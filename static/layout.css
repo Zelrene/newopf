@@ -14,12 +14,11 @@ body {
 .wrapper {
     display: flex;
     position: relative;
-    background-color: red;
 }
 
 .wrapper .sidebar {
     position: fixed;
-    width: 200px;
+    width: 160px;
     height: 100%;
     background: #293241;
     padding: 30px 0;
@@ -34,38 +33,15 @@ body {
 
 .wrapper .sidebar ul li {
     padding: 15px;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    border-top: 1px solid rgba(225,225,225,0.05);
 }
 
 .wrapper .sidebar ul li a{
     color: #bdb8d7;
-    display: block
+    display: block;
 }
 
-.wrapper .content {
-    position: fixed;
-    width: 100%;
+.content {
+    margin: auto;
 }
 
-.wrapper .content .header {
-    margin-left: 200px;
-    overflow: hidden;
-    padding: 20px;
-    background-color: #FCFAFB;
-}
 
-.wrapper .content .header .header-right {
-    float: right;
-}
-
-.wrapper .content .main_content {
-    padding: 20px;
-    width: 100%;
-    margin-left: 200px;
-}
-
-h1{
-    font-family: effra, sans-serif;
-    color: #313131;
-}

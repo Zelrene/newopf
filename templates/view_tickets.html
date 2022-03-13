@@ -2,24 +2,24 @@
 {% extends "layout.html" %}
 
 {% block content %}
-        <div>
-            {% block title %}View All Tickets{% endblock %}
-        </div>
-        <br>
-        <table>
-            <tr>
-                <th>Title</th>
-                <th>Location</th>
-                <th>Building</th>
-                <th>Unit</th>
-            </tr>
-            {% for ticket in tickets %}
-            
-                <td>{{ ticket.title }}</td>
-                <td>{{ ticket.location }}</td>
-                <td>{{ ticket.building }}</td>
-                <td>{{ ticket.unit }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    {% endblock %}
+    <div>
+        {% block title %}View All Tickets{% endblock %}
+    </div>
+    <br>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Building</th>
+            <th>Unit</th>
+        </tr>
+        {% for ticket in tickets %}
+        
+            <td>{{ ticket.title }}</td>
+            <td>{{ ticket.location }}</td>
+            <td>{{ ticket.building }}</td>
+            <td>{{ ticket.unit }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

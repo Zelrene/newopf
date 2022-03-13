@@ -1,24 +1,62 @@
 from flask import Flask, abort, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
-Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
-from src import TicketController
+from src import TicketController, UserController
 
 ticket_controller = TicketController.TicketController()
+user_controller = UserController.UserController()
 
 @app.route('/')
 def index():
-	return redirect('/create_tickets.html')
+	return redirect('/log_in.html')
 
 @app.route('/log_in.html', methods = ['GET', 'POST'])
 def log_in():
 	if request.method == 'GET':
 		return render_template('log_in.html')
+		'''
+		need if-statement to check if log-in is valid. if so,
+			redirect to create_tickets
+		return redirect('create_tickets.html')
+		'''
+
+	if request.method == 'POST':
+		net_id = request.form['Net_Id']
+		password = request.form['Password']
+		
+		return render_template('sign_up.html')
+
+@app.route('/sign_up.html', methods = ['GET', 'POST'])
+def sign_up():
+	if request.method == 'GET':
+		return render_template('sign_up.html')
+
+	if request.method == 'POST':
+		first_name = request.form['First_Name']
+		last_name = request.form['Last_Name']
+		isStudent = request.form['Is_Student']
+		contact_email= request.form['Contact_Email']
+		net_id = request.form['Net_Id']
+		nshe_id = request.form['Nshe_Id']
+		gender = request.form['Gender']
+		year = request.form['Year']
+		password = request.form['Password']
+
+		user_controller.create_user( first_name = first_name,
+		last_name = last_name,
+		contact_email = contact_email,
+		net_id = net_id,
+		nshe_id = nshe_id,
+		gender = gender,
+		year = year,
+		password = password,
+		isStudent = isStudent)
+
+		return redirect('/log_in.html')
 
 @app.route('/create_tickets.html', methods = ['GET', 'POST'])
 def create_tickets():
@@ -35,7 +73,7 @@ def create_tickets():
 		contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
 		status = "pending"
-		creator_id = "Student John"
+		creator_id = 1234
 		
 		ticket_controller.create_ticket(title=title,
 		description=description, 

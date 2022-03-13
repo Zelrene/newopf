@@ -5,9 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <!-- Style Sheets for Formatting w/ CSS -->
-        <link rel="stylesheet" href="../static/layout.css"/>
-        <link rel="stylesheet" href="/static/ticket_form.css"/>
         <link rel="stylesheet" href="/static/layout.css"/>
+        <link rel="stylesheet" href="/static/ticket_form.css"/>
         <link rel="stylesheet" href="/static/tickets_table.css"/>
         
         <title>{% block title %}{% endblock %}</title>
@@ -20,13 +19,14 @@
             </div>
 
             <div class="content">
+<!--
                 <div class="header">
-                    <a>Logo</a>
+                    <p>Welcome, John Doe</p>
                     <div class="header-right">
                         <a href="#signout">Sign Out</a>
                     </div>
                 </div>
-                
+-->
                 <div class="main_content">
                     {% block content %}{% endblock %}
                 </div>
