@@ -19,6 +19,12 @@ def log_in():
 	if request.method == 'GET':
 		return render_template('log_in.html')
 
+	if request.method == 'POST':
+		net_id = request.form['Net_Id']
+		password = request.form['Password']
+		
+		return render_template('/create_tickets.html')
+
 @app.route('/sign_up.html', methods = ['GET', 'POST'])
 def sign_up():
 	if request.method == 'GET':
