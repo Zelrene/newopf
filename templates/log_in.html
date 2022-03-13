@@ -1,11 +1,15 @@
 <!doctype html>
-
+<head>
+    <link rel="stylesheet" href="/static/login.css"/>
+</head>
 
 {% block content %}
-    <h1>Welcome To Optimum Property Fix</h1>
-    <p>Please sign in to continue.</p>
+<div class="container">
+    <div class="form-container">
     <form action="/log_in.html" method="GET">
-        <div class="container-right">
+        <h1>Welcome To 
+            <br>Optimum Property Fix</h1>
+    <p>Please sign in to continue.</p>
             <input type="text"
             name="Net_Id"
             placeholder="Net_Id"
@@ -17,12 +21,18 @@
             placeholder="Password"
             value="{{ request.form['Password'] }}">
             </input>
-            <br>
-            <button type="submit">Log In</button>
-            
+            <br> 
+            <button class="btn" type="submit">Log In</button>
+    </div>
+<div class="overlay-container">
+    <div class="overlay">
+        <div class="overlay-panel overlay-left">
             <h1>New Here?</h1>
             <p>Sign up now to report your first maintenance issue and receive Optimum Service!</p>
-            <button type="submit" formaction="{{url_for('sign_up')}}">Sign Up</button>
+            <button class="btn" type="submit" formaction="{{url_for('sign_up')}}">Sign Up</button>
         </div>
+    </div>
+</div>
+</div>
     </form>
 {% endblock %}

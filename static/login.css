@@ -1,0 +1,64 @@
+.container{
+        font-family: effra, sans-serif;
+ }
+
+.container p {
+    font-weight: light;
+    color: #919191;
+}
+.form-container {
+    position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+    background-color: #293241;
+    color: white;
+}
+.overlay-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+}
+
+.overlay {
+	background: #ffffff;
+	background-size: cover;
+	background-position: 0 0;
+	color: #313131;
+	position: relative;
+	height: 100%;
+    text-align: center;
+}
+
+.overlay p{
+    color: #313131;
+}
+
+form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100%;
+	text-align: center;
+}
+
+.btn{
+    background-color: #ee6c4d;
+    font-weight: 700;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 5px 30px;
+    cursor: pointer; 
+}
+
+.form-container input[type=text]{
+    border-color: white;
+    border-width: 1px;
+    padding: 5px 30px;
+    border-radius: 5px;
+    background: transparent;
+    
+}
