@@ -28,6 +28,19 @@ def log_in():
 	if request.method == 'GET':
 		return render_template('log_in.html')
 
+	if request.method == 'POST':
+		first_name = request.form['First_Name']
+		last_name = request.form['Last_Name']
+		isStudent = request.form['Is_Student']
+		contact_email= request.form['Contact_Email']
+		net_id = request.form['Net_Id']
+		nshe_id = request.form['Nshe_Id']
+		gender = request.form['Gender']
+		year = request.form['Year']
+		password = request.form['Password']
+		
+		
+
 @app.route('/sign_up.html', methods = ['GET', 'POST'])
 def sign_up():
 	if request.method == 'GET':
