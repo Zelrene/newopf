@@ -11,8 +11,10 @@ class UserController():
 
     def create_user(self, first_name, last_name, isStudent, contact_email, net_id, nshe_id, gender, year, password): 
 
-        if gender == 'MALE':
+        if gender == 'Male':
             gender = 'M'
+        elif gender == 'Female':
+            gender = 'F'
         else:
             gender = 'F'
 
