@@ -38,3 +38,40 @@ class DB_Connector():
             isStudent = isStudent)
         db.session.add(new_user)
         db.session.commit()
+
+
+    def select_all_user(self):
+            return User.query.all()
+
+    def select_user_with_matching_email(self, contact_email):
+        user = User.query.filter_by(contact_email = contact_email).first()
+        return user
+
+    def select_user_with_matching_netid(self, net_id):
+        user = User.query.filter_by(net_id= net_id).first()
+        return user
+
+    def select_password_with_matching_email(self, contact_email):
+        user = self.select_user_with_matching_email(contact_email)
+        return user.password
+
+    def select_password_with_matching_netid(self, net_id):
+        user = self.select_user_with_matching_netid(net_id)
+        return user.password
+
+    def select_first_name_with_matching_email(self, contact_email):
+        user = self.select_user_with_matching_email(contact_email)
+        return user.first_name
+
+    def select_first_name_with_matching_netid(self, net_id):
+        user = self.select_user_with_matching_netid(net_id)
+        return user.first_name
+
+    def select_last_name_with_matching_email(self, contact_email):
+        user = self.select_user_with_matching_email(contact_email)
+        return user.last_name
+
+    def select_last_name_with_matching_netid(self, net_id):
+        user = self.select_user_with_matching_netid(net_id)
+        return user.last_name
+
