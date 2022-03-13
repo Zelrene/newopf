@@ -4,7 +4,7 @@ database = DB_Connector()
 
 class UserController(): 
 
-    def create_user(self, first_name, last_name, isStudent, contact_email, net_id, nshe_id, gender, year, password): 
+    def create_user(self, first_name, last_name, isStudent, contact_email, net_id, gender, student_year, password): 
 
         if isStudent == 'Student':
             isStudent = True
@@ -16,6 +16,6 @@ class UserController():
         elif gender == 'Female':
             gender = 'F'
         else:
-            gender = 'F'
+            gender = 'NA'
 
-        database.insert_user(first_name, last_name, isStudent, contact_email, net_id, nshe_id, gender, year, password)
+        database.insert_user(first_name, last_name, isStudent, contact_email, net_id, gender, student_year, password)
