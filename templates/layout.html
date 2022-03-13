@@ -17,20 +17,9 @@
             <div class="sidebar">
                 {% include "side_nav.html" %}
             </div>
-
-            <div class="content">
-<!--
-                <div class="header">
-                    <p>Welcome, John Doe</p>
-                    <div class="header-right">
-                        <a href="#signout">Sign Out</a>
-                    </div>
-                </div>
--->
-                <div class="main_content">
+        </div>
+        <div class="main_content">
                     {% block content %}{% endblock %}
-                </div>
-            </div>
         </div>
     </body>
 </html>

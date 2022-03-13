@@ -1,6 +1,10 @@
 table{
     border-collapse: collapse;
-    width: 300px;
+    width: 900px;
+    margin: auto;
+    position: relative;
+    left: 80px;
+
 }
 
 th{

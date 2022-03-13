@@ -36,12 +36,19 @@ body {
 }
 
 .wrapper .sidebar ul li a{
-    color: #bdb8d7;
+    color: #ffffff;
     display: block;
+    font-size: 12px;
+    text-align: center;
 }
 
-.content {
-    margin: auto;
+.wrapper .sidebar ul li a:active {
+    color: #f15a29;
 }
 
-
+.logo-image{
+    width: 70px;
+    height: auto;
+    margin-left: 45px;
+    margin-bottom: 20px;
+}
