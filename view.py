@@ -19,21 +19,21 @@ def log_in():
 	if request.method == 'GET':
 		return render_template('log_in.html')
 
-@app.route('/signup.html', methods = ['GET', 'POST'])
-def signup():
+@app.route('/sign_up.html', methods = ['GET', 'POST'])
+def sign_up():
 	if request.method == 'GET':
-		return render_template('signup.html')
+		return render_template('sign_up.html')
 
 	if request.method == 'POST':
-		first_name = request.form['first_name']
-		last_name = request.form['last_name']
-		contact_email = request.form['contact_email']
-		net_id = request.form['net_id']
-		nshe_id = request.form['nshe_id']
-		gender = request.form['gender']
-		year = request.form['year']
-		password = request.form['password']
-		isStudent = True
+		first_name = request.form['First_Name']
+		last_name = request.form['Last_Name']
+		isStudent = request.form['Is_Student']
+		contact_email= request.form['Contact_Email']
+		net_id = request.form['Net_Id']
+		nshe_id = request.form['Nshe_Id']
+		gender = request.form['Gender']
+		year = request.form['Year']
+		password = request.form['Password']
 
 		user_controller.create_user( first_name = first_name,
 		last_name = last_name,

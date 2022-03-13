@@ -1,0 +1,70 @@
+<!doctype html>
+{% block content %}
+<h1>Create An Account</h1>
+    <form action = "/sign_up.html" method = "POST">
+        <div class="container-right">
+        <input type = "text"
+        name = "Net_Id"
+        placeholder = "Net ID"
+        value = "{{ request.form['Net_Id'] }}">
+        </input>
+        <input type = "text"
+        name = "Is_Student"
+        placeholder = "Who are you?"
+        value = "{{ request.form['Is_Student'] }}">
+        </input>
+        <br>
+        <input type = "text"
+        name = "First_Name"
+        placeholder = "First Name"
+        value = "{{ request.form['First_Name'] }}">
+        </input>
+        <input type = "text"
+        name = "Last_Name"
+        placeholder = "Last_Name"
+        value = "{{ request.form['Last_Name'] }}">
+        </input>
+        <br>
+        <select name = "Gender"
+        value name="{{ request.form['Gender'] }}">
+        <option>Male</option>
+        <option>Female</option>
+        <option>Do not wish to answer</option>
+        </select>
+        <input type = "text"
+        name = "Year"
+        placeholder="Date of Birth"
+        value= "{{ request.form['Year'] }}">
+        </input>
+        <br>
+        <input type = "text"
+        name = "Contact_Email"
+        placeholder = "Email Address"
+        value = "{{ request.form['Contact_Email'] }}">
+        </input>
+        <br>
+        <input type = "text"
+        name = "Password"
+        placeholder = "Password"
+        value = "{{ request.form['Password'] }}">
+        </input>
+        <input type = "text"
+        name = "Nshe_Id"
+        placeholder = "NSHE Id"
+        value = "{{ request.form['Nshe_Id'] }}">
+        </input>
+        
+        <br>
+        <button type="submit" class="btn btn-default">Sign Up</button>
+        <br>
+        <h1>Already Here?</h1>
+        <p>Log in to your existing account to access dashboard</p>
+        <a href = log_in.html>
+            <button type="submit">Log In</button>
+        </a>
+        </div>
+
+
+
+    </form>
+{% endblock %}
