@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container">
     <div class="form-container">
-    <form action="/log_in.html" method="GET">
+    <form action="/log_in.html" method="POST">
         <h1>Welcome To 
             <br>Optimum Property Fix</h1>
     <p>Please sign in to continue.</p>
@@ -24,15 +24,16 @@
             <br> 
             <button class="btn" type="submit">Log In</button>
     </div>
-<div class="overlay-container">
-    <div class="overlay">
-        <div class="overlay-panel overlay-left">
-            <h1>New Here?</h1>
-            <p>Sign up now to report your first maintenance issue and receive Optimum Service!</p>
-            <button class="btn" type="submit" formaction="{{url_for('sign_up')}}">Sign Up</button>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>New Here?</h1>
+                <p>Sign up now to report your first maintenance issue and receive Optimum Service!</p>
+                <button class="btn" type="submit">Sign Up</button>
+                <!--formaction="{{url_for('sign_up')}}"-->
+            </div>
         </div>
     </div>
-</div>
 </div>
     </form>
 {% endblock %}

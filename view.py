@@ -1,4 +1,5 @@
 from flask import Flask, abort, render_template, request, redirect
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -19,20 +20,18 @@ def index():
 def log_in():
 	if request.method == 'GET':
 		return render_template('log_in.html')
-		'''
-		need if-statement to check if log-in is valid. if so,
-			redirect to create_tickets
-		'''
-		
-
-		return redirect('create_tickets.html')
-		
 
 	if request.method == 'POST':
 		net_id = request.form['Net_Id']
 		password = request.form['Password']
 		
-		return render_template('sign_up.html')
+		user = user_controller.get_user_info_with_matching_netid(net_id)
+
+		if user:
+			return redirect('create_tickets.html')
+		
+		return render_template('log_in.html')
+
 
 @app.route('/sign_up.html', methods = ['GET', 'POST'])
 def sign_up():
