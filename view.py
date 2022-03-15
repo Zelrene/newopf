@@ -1,8 +1,9 @@
-from flask import Flask, abort, render_template, request, redirect
+from flask import Flask, abort, render_template, request, redirect, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret-key-goes-here'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
@@ -27,11 +28,14 @@ def log_in():
 		
 		user = user_controller.get_user_info_with_matching_netid(net_id)
 
-		if user:
-			return redirect('create_tickets.html')
-		
-		return render_template('log_in.html')
+		if request.form['submit_btn'] == 'Sign In':
+			return redirect('sign_up.html')
+		elif request.form['submit_btn'] == 'Log In':	
+			if not user or not check_password_hash(user.password, password):
+				flash('Please check your login details and try again.')
+				return redirect('log_in.html')
 
+		return redirect('create_tickets.html')
 
 @app.route('/sign_up.html', methods = ['GET', 'POST'])
 def sign_up():
