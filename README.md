@@ -10,6 +10,7 @@ pip install flask
 pip install flask-SQLAlchemy
 pip install SQLAlchemy
 pip install jinja2
+pip install flask-login
 ```
 
 ## Collaborators

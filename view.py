@@ -1,12 +1,29 @@
+from unicodedata import name
 from flask import Flask, abort, render_template, request, redirect, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
+
+from flask_login import LoginManager, login_user, login_required, current_user, logout_user
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
+
+#login functionality
+login_manager = LoginManager()
+login_manager.login_view = '/log_in.html'
+login_manager.init_app(app)
+
+from src.models.user import User
+
+@login_manager.user_loader
+def load_user(user_id):
+	return User.query.get(int(user_id))
+	print("the user id is: " + user_id)
+
 
 from src import TicketController, UserController
 
@@ -35,7 +52,10 @@ def log_in():
 			flash('Please check your login details and try again.')
 			return redirect('log_in.html')
 
-		return redirect('create_tickets.html')
+		#if the above check passes, then we know the user has the right credentials
+		login_user(user)
+		print(user)
+		return redirect('dashboard.html')
 
 @app.route('/sign_up.html', methods = ['GET', 'POST'])
 def sign_up():
@@ -63,7 +83,9 @@ def sign_up():
 
 		return render_template('log_in.html')
 
+
 @app.route('/create_tickets.html', methods = ['GET', 'POST'])
+@login_required
 def create_tickets():
 	if request.method == 'GET':
 		return render_template('create_tickets.html')
@@ -96,6 +118,7 @@ def create_tickets():
 
 
 @app.route('/view_tickets.html')
+@login_required
 def view_tickets():
 	
 	tickets = []
@@ -118,6 +141,18 @@ def view_tickets():
 	'''
 	tickets = ticket_controller.get_tickets()
 	return render_template('view_tickets.html', tickets=tickets)
+
+@app.route('/dashboard.html')
+@login_required
+def dashboard():
+	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+	return render_template('dashboard.html', name=curr_user_name)
+	
+@app.route('/log_out')
+@login_required
+def log_out():
+	logout_user()
+	return render_template('log_in.html')
 
 if __name__ == '__main__':
     app.run()
