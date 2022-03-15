@@ -5,6 +5,9 @@ from flask_sqlalchemy import SQLAlchemy
 
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 
+from flask_principal import Principal, Permission, Identity, AnonymousIdentity
+from flask_principal import RoleNeed, UserNeed, identity_loaded, identity_changed
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
@@ -12,17 +15,39 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
+from src.models.user import UserRoles, User, Role
+
 #login functionality
 login_manager = LoginManager()
 login_manager.login_view = '/log_in.html'
 login_manager.init_app(app)
 
-from src.models.user import User
-
 @login_manager.user_loader
 def load_user(user_id):
 	return User.query.get(int(user_id))
-	print("the user id is: " + user_id)
+
+
+principal = Principal()
+principal.init_app(app)
+
+# Flask-Principal: Create a permission with a single RoleNeed
+admin_permission = Permission(RoleNeed('Admin'))
+student_pernission = Permission(RoleNeed('Student'))
+
+# Flask-Principal: Add the Needs that this user can satisfy
+@identity_loaded.connect_via(app)
+def on_identity_loaded(sender, identity):
+	# Set the identity user object
+	identity.user = current_user
+
+	# Add the UserNeed to the identity (We are not using UserNeed here)
+	if hasattr(current_user, 'id'):
+		identity.provides.add(UserNeed(current_user.id))
+
+	if hasattr(current_user, 'roles'):
+		for role in current_user.roles:
+			identity.provides.add(RoleNeed(role.name))
+ 
 
 
 from src import TicketController, UserController
@@ -54,7 +79,7 @@ def log_in():
 
 		#if the above check passes, then we know the user has the right credentials
 		login_user(user)
-		print(user)
+
 		return redirect('dashboard.html')
 
 @app.route('/sign_up.html', methods = ['GET', 'POST'])
@@ -119,26 +144,10 @@ def create_tickets():
 
 @app.route('/view_tickets.html')
 @login_required
+@admin_permission.require()
 def view_tickets():
 	
 	tickets = []
-	'''
-	ticket_list = [{"title": "Faucet Leak",
-	 "description": "Faucet is broken and leaking water", 
-	"location": "Bathroom", 
-	"building": "Argenta Hall", 
-	"unit": "23A", 
-	"contact": "student@nevada.unr.edu", 
-	"additionalNotes": "N/A"},
-	{"title": "Clogged Drain",
-	 "description": "Drain is clogged and sink floods", 
-	"location": "Bathroom", 
-	"building": "Canada Hall", 
-	"unit": "24B", 
-	"contact": "student2@nevada.unr.edu", 
-	"additionalNotes": "N/A"},
-	]
-	'''
 	tickets = ticket_controller.get_tickets()
 	return render_template('view_tickets.html', tickets=tickets)
 

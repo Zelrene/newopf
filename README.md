@@ -11,6 +11,7 @@ pip install flask-SQLAlchemy
 pip install SQLAlchemy
 pip install jinja2
 pip install flask-login
+pip install flask-principal
 ```
 
 ## Collaborators
