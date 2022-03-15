@@ -16,7 +16,6 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     first_name = db.Column(db.String(150), nullable = False)
     last_name = db.Column(db.String(150), nullable = False)
-    #isStudent = db.Column(db.Boolean, nullable = False)
     contact_email = db.Column(db.String(120), nullable = False, unique = True)
     net_id = db.Column(db.String(50), nullable = False, unique = True)
     gender = db.Column(db.Enum('M', 'F', 'NA'), nullable = False)

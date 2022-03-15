@@ -36,9 +36,10 @@ class DB_Connector():
             student_year = student_year,
             password = password,
             )
-        #new_user.roles.append(Role(name=isStudent))
+        
         role = Role(name = isStudent)
         new_user.roles = [role,]
+        
         db.session.add(new_user)
         db.session.commit()
 
