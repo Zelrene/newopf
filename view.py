@@ -23,17 +23,17 @@ def log_in():
 		return render_template('log_in.html')
 
 	if request.method == 'POST':
+		if request.form['submit_btn'] == 'Sign In':
+			return redirect('sign_up.html')
+
 		net_id = request.form['Net_Id']
 		password = request.form['Password']
 		
 		user = user_controller.get_user_info_with_matching_netid(net_id)
-
-		if request.form['submit_btn'] == 'Sign In':
-			return redirect('sign_up.html')
-		elif request.form['submit_btn'] == 'Log In':	
-			if not user or not check_password_hash(user.password, password):
-				flash('Please check your login details and try again.')
-				return redirect('log_in.html')
+		
+		if not user or not check_password_hash(user.password, password):
+			flash('Please check your login details and try again.')
+			return redirect('log_in.html')
 
 		return redirect('create_tickets.html')
 
@@ -58,7 +58,7 @@ def sign_up():
 		net_id = net_id,
 		gender = gender,
 		student_year = student_year,
-		password = password,
+		password = generate_password_hash(password),
 		isStudent = isStudent)
 
 		return render_template('log_in.html')
