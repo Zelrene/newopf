@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
-from src.models.user import User, Role
+from src.models.user import UserRoles, User, Role
 
 #login functionality
 login_manager = LoginManager()
