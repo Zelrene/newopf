@@ -6,9 +6,17 @@
 {% block content %}
 <div class="container">
     <div class="form-container">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification-danger">
+                {{ messages[0] }}.
+            </div>
+        {% endif %}
+    {% endwith%}
     <form action="/log_in.html" method="POST">
         <h1>Welcome To 
             <br>Optimum Property Fix</h1>
+
     <p>Please sign in to continue.</p>
             <input type="text"
             name="Net_Id"
@@ -22,15 +30,16 @@
             value="{{ request.form['Password'] }}">
             </input>
             <br> 
-            <button class="btn" type="submit">Log In</button>
+            <!--button class="btn" type="submit" name="log-in" value="go-to-user-page">Log In</button-->
+            <input class="btn" type="submit" name="submit_btn" value="Log In">
     </div>
     <div class="overlay-container">
         <div class="overlay">
             <div class="overlay-panel overlay-left">
                 <h1>New Here?</h1>
                 <p>Sign up now to report your first maintenance issue and receive Optimum Service!</p>
-                <button class="btn" type="submit">Sign Up</button>
-                <!--formaction="{{url_for('sign_up')}}"-->
+                <!--button class="btn" type="submit">Sign Up</button-->
+                <input class="btn" type="submit" name="submit_btn" value="Sign In">
             </div>
         </div>
     </div>
