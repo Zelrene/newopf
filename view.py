@@ -97,6 +97,13 @@ def sign_up():
 		student_year = request.form['Year']
 		password = request.form['Password']
 
+		user_n = user_controller.get_user_info_with_matching_netid(net_id)
+		user_e = user_controller.get_user_info_with_matching_email(contact_email)
+
+		if user_n or user_e:
+			flash('A user with the same net_id or email already exists. Please use a different net_id or password.')
+			return redirect('sign_up.html')
+
 		user_controller.create_user( first_name = first_name,
 		last_name = last_name,
 		contact_email = contact_email,
