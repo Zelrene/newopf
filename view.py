@@ -1,5 +1,5 @@
 from unicodedata import name
-from flask import Flask, abort, render_template, request, redirect, flash
+from flask import Flask, abort, render_template, request, redirect, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 
@@ -110,7 +110,7 @@ def sign_up():
 		if user_n:
 			flash('A user with the same NETID already exists. Please use a different NETID.')
 			return redirect('sign_up.html')
-		elif user_e:
+		if user_e:
 			flash('A user with the email already exists. Please user a different email.')
 
 		user_controller.create_user( 
@@ -167,7 +167,7 @@ def create_tickets():
 
 @app.route('/view_tickets.html')
 @login_required
-@admin_permission.require()
+@admin_permission.require(http_exception=403)
 def view_tickets():
 	
 	tickets = []
@@ -177,9 +177,10 @@ def view_tickets():
 
 @app.route('/view_single_ticket.html')
 @login_required
-@student_permission.require()
+@student_permission.require(http_exception=403)
 def view_single_ticket():
-	return render_template('view_single_ticket.html')
+	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+	return render_template('view_single_ticket.html', name=curr_user_name)
 
 @app.route('/dashboard.html')
 @login_required
@@ -199,6 +200,13 @@ def faq():
 def log_out():
 	logout_user()
 	return render_template('log_in.html')
+
+@app.errorhandler(403)
+@login_required
+def page_not_found(e):
+	session['redirected_from'] = request.url
+	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+	return render_template('page_not_found.html', name=curr_user_name)
 
 if __name__ == '__main__':
     app.run()
