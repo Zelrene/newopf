@@ -1,6 +1,7 @@
 from view import db
 from src.models.ticket import Ticket
-from src.models.user import Role, User
+#from src.models.user import Role, User
+from src.models.user import User
 
 class DB_Connector():
     def __init__(self):
@@ -30,18 +31,22 @@ class DB_Connector():
         new_user = User(
             first_name = first_name,
             last_name = last_name,
+            user_role = isStudent,
             contact_email = contact_email,
             net_id = net_id,
             gender = gender,
             student_year = student_year,
             password = password,
             )
-        
-        role = Role(name = isStudent)
-        new_user.roles = [role,]
-        
+
+
+        #role = Role(name = isStudent,)
+        #new_user.roles = [role,]
+
         db.session.add(new_user)
         db.session.commit()
+        
+
 
 
     def select_all_user(self):
