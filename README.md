@@ -36,7 +36,7 @@ To run the project for the first time, please do the following commands.
 export FLASK_APP=view
 export FLASK_ENV=development
 ```
-If you have done the two commands, to run and rerun the project, do the following command.
+If you have done the two commands, to run or rerun the project, do the following command.
 
 ``` bash
 flask run
