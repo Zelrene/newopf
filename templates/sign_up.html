@@ -8,7 +8,12 @@
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="notification-danger">
-                {{ messages[0] }}
+                {% for message in messages %}
+                    {{ message }}
+                    {% if not loop.last %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
             </div>
         {% endif %}
     {% endwith%}

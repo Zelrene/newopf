@@ -107,11 +107,17 @@ def sign_up():
 		user_n = user_controller.get_user_info_with_matching_netid(net_id)
 		user_e = user_controller.get_user_info_with_matching_email(contact_email)
 
-		if user_n:
-			flash('A user with the same NETID already exists. Please use a different NETID.')
-			return redirect('sign_up.html')
-		if user_e:
-			flash('A user with the email already exists. Please user a different email.')
+		# Error Message for Sign Up
+		if not first_name or not last_name or not contact_email or not password:
+			flash('Not all fields are filled. Please complete all required fields before signing up.')
+
+			if net_id and user_n:
+				flash('A user with the same NETID already exists. Please use a different NETID.')
+			
+			if contact_email and user_e:
+				flash('A user with the email already exists. Please use a different email.')
+
+			return redirect('/sign_up.html')
 
 		user_controller.create_user( 
 			first_name = first_name,
@@ -147,7 +153,7 @@ def create_tickets():
 		creator_id = 1234
 		
 		if not title or not description or not location or not building or not unit or not contact:
-			flash('Not all required fields are filled. Please fill all required fields.')
+			flash('Not all required fields are filled. Please fill all required fields before submitting your ticket.')
 			return redirect('create_tickets.html')
 
 		ticket_controller.create_ticket(
@@ -212,4 +218,4 @@ def page_not_found(e):
 	return render_template('page_not_found.html', name=curr_user_name)
 
 if __name__ == '__main__':
-    app.run()
+	app.run()
