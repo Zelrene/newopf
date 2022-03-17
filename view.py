@@ -32,7 +32,7 @@ principal.init_app(app)
 
 # Flask-Principal: Create a permission with a single RoleNeed
 admin_permission = Permission(RoleNeed('Admin'))
-student_pernission = Permission(RoleNeed('Student'))
+student_permission = Permission(RoleNeed('Student'))
 
 # Flask-Principal: Add the Needs that this user can satisfy
 @identity_loaded.connect_via(app)
@@ -101,8 +101,10 @@ def sign_up():
 		user_e = user_controller.get_user_info_with_matching_email(contact_email)
 
 		if user_n or user_e:
-			flash('A user with the same net_id or email already exists. Please use a different net_id or password.')
+			flash('A user with the same NETID already exists. Please use a different NETID.')
 			return redirect('sign_up.html')
+		elif user_e:
+			flash('A user with the email already exists. Please user a different email.')
 
 		user_controller.create_user( first_name = first_name,
 		last_name = last_name,
@@ -146,8 +148,7 @@ def create_tickets():
 		creator_id= creator_id)
 
 		return redirect('/view_tickets.html')
-
-
+		#return redirect('/view_single_ticket.html')
 
 @app.route('/view_tickets.html')
 @login_required
@@ -157,6 +158,12 @@ def view_tickets():
 	tickets = []
 	tickets = ticket_controller.get_tickets()
 	return render_template('view_tickets.html', tickets=tickets)
+
+@app.route('/view_single_ticket.html')
+@login_required
+#@student_permission.require()
+def view_single_ticket():
+	return render_template('view_single_ticket.html')
 
 @app.route('/dashboard.html')
 @login_required
