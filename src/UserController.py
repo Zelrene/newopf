@@ -86,4 +86,12 @@ class UserController():
             return true
         else:
             return false
-            
+
+    def get_role_with_matching_email(self, contact_email):
+        role = database.select_role_with_matching_email(contact_email)
+        return role
+        
+
+    def get_role_with_matching_netid(self, net_id):
+        role = database.select_password_with_matching_netid(net_id)
+        return role    
