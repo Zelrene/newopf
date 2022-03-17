@@ -65,7 +65,7 @@ def log_in():
 		return render_template('log_in.html')
 
 	if request.method == 'POST':
-		if request.form['submit_btn'] == 'Sign In':
+		if request.form['submit_btn'] == 'Sign Up':
 			return redirect('sign_up.html')
 
 		net_id = request.form['Net_Id']
