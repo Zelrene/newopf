@@ -90,6 +90,9 @@ def sign_up():
 		return render_template('sign_up.html')
 
 	if request.method == 'POST':
+		if request.form['submit_btn'] == 'Log In':
+			return redirect('log_in.html')
+
 		first_name = request.form['First_Name']
 		last_name = request.form['Last_Name']
 		isStudent = request.form['Is_Student']
