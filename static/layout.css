@@ -52,3 +52,39 @@ body {
     margin-left: 45px;
     margin-bottom: 20px;
 }
+
+.header {
+    overflow: hidden;
+    background-color: #ffffff;
+    padding: 20px 10px;
+  }
+
+.header-right {
+    float: right;
+  }
+
+.header-right a{
+    color: #ee6c4d;
+    padding: 35px;
+    font-size: 16px;
+  }
+.header-left{
+  float: left;
+  text-align: center;
+  padding-left: 250px;
+  padding-top: 12px;
+  line-height: 0px;
+} 
+
+.header-left p{
+    color: #ee6c4d;
+    font-size: 16px;
+  }
+
+.user {
+    width: 25px;
+    height: auto;
+    line-height: 0px;
+    left: 225px;
+    position: absolute;
+}

@@ -65,7 +65,7 @@ def log_in():
 		return render_template('log_in.html')
 
 	if request.method == 'POST':
-		if request.form['submit_btn'] == 'Sign In':
+		if request.form['submit_btn'] == 'Sign Up':
 			return redirect('sign_up.html')
 
 		net_id = request.form['Net_Id']
@@ -122,7 +122,8 @@ def sign_up():
 @login_required
 def create_tickets():
 	if request.method == 'GET':
-		return render_template('create_tickets.html')
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+		return render_template('create_tickets.html', name=curr_user_name)
 	
 	if request.method == 'POST':
 		title = request.form['Title']
@@ -158,7 +159,8 @@ def view_tickets():
 	
 	tickets = []
 	tickets = ticket_controller.get_tickets()
-	return render_template('view_tickets.html', tickets=tickets)
+	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+	return render_template('view_tickets.html', tickets=tickets, name=curr_user_name)
 
 @app.route('/dashboard.html')
 @login_required
