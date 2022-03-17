@@ -34,7 +34,8 @@ principal.init_app(app)
 admin_permission = Permission(RoleNeed('Admin'))
 student_permission = Permission(RoleNeed('Student'))
 
-# Flask-Principal: Add the Needs that this user can satisfy
+# Flask-Principal: Add the Needs that this user can 
+# Updates Role and User Needs
 @identity_loaded.connect_via(app)
 def on_identity_loaded(sender, identity):
 	# Set the identity user object
@@ -77,10 +78,11 @@ def log_in():
 			flash('Please check your login details and try again.')
 			return redirect('log_in.html')
 
-		#if the above check passes, then we know the user has the right credentials
+		# If the above check passes, then we know the user has the right credentials
 		login_user(user)
 
-		#identity_changed.send(app, identity=Identity(user.net_id))
+		# Update identity of user thus calling
+		identity_changed.send(app, identity=Identity(user.net_id))
 
 		return redirect('dashboard.html')
 
@@ -95,7 +97,7 @@ def sign_up():
 
 		first_name = request.form['First_Name']
 		last_name = request.form['Last_Name']
-		isStudent = request.form['Is_Student']
+		user_role = request.form['User_Role']
 		contact_email= request.form['Contact_Email']
 		net_id = request.form['Net_Id']
 		gender = request.form['Gender']
@@ -111,15 +113,17 @@ def sign_up():
 		elif user_e:
 			flash('A user with the email already exists. Please user a different email.')
 
-		user_controller.create_user( first_name = first_name,
-		last_name = last_name,
-		contact_email = contact_email,
-		net_id = net_id,
-		gender = gender,
-		student_year = student_year,
-		password = generate_password_hash(password),
-		isStudent = isStudent)
-
+		user_controller.create_user( 
+			first_name = first_name,
+			last_name = last_name,
+			user_role = user_role,
+			contact_email = contact_email,
+			net_id = net_id,
+			gender = gender,
+			student_year = student_year,
+			password = generate_password_hash(password)
+			)
+			
 		return render_template('log_in.html')
 
 
@@ -142,19 +146,24 @@ def create_tickets():
 		status = "pending"
 		creator_id = 1234
 		
-		ticket_controller.create_ticket(title=title,
-		description=description, 
-		location=location,
-		building=building,
-		severity_level=severity_level,
-		unit=unit,
-		contact=contact,
-		additionalNotes=additonalNotes,
-		status=status,
-		creator_id= creator_id)
+		ticket_controller.create_ticket(
+			title = title,
+			description = description, 
+			location = location,
+			building = building,
+			severity_level = severity_level,
+			unit = unit,
+			contact = contact,
+			additionalNotes = additonalNotes,
+			status = status,
+			creator_id = creator_id)
 
-		return redirect('/view_tickets.html')
-		#return redirect('/view_single_ticket.html')
+		role = user_controller.get_role_with_matching_netid(current_user.net_id)
+
+		if role == 'Admin':
+			return redirect('/view_tickets.html')
+		else:
+			return redirect('/view_single_ticket.html')
 
 @app.route('/view_tickets.html')
 @login_required
@@ -168,7 +177,7 @@ def view_tickets():
 
 @app.route('/view_single_ticket.html')
 @login_required
-#@student_permission.require()
+@student_permission.require()
 def view_single_ticket():
 	return render_template('view_single_ticket.html')
 
