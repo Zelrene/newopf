@@ -5,7 +5,7 @@ database = DB_Connector()
 
 class UserController(): 
 
-    def create_user(self, first_name, last_name, isStudent, contact_email, net_id, gender, student_year, password): 
+    def create_user(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password): 
         
         if gender == 'Male':
             gender = 'M'
@@ -14,7 +14,16 @@ class UserController():
         else:
             gender = 'NA'
 
-        database.insert_user(first_name, last_name, isStudent, contact_email, net_id, gender, student_year, password)
+        database.insert_user(
+            first_name = first_name, 
+            last_name = last_name,
+            user_role = user_role,
+            contact_email = contact_email,
+            net_id = net_id,
+            gender = gender,
+            student_year = student_year,
+            password = password
+            )
 
     def get_all_users(self):
         users = database.select_all_tickets()
@@ -90,8 +99,7 @@ class UserController():
     def get_role_with_matching_email(self, contact_email):
         role = database.select_role_with_matching_email(contact_email)
         return role
-        
 
     def get_role_with_matching_netid(self, net_id):
-        role = database.select_password_with_matching_netid(net_id)
+        role = database.select_role_with_matching_netid(net_id)
         return role    

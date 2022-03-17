@@ -27,11 +27,11 @@ class DB_Connector():
         return Ticket.query.all()
 
 
-    def insert_user(self, first_name, last_name, isStudent, contact_email, net_id, gender, student_year, password):
+    def insert_user(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password):
         new_user = User(
             first_name = first_name,
             last_name = last_name,
-            user_role = isStudent,
+            user_role = user_role,
             contact_email = contact_email,
             net_id = net_id,
             gender = gender,
