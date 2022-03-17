@@ -22,6 +22,7 @@ body {
     height: 100%;
     background: #293241;
     padding: 30px 0;
+    box-shadow: 5px 0px 5px rgb(158, 158, 158);
 }
 
 .wrapper .sidebar h2 {
