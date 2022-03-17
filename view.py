@@ -170,6 +170,15 @@ def view_tickets():
 def dashboard():
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 	return render_template('dashboard.html', name=curr_user_name)
+
+@app.route('/faq.html')
+@login_required
+def faq():
+	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+	return render_template('faq.html', name=curr_user_name)
+
+
+
 	
 @app.route('/log_out')
 @login_required
