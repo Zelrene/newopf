@@ -84,3 +84,10 @@ class DB_Connector():
         user = self.select_user_with_matching_netid(net_id)
         return user.last_name
 
+    def select_role_with_matching_email(self, contact_email):
+        user = self.select_user_with_matching_email(contact_email)
+        return user.user_role
+
+    def select_role_with_matching_netid(self, net_id):
+        user = self.select_user_with_matching_netid(net_id)
+        return user.user_role
