@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
-from src.models.user import UserRoles, User, Role
+from src.models.user import User
 
 #login functionality
 login_manager = LoginManager()
@@ -44,9 +44,9 @@ def on_identity_loaded(sender, identity):
 	if hasattr(current_user, 'id'):
 		identity.provides.add(UserNeed(current_user.id))
 
-	if hasattr(current_user, 'roles'):
-		for role in current_user.roles:
-			identity.provides.add(RoleNeed(role.name))
+	if hasattr(current_user, 'user_role'):
+		#for role in current_user.roles:
+		identity.provides.add(RoleNeed(current_user.user_role))
  
 
 
@@ -79,6 +79,8 @@ def log_in():
 
 		#if the above check passes, then we know the user has the right credentials
 		login_user(user)
+
+		#identity_changed.send(app, identity=Identity(user.net_id))
 
 		return redirect('dashboard.html')
 
