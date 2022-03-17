@@ -90,6 +90,9 @@ def sign_up():
 		return render_template('sign_up.html')
 
 	if request.method == 'POST':
+		if request.form['submit_btn'] == 'Log In':
+			return redirect('log_in.html')
+
 		first_name = request.form['First_Name']
 		last_name = request.form['Last_Name']
 		isStudent = request.form['Is_Student']
@@ -174,6 +177,15 @@ def view_single_ticket():
 def dashboard():
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 	return render_template('dashboard.html', name=curr_user_name)
+
+@app.route('/faq.html')
+@login_required
+def faq():
+	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+	return render_template('faq.html', name=curr_user_name)
+
+
+
 	
 @app.route('/log_out')
 @login_required

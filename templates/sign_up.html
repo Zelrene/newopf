@@ -1,6 +1,10 @@
 <!doctype html>
+<head>
+    <link rel="stylesheet" href="/static/signup.css"/>
+</head>
 {% block content %}
-<div class="form-container">
+<div class="container">
+    <div class="form-container">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="notification-danger">
@@ -8,9 +12,9 @@
             </div>
         {% endif %}
     {% endwith%}
-<h1>Create An Account</h1>
+
     <form action = "/sign_up.html" method = "POST">
-        <div class="container-right">
+        <h1>Create An Account</h1>
         <input type = "text"
         name = "Net_Id"
         placeholder = "Net ID"
@@ -61,15 +65,21 @@
         </input>
         <br>
         <a href = log_in.html>
-        <button type="submit" class="btn btn-default">Sign Up</button>
+        <!--<button type="submit" class="btn btn-default">Sign Up</button>-->
+        <input class="btn" type="submit" name="submit_btn" value="Sign Up">
     </a>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
         <br>
         <h1>Already Here?</h1>
         <p>Log in to your existing account to access dashboard</p>
-        <button type="submit" formaction="{{url_for('log_in')}}">Log In</button>
+        <input class="btn" type="submit" name="submit_btn" value="Log In">
         </div>
-
-
-
+            </div>
+        </div>
+    </div>
+</div>
     </form>
 {% endblock %}
