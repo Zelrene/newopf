@@ -17,7 +17,7 @@ db = SQLAlchemy(app)
 
 from src.models.user import User
 
-#login functionality
+# Login Functionality
 login_manager = LoginManager()
 login_manager.login_view = '/log_in.html'
 login_manager.init_app(app)
@@ -26,7 +26,7 @@ login_manager.init_app(app)
 def load_user(user_id):
 	return User.query.get(int(user_id))
 
-
+# Authorization Functionality
 principal = Principal()
 principal.init_app(app)
 
@@ -84,7 +84,7 @@ def log_in():
 		# Update identity of user thus calling
 		identity_changed.send(app, identity=Identity(user.net_id))
 
-		return redirect('dashboard.html')
+		return redirect('/dashboard.html')
 
 @app.route('/sign_up.html', methods = ['GET', 'POST'])
 def sign_up():
@@ -124,7 +124,7 @@ def sign_up():
 			password = generate_password_hash(password)
 			)
 			
-		return render_template('log_in.html')
+		return redirect('/log_in.html')
 
 
 @app.route('/create_tickets.html', methods = ['GET', 'POST'])
@@ -146,6 +146,10 @@ def create_tickets():
 		status = "pending"
 		creator_id = 1234
 		
+		if not title or not description or not location or not building or not unit or not contact:
+			flash('Not all required fields are filled. Please fill all required fields.')
+			return redirect('create_tickets.html')
+
 		ticket_controller.create_ticket(
 			title = title,
 			description = description, 
@@ -169,7 +173,6 @@ def create_tickets():
 @login_required
 @admin_permission.require(http_exception=403)
 def view_tickets():
-	
 	tickets = []
 	tickets = ticket_controller.get_tickets()
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
@@ -199,7 +202,7 @@ def faq():
 @login_required
 def log_out():
 	logout_user()
-	return render_template('log_in.html')
+	return redirect('/log_in.html')
 
 @app.errorhandler(403)
 @login_required
