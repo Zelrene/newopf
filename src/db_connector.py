@@ -1,4 +1,4 @@
-from opf.view import db
+from opf import db
 from src.models.ticket import Ticket
 #from src.models.user import Role, User
 from src.models.user import User

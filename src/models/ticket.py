@@ -1,4 +1,4 @@
-from opf.view import db
+from opf import db
 from src.models.user import User 
 
 class Ticket(db.Model):
