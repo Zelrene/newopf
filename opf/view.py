@@ -101,4 +101,13 @@ def log_out():
 def page_not_found(e):
 	session['redirected_from'] = request.url
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('page_not_found.html', name=curr_user_name)
+	title = 'Sorry, Page Not Found'
+	message = 'The page you requested does not exist. You may have followed a bad link, or the page may have been moved or removed.'
+	return render_template('page_not_found.html', name=curr_user_name, title=title, message=message, show=True)
+
+@main_bp.errorhandler(401)
+def page_not_found(e):
+	session['redirected_from'] = request.url
+	title = 'Unauthorized Page'
+	message = 'The page you are trying to access is unavailable. You lack the valid authentication credentials to view this page.'
+	return render_template('page_not_found.html', title=title, message=message, show=False)

@@ -1,10 +1,12 @@
 <!doctype html>
-{% extends "layout.html" %}
+{% if show %}
+    {% extends "layout.html" %}
+{% endif %}
 
 {% block content %}
     <h1 class="title">
-        Page Not Found
+        {{ title }}
     </h1>
     <br><br>
-    <p>The page you requested does not exist. You may have followed a bad link, or the page may have been moved or removed.</p>
+    <p> {{ message }} </p>
 {% endblock %}
