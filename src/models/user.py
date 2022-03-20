@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 #from sqlalchemy import PrimaryKeyConstraint
-from view import db
+from opf.view import db
 
 '''
 # Define the UserRoles association table
