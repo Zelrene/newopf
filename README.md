@@ -27,13 +27,14 @@ pip install SQLAlchemy
 pip install jinja2
 pip install flask-login
 pip install flask-principal
+pip install config
 ```
 
 ### Run the Project
 To run the project for the first time, please do the following commands.
 
 ```bash
-export FLASK_APP=view
+export FLASK_APP=opf
 export FLASK_ENV=development
 ```
 If you have done the two commands, to run or rerun the project, do the following command.
