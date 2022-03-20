@@ -2,14 +2,8 @@
 
 
 /env
+*.db
 
-/__pycache__
-src/__pycache__
-src/models/__pycache__
-__pycache__/__init__.cpython-310.pyc
-__pycache__/controller.cpython-310.pyc
-models/__pycache__/__init__.cpython-310.pyc
-src/__pycache__/__init__.cpython-310.pyc
-src/models/__pycache__/__init__.cpython-310.pyc
+**/__pycache__
 
-database.db
+*.pyc
