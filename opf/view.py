@@ -1,5 +1,5 @@
 from unicodedata import name
-from flask import Flask, abort, render_template, request, redirect, flash, session
+from flask import Flask, Blueprint, abort, render_template, request, redirect, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 
@@ -8,12 +8,15 @@ from flask_login import LoginManager, login_user, login_required, current_user, 
 from flask_principal import Principal, Permission, Identity, AnonymousIdentity
 from flask_principal import RoleNeed, UserNeed, identity_loaded, identity_changed
 
+from opf import app
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret-key-goes-here'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+#app = Flask(__name__)
+#app.config['SECRET_KEY'] = 'secret-key-goes-here'
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
+
+#admin = Blueprint("admin", __name__, static_folder="static", template_folder="templates")
 
 from src.models.user import User
 
@@ -217,5 +220,5 @@ def page_not_found(e):
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 	return render_template('page_not_found.html', name=curr_user_name)
 
-if __name__ == '__main__':
-	app.run()
+#if __name__ == '__main__':
+#	app.run()
