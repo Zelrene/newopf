@@ -28,6 +28,7 @@ pip install jinja2
 pip install flask-login
 pip install flask-principal
 pip install config
+pip install python-dotenv
 ```
 
 ### Run the Project
