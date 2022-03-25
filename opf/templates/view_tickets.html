@@ -17,6 +17,7 @@
             <th>Location</th>
         </tr>
         {% for ticket in tickets %}
+        <tr>
             <td>{{ ticket.title }}</td>
             {% for status in status %}
                 {% if loop.last %}
@@ -27,8 +28,8 @@
             <td>{{ ticket.unit }}</td>
             <td>{{ ticket.severity_level }}</td>
             <td>{{ ticket.location }}</td>
-
-        {% endfor %}
         </tr>
+        {% endfor %}
+        
     </table>
 {% endblock %}
