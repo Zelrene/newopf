@@ -33,9 +33,7 @@ def create_tickets():
 		building = request.form['Building']
 		severity_level = request.form['Severity_level']
 		unit = request.form['Unit#']
-		#contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
-		#status = "pending"
 		creator_id = current_user.id
 		
 		if not title or not description or not location or not building or not unit:
