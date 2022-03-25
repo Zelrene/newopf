@@ -4,7 +4,7 @@
 
 .container p {
 font-weight: light;
-color: #919191;
+color: white;
 }
 .form-container {
 position: absolute;
@@ -42,6 +42,7 @@ justify-content: center;
 flex-direction: column;
 height: 100%;
 text-align: center;
+margin-top: 180px;
 }
 
 .btn{
@@ -60,5 +61,12 @@ border-width: 1px;
 padding: 5px 30px;
 border-radius: 5px;
 background: transparent;
+color: white;
+}
 
+.select{
+padding: 5px 10px;
+border-radius: 5px;
+background: none;
+color: white;
 }
