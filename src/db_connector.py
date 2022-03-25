@@ -7,7 +7,7 @@ class DB_Connector():
     def __init__(self):
         db.create_all()
 
-    
+    '''
     def insert_ticket(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, contact):
         new_ticket = Ticket(
             title = title,
@@ -20,6 +20,24 @@ class DB_Connector():
             location = location, 
             additionalNotes = additionalNotes, 
             contact = contact)
+        db.session.add(new_ticket)
+        db.session.commit()
+
+    '''
+    def insert_ticket(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, submission_date, appointment_date, appointment_time):
+        new_ticket = Ticket(
+            title = title,
+            creator_id = creator_id, 
+            status = status, 
+            severity_level = severity_level, 
+            description = description, 
+            building = building, 
+            unit = unit, 
+            location = location, 
+            additionalNotes = additionalNotes,
+            submission_date = submission_date,
+            appointment_date = appointment_date,
+            appointment_time = appointment_time)
         db.session.add(new_ticket)
         db.session.commit()
 
@@ -46,8 +64,6 @@ class DB_Connector():
         db.session.add(new_user)
         db.session.commit()
         
-
-
 
     def select_all_user(self):
             return User.query.all()
