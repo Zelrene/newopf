@@ -33,12 +33,10 @@ def create_tickets():
 		building = request.form['Building']
 		severity_level = request.form['Severity_level']
 		unit = request.form['Unit#']
-		contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
-		status = "pending"
-		creator_id = 1234
+		creator_id = current_user.id
 		
-		if not title or not description or not location or not building or not unit or not contact:
+		if not title or not description or not location or not building or not unit:
 			flash('Not all required fields are filled. Please fill all required fields before submitting your ticket.')
 			return redirect(url_for('main_bp.create_tickets'))
 
@@ -49,9 +47,7 @@ def create_tickets():
 			building = building,
 			severity_level = severity_level,
 			unit = unit,
-			contact = contact,
 			additionalNotes = additonalNotes,
-			status = status,
 			creator_id = creator_id)
 
 		role = user_controller.get_role_with_matching_netid(current_user.net_id)
