@@ -32,3 +32,5 @@ class Ticket(db.Model):
         self.appointment_date = appointment_date
         self.appointment_time = appointment_time  
 
+    def get_id(self):
+        return self.id
