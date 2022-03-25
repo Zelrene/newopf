@@ -35,7 +35,8 @@ def create_tickets():
 		unit = request.form['Unit#']
 		contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
-		creator_id = 1234
+		status = "Submitted"
+		creator_id = current_user.id
 		
 		if not title or not description or not location or not building or not unit or not contact:
 			flash('Not all required fields are filled. Please fill all required fields before submitting your ticket.')
@@ -50,6 +51,7 @@ def create_tickets():
 			unit = unit,
 			contact = contact,
 			additionalNotes = additonalNotes,
+			status = status,
 			creator_id = creator_id)
 
 		role = user_controller.get_role_with_matching_netid(current_user.net_id)
@@ -60,33 +62,46 @@ def create_tickets():
 		'''
 		return redirect(url_for('main_bp.view_tickets'))
 
-@main_bp.route('/view_tickets.html')
+@main_bp.route('/view_tickets.html', methods = ['GET', 'POST'])
 @login_required
 def view_tickets():
 	tickets = []
-	status = []
-	status = ticket_controller.get_status()
 	tickets = ticket_controller.get_tickets()
-	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('view_tickets.html', tickets=tickets, status=status, name=curr_user_name)
+
+	if request.method == 'GET':
+		#tickets = []
+		#status = []
+		#status = ticket_controller.get_status()
+		#tickets = ticket_controller.get_tickets()
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+
+		return render_template('view_tickets.html', tickets=tickets, name=curr_user_name)#, status=status)
+
+	if request.method == 'POST':
+		for curr_ticket in tickets:
+			#print('[[[[[' + curr_ticket.title)
+			if request.form['ticket_title'] == curr_ticket.title:
+				redirect(url_for('main_bp.view_single_ticket(curr_tickeet)'))
+
 
 
 @main_bp.route('/view_single_ticket.html',  methods = ['GET', 'POST'])
 @login_required
-def view_single_ticket():
+def view_single_ticket(ticket):
 	if request.method == 'GET':
-		tickets = []
-		status = []
-		status = ticket_controller.get_status()
-		tickets = ticket_controller.get_tickets()
+		#tickets = []
+		#status = []
+		#status = ticket_controller.get_status()
+		#tickets = ticket_controller.get_tickets()
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-		return render_template('view_single_ticket.html', tickets=tickets, name=curr_user_name, status=status)
+		#return render_template('view_single_ticket.html', tickets=tickets, name=curr_user_name)#, status=status)
+		return render_template('viw_single_ticket.html', ticket=ticket, name=curr_user_name)
 	
 	if request.method == 'POST':
 		status = request.form['Status']
 
-		ticket_controller.view_single_ticket(
-			status = status)
+		#ticket_controller.view_single_ticket(status = status)
+		ticket_controller.update_status(new_status = status)
 
 		role = user_controller.get_role_with_matching_netid(current_user.net_id)
 
@@ -126,3 +141,10 @@ def page_not_found(e):
 	title = 'Unauthorized Page'
 	message = 'The page you are trying to access is unavailable. You lack the valid authentication credentials to view this page.'
 	return render_template('page_not_found.html', title=title, message=message, show=False)
+
+@main_bp.errorhandler(400)
+def page_not_found(e):
+	session['redirected_from'] = request.url
+	title = 'Bad Directory'
+	message = 'The page you are trying to access is unavailable. The page that directed you here should not have made a link to this page.'
+	return render_template('page_not_found.html', title=title, message=message, show=True)
