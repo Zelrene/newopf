@@ -35,7 +35,7 @@ class TicketController():
         tickets = database.select_all_tickets()
         return tickets
 
-    def get_all_tickets_with_mathing_user_id(self, user_id):
+    def get_all_tickets_with_matching_user_id(self, user_id):
         tickets = database.select_all_tickets_with_matching_user_id(user_id)
         return tickets
 
