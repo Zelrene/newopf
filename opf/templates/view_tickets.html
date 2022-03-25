@@ -19,7 +19,9 @@
         {% for ticket in tickets %}
             <td>{{ ticket.title }}</td>
             {% for status in status %}
-            <td class="status">{{ status.status }}</td>
+                {% if loop.last %}
+                    <td class="status">{{ status.status }}</td>
+                {% endif %}
             {% endfor %}
             <td>{{ ticket.building }}</td>
             <td>{{ ticket.unit }}</td>
