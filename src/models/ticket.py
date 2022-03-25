@@ -6,6 +6,7 @@ class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(75), nullable = False)
     creator_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
+    status = db.Column(db.String(25), nullable = False)
     description = db.Column(db.Text, nullable = False)
     severity_level = db.Column(db.String(50), nullable = False)
     building = db.Column(db.String(25), nullable = False)
@@ -14,9 +15,10 @@ class Ticket(db.Model):
     additionalNotes = db.Column(db.Text, nullable = True)
     contact = db.Column(db.Text, nullable = True)
     
-    def __init__(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes, contact):
+    def __init__(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, contact):
         self.title = title
         self.creator_id = creator_id
+        self.status = status
         self.description = description
         self.severity_level = severity_level
         self.building = building
@@ -25,7 +27,7 @@ class Ticket(db.Model):
         self.additionalNotes = additionalNotes
         self.contact = contact  
 
-
+'''
 class Status(db.Model):
     __tablename__ = 'status'
     id = db.Column(db.Integer, primary_key = True)
@@ -33,4 +35,4 @@ class Status(db.Model):
     
     def __init__(self, status):
         self.status = status
-      
+'''
