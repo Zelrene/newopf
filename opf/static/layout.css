@@ -25,13 +25,6 @@ body {
     box-shadow: 5px 0px 5px rgb(158, 158, 158);
 }
 
-.wrapper .sidebar h2 {
-    color: #fff;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
 .wrapper .sidebar ul li {
     padding: 15px;
 }
@@ -42,7 +35,13 @@ body {
     font-size: 12px;
     text-align: center;
 }
-
+.wrapper .sidebar hr{
+   opacity: 0.3;
+   border-width: .5px;
+   align-items: center;
+   width:25%;
+   margin: auto;
+}
 .wrapper .sidebar ul li a:active {
     color: #f15a29;
 }
@@ -57,7 +56,7 @@ body {
 .header {
     overflow: hidden;
     background-color: #ffffff;
-    padding: 20px 10px;
+    padding: 15px 8px;
   }
 
 .header-right {
@@ -66,26 +65,69 @@ body {
 
 .header-right a{
     color: #ee6c4d;
-    padding: 35px;
     font-size: 16px;
   }
+
 .header-left{
   float: left;
   text-align: center;
-  padding-left: 250px;
-  padding-top: 12px;
+  padding-left: 200px;
+  padding-top: 20px;
   line-height: 0px;
 } 
 
 .header-left p{
-    color: #ee6c4d;
+    color: #293241;
     font-size: 16px;
   }
-
 .user {
     width: 25px;
     height: auto;
-    line-height: 0px;
-    left: 225px;
+    right: 225px;
     position: absolute;
+    padding-top: 6px;
+}
+
+  .dropdown-content {
+    display: none; 
+    width: 100%;
+    overflow: auto;
+    border-radius: 5px;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .dropdown-content a {
+    display: block;
+    color: #293241;
+    padding: 5px;
+    text-decoration: none;
+  }
+  .dropdown-content a:hover {
+    color: #313131;
+    background-color: #d4d4d4;
+    font-size: light;
+  }
+
+.header-right button{
+    background-color: #ffffff;
+    opacity: 0.8;
+    color: #ee6c4d;;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    font-family: effra, sans-serif;
+
+}
+
+.header-right button:hover{
+    background-color: #293241;
+    opacity: 0.8;
+    color: #ffffff;;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    font-family: effra, sans-serif;
 }
