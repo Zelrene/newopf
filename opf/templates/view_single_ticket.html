@@ -3,6 +3,7 @@
 
 {% block content %}
 <h1>View a ticket</h1>
+<p>{{ ticket.title }}</p>
 <form action = "/view_single_ticket.html" method = "POST">
     <select name="Status" value="{{request.form['Status']}}">
       <option class="option1">Submitted</option>

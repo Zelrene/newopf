@@ -18,12 +18,14 @@
         </tr>
         {% for ticket in tickets %}
         <tr>
-            <td>{{ ticket.title }}</td>
-            {% for status in status %}
+            <!--<td><a href="{{url_for('main_bp.view_single_ticket')}}">{{ ticket.title }}</a></td>-->
+            <td><input type="submit" name="ticket_title" value={{ ticket.title }}></td>
+            <!--{% for status in status %}
                 {% if loop.last %}
                     <td class="status">{{ status.status }}</td>
                 {% endif %}
-            {% endfor %}
+            {% endfor %}-->
+            <td class="status">{{ ticket.status }}</td>
             <td>{{ ticket.building }}</td>
             <td>{{ ticket.unit }}</td>
             <td>{{ ticket.severity_level }}</td>
