@@ -2,13 +2,16 @@ from opf import db
 from src.models.ticket import Ticket
 #from src.models.user import Role, User
 from src.models.user import User
+from src.models.faq import Faq
 
 class DB_Connector():
     def __init__(self):
         db.create_all()
 
     '''ticket model functions'''
+
     def insert_ticket(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, submission_date, appointment_date, appointment_time):
+        
         new_ticket = Ticket(
             title = title,
             creator_id = creator_id, 
@@ -22,11 +25,13 @@ class DB_Connector():
             submission_date = submission_date,
             appointment_date = appointment_date,
             appointment_time = appointment_time)
+
         db.session.add(new_ticket)
         db.session.commit()
 
     def select_all_tickets(self):
-        return Ticket.query.all()
+        tickets = Ticket.query.all()
+        return tickets
 
     def select_all_tickets_with_matching_user_id(self, user_id):
         tickets = Ticket.query.filter(creator_id = user_id).all()
@@ -66,6 +71,7 @@ class DB_Connector():
          db.session.commit() 
 
     '''user model functions'''
+
     def insert_user(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password):
         new_user = User(
             first_name = first_name,
@@ -87,7 +93,8 @@ class DB_Connector():
         
 
     def select_all_user(self):
-            return User.query.all()
+        users = User.query.all()
+        return users
 
     def select_user_with_matching_email(self, contact_email):
         user = User.query.filter_by(contact_email = contact_email).first()
@@ -128,3 +135,25 @@ class DB_Connector():
     def select_role_with_matching_netid(self, net_id):
         user = self.select_user_with_matching_netid(net_id)
         return user.user_role
+
+
+    '''faq model functions'''
+
+    def insert_faq(self, question, answer):
+        
+        new_faq = Faq(
+            question = question,
+            answer = answer
+            )
+        
+        db.session.add(new_faq)
+        db.session.commit()
+
+    def select_all_faq(self):
+        all_faq = Faq.query.all()
+        return all_faq
+
+    def delete_faq(self, faq_id):
+        faq_to_del = Faq.query.filter(id = faq_id).first()
+        db.session.delete(faq_to_del)
+        db.session.commit()

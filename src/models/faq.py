@@ -1,4 +1,4 @@
-from view import db
+from opf import db
 
 
 class Faq(db.Model):
