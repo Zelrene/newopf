@@ -10,19 +10,23 @@
     <table>
         <tr>
             <th>Title</th>
-            <th>Building</th>
+            <th>Status</th>
+           <th>Building</th>
             <th>Unit</th>
             <th>Severity</th>
             <th>Location</th>
         </tr>
         {% for ticket in tickets %}
-        
             <td>{{ ticket.title }}</td>
+            {% for status in status %}
+            <td class="status">{{ status.status }}</td>
+            {% endfor %}
             <td>{{ ticket.building }}</td>
             <td>{{ ticket.unit }}</td>
             <td>{{ ticket.severity_level }}</td>
             <td>{{ ticket.location }}</td>
-        </tr>
+
         {% endfor %}
+        </tr>
     </table>
 {% endblock %}

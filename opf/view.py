@@ -35,7 +35,6 @@ def create_tickets():
 		unit = request.form['Unit#']
 		contact = request.form['Contact']
 		additonalNotes = request.form['AdditionalNotes']
-		status = "pending"
 		creator_id = 1234
 		
 		if not title or not description or not location or not building or not unit or not contact:
@@ -51,31 +50,47 @@ def create_tickets():
 			unit = unit,
 			contact = contact,
 			additionalNotes = additonalNotes,
-			status = status,
 			creator_id = creator_id)
 
 		role = user_controller.get_role_with_matching_netid(current_user.net_id)
 
-		if role == 'Admin':
-			return redirect(url_for('main_bp.view_tickets'))
+		'''if role == 'Admin':
+			return redirect(url_for('main_bp.view_tickets_admin'))
 		else:
-			return redirect(url_for('main_bp.view_single_ticket'))
+		'''
+		return redirect(url_for('main_bp.view_tickets'))
 
 @main_bp.route('/view_tickets.html')
 @login_required
-@admin_permission.require(http_exception=403)
 def view_tickets():
 	tickets = []
+	status = []
+	status = ticket_controller.get_status()
 	tickets = ticket_controller.get_tickets()
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('view_tickets.html', tickets=tickets, name=curr_user_name)
+	return render_template('view_tickets.html', tickets=tickets, status=status, name=curr_user_name)
 
-@main_bp.route('/view_single_ticket.html')
+
+@main_bp.route('/view_single_ticket.html',  methods = ['GET', 'POST'])
 @login_required
-@student_permission.require(http_exception=403)
 def view_single_ticket():
-	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('view_single_ticket.html', name=curr_user_name)
+	if request.method == 'GET':
+		tickets = []
+		status = []
+		status = ticket_controller.get_status()
+		tickets = ticket_controller.get_tickets()
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+		return render_template('view_single_ticket.html', tickets=tickets, name=curr_user_name, status=status)
+	
+	if request.method == 'POST':
+		status = request.form['Status']
+
+		ticket_controller.view_single_ticket(
+			status = status)
+
+		role = user_controller.get_role_with_matching_netid(current_user.net_id)
+
+		return redirect(url_for('main_bp.view_single_ticket'))
 
 @main_bp.route('/dashboard.html')
 @login_required

@@ -2,7 +2,15 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1 class="title">
-    View Ticket Details
-  </h1>
+<h1>View a ticket</h1>
+<form action = "/view_single_ticket.html" method = "POST">
+    <select name="Status" value="{{request.form['Status']}}">
+      <option class="option1">Submitted</option>
+      <option class="option2">In Progress</option>
+      <option class="option3">Denied</option>
+      <option class="option4">Completed</option>
+  </select>
+  <button type="submit" 
+  class="btn btn-default">Save Changes</button>
+</form>
 {% endblock %}

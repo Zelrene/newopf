@@ -1,5 +1,6 @@
 from opf import db
 from src.models.ticket import Ticket
+from src.models.ticket import Status
 #from src.models.user import Role, User
 from src.models.user import User
 
@@ -7,12 +8,10 @@ class DB_Connector():
     def __init__(self):
         db.create_all()
 
-    
-    def insert_ticket(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, contact):
+    def insert_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes, contact):
         new_ticket = Ticket(
             title = title,
             creator_id = creator_id, 
-            status = status, 
             severity_level = severity_level, 
             description = description, 
             building = building, 
@@ -23,8 +22,17 @@ class DB_Connector():
         db.session.add(new_ticket)
         db.session.commit()
 
+    def insert_status(self, status):
+        new_status = Status(
+            status = status)
+        db.session.add(new_status)
+        db.session.commit()
+
     def select_all_tickets(self):
         return Ticket.query.all()
+
+    def select_status(self):
+        return Status.query.all()
 
 
     def insert_user(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password):

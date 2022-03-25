@@ -7,6 +7,22 @@ table{
 
 }
 
+.status .option1{
+    color: blue;
+}
+
+.status .option2{
+    color: orange;
+}
+
+.status .option3{
+    color: red;
+}
+
+.status .option4{
+    color: green;
+}
+
 th{
     background-color: #98c1d9;
     color: white;
