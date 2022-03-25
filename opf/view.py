@@ -63,7 +63,8 @@ def create_tickets():
 @login_required
 def view_tickets():
 	tickets = []
-	tickets = ticket_controller.get_tickets()
+	#tickets = ticket_controller.get_tickets()
+	tickets = ticket_controller.get_all_tickets_with_matching_user_id(current_user.id)
 
 	if request.method == 'GET':
 		#tickets = []
