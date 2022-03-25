@@ -25,8 +25,10 @@
         placeholder = "Net ID"
         value = "{{ request.form['Net_Id'] }}">
         </input>
-        <select name ="User_Role"
+        
+        <select class="select" name ="User_Role"
         value="{{ request.form['User_Role'] }}">
+        <option value="none" selected disabled hidden>Who Are You?</option>
         <option>Student</option>
         <option>Admin</option>
         </select>
@@ -42,14 +44,16 @@
         value = "{{ request.form['Last_Name'] }}">
         </input>
         <br>
-        <select name = "Gender"
+        <select class="select" name = "Gender"
         value="{{ request.form['Gender'] }}">
+        <option value="none" selected disabled hidden>Gender</option>
         <option>Male</option>
         <option>Female</option>
         <option>Do not wish to answer</option>
         </select>
-        <select name="Year"
+        <select class ="select" name="Year"
         value="{{ request.form['Year'] }}">
+        <option value="none" selected disabled hidden>Year</option>
         <option>Freshman</option>
         <option>Sophomore</option>
         <option>Junior</option>
