@@ -35,15 +35,15 @@ class DB_Connector():
         return tickets
 
     def select_all_tickets_with_matching_user_id(self, user_id):
-        tickets = Ticket.query.filter(creator_id = user_id).all()
+        tickets = Ticket.query.filter_by(creator_id = user_id).all()
         return tickets
 
     def select_single_ticket_with_matching_user_id(self, user_id):
-        ticket = Ticket.query.filter(creator_id = user_id).first()
+        ticket = Ticket.query.filter_by(creator_id = user_id).first()
         return ticket
 
     def select_single_ticket_with_matching_ticket_id(self, ticket_id):
-        ticket = Ticket.query.filter(id = ticket_id).first()
+        ticket = Ticket.query.filter_by(id = ticket_id).first()
         return ticket
 
     def select_ticket_status(self, ticket_id):
@@ -52,22 +52,22 @@ class DB_Connector():
         return status
 
     def delete_ticket(self, ticket_id):
-        ticket_to_del = Ticket.query.filter(id = ticket_id).first()
+        ticket_to_del = Ticket.query.filter_by(id = ticket_id).first()
         db.session.delete(ticket_to_del)
         db.session.commit()
 
     def update_ticket_status(self, ticket_id, new_status):
-        ticket = Ticket.query.filter(id = ticket_id).first()
+        ticket = Ticket.query.filter_by(id = ticket_id).first()
         ticket.status = new_status
         db.session.commit()
 
     def update_ticket_appointment_date(self, ticket_id, new_date):
-         ticket = Ticket.query.filter(id = ticket_id).first()
+         ticket = Ticket.query.filter_by(id = ticket_id).first()
          ticket.appointment_date = new_date
          db.session.commit()       
 
     def update_ticket_appointment_time(self, ticket_id, new_time):
-         ticket = Ticket.query.filter(id = ticket_id).first()
+         ticket = Ticket.query.filter_by(id = ticket_id).first()
          ticket.appointment_date = new_time
          db.session.commit() 
 
@@ -155,6 +155,6 @@ class DB_Connector():
         return all_faq
 
     def delete_faq(self, faq_id):
-        faq_to_del = Faq.query.filter(id = faq_id).first()
+        faq_to_del = Faq.query.filter.by(id = faq_id).first()
         db.session.delete(faq_to_del)
         db.session.commit()
