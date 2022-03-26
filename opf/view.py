@@ -73,13 +73,7 @@ def view_tickets():
 		#tickets = ticket_controller.get_tickets()
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 
-		return render_template('view_tickets.html', tickets=tickets, name=curr_user_name)#, status=status)
-
-	if request.method == 'POST':
-		for curr_ticket in tickets:
-			#print('[[[[[' + curr_ticket.title)
-			if request.form['ticket_title'] == curr_ticket.title:
-				redirect(url_for('main_bp.view_single_ticket(curr_tickeet)'))
+		
 
 
 
@@ -87,10 +81,6 @@ def view_tickets():
 @login_required
 def view_single_ticket(ticket):
 	if request.method == 'GET':
-		#tickets = []
-		#status = []
-		#status = ticket_controller.get_status()
-		#tickets = ticket_controller.get_tickets()
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 		#return render_template('view_single_ticket.html', tickets=tickets, name=curr_user_name)#, status=status)
 		return render_template('viw_single_ticket.html', ticket=ticket, name=curr_user_name)
