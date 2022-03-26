@@ -55,7 +55,7 @@ class TicketController():
     def delete_ticket(self, ticket_id):
         database.delete_ticket(ticket_id)
 
-    def update_ticket_staus(self, ticket_id, new_status):
+    def update_ticket_status(self, ticket_id, new_status):
         database.update_ticket_status(ticket_id = ticket_id, new_status = new_status)
 
     def update_appointment_date(self, ticket_id, new_date):
