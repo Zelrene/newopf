@@ -34,7 +34,6 @@ def create_tickets():
 		severity_level = request.form['Severity_level']
 		unit = request.form['Unit#']
 		additonalNotes = request.form['AdditionalNotes']
-		status = "Submitted"
 		creator_id = current_user.id
 		
 		if not title or not description or not location or not building or not unit:
@@ -75,25 +74,31 @@ def view_tickets():
 
 		
 
+		return render_template('view_tickets.html', tickets=tickets, name=curr_user_name)#, status=status)
 
 
-@main_bp.route('/view_single_ticket.html',  methods = ['GET', 'POST'])
+@main_bp.route('/view_single_ticket.html', defaults = {'ticket_id' : '0000'}, methods = ['GET', 'POST'])
+@main_bp.route('/view_single_ticket.html/<ticket_id>',  methods = ['GET', 'POST'])
 @login_required
-def view_single_ticket(ticket):
+def view_single_ticket(ticket_id):
+	ticket = ticket_controller.get_single_ticket_with_matching_ticket_id(ticket_id)
+	#print("[[[[[[[[[[[ " + ticket.title)
+
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-		#return render_template('view_single_ticket.html', tickets=tickets, name=curr_user_name)#, status=status)
-		return render_template('viw_single_ticket.html', ticket=ticket, name=curr_user_name)
+		
+		return render_template('view_single_ticket.html', ticket=ticket, name=curr_user_name)
 	
 	if request.method == 'POST':
 		status = request.form['Status']
 
-		#ticket_controller.view_single_ticket(status = status)
-		ticket_controller.update_status(new_status = status)
+		#print("[[[[[[[[[[[ " + ticket.status)
+		
+		ticket_controller.update_ticket_status(
+			ticket_id = ticket_id, 
+			new_status = status)
 
-		role = user_controller.get_role_with_matching_netid(current_user.net_id)
-
-		return redirect(url_for('main_bp.view_single_ticket'))
+		return redirect(url_for('main_bp.view_tickets'))
 
 @main_bp.route('/dashboard.html')
 @login_required

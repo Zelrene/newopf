@@ -19,7 +19,8 @@
         {% for ticket in tickets %}
         <tr>
             <!--<td><a href="{{url_for('main_bp.view_single_ticket')}}">{{ ticket.title }}</a></td>-->
-            <td><input type="submit" name="ticket_title" value={{ ticket.title }}></td>
+            <!--<td><input type="submit" name="ticket_title" value={{ ticket.title }}></td>-->
+            <td><a href="{{ url_for('main_bp.view_single_ticket', ticket_id=ticket.id) }}">{{ ticket.title }}</a></td>
             <!--{% for status in status %}
                 {% if loop.last %}
                     <td class="status">{{ status.status }}</td>
