@@ -155,6 +155,6 @@ class DB_Connector():
         return all_faq
 
     def delete_faq(self, faq_id):
-        faq_to_del = Faq.query.filter.by(id = faq_id).first()
+        faq_to_del = Faq.query.filter_by(id = faq_id).first()
         db.session.delete(faq_to_del)
         db.session.commit()
