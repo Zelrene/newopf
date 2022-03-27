@@ -66,33 +66,34 @@ def view_tickets():
 	tickets = ticket_controller.get_all_tickets_with_matching_user_id(current_user.id)
 
 	if request.method == 'GET':
-		#tickets = []
-		#status = []
-		#status = ticket_controller.get_status()
-		#tickets = ticket_controller.get_tickets()
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-
-		
 
 		return render_template('view_tickets.html', tickets=tickets, name=curr_user_name)#, status=status)
 
+# Global Variable for View Single Ticket
+curr_ticket_id = 0
 
-@main_bp.route('/view_single_ticket.html', defaults = {'ticket_id' : '0000'}, methods = ['GET', 'POST'])
-@main_bp.route('/view_single_ticket.html/<ticket_id>',  methods = ['GET', 'POST'])
+@main_bp.route('/view_single_ticket.html', defaults = {'ticket_id' : 0}, methods = ['GET', 'POST'])
+@main_bp.route('/view_single_ticket.html/<int:ticket_id>',  methods = ['GET', 'POST'])
 @login_required
 def view_single_ticket(ticket_id):
+	
+	# Make sure ticket_id is not 0 (aka NULL)
+	global curr_ticket_id
+	if ticket_id != 0:
+		curr_ticket_id = ticket_id
+	else:
+		ticket_id = curr_ticket_id
+
 	ticket = ticket_controller.get_single_ticket_with_matching_ticket_id(ticket_id)
-	#print("[[[[[[[[[[[ " + ticket.title)
 
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 		
 		return render_template('view_single_ticket.html', ticket=ticket, name=curr_user_name)
-	
+		
 	if request.method == 'POST':
 		status = request.form['Status']
-
-		#print("[[[[[[[[[[[ " + ticket.status)
 		
 		ticket_controller.update_ticket_status(
 			ticket_id = ticket_id, 
