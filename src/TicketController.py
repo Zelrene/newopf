@@ -88,6 +88,17 @@ class TicketController():
     
     def update_appointment_date(self, ticket_id, new_date):
         database.update_ticket_appointment_date(ticket_id = ticket_id, new_date = new_date)
+
+       #send email 
+        email_subj = "Ticket appointment day update"
+        recipeint_email = database.select_creator_email_with_matching_ticket_id(ticket_id)
+        recipeint_name = database.select_creator_name_with_matching_ticket_id(ticket_id)
+        email_body = "Hi " + recipeint_name + ", \nThe appointment day of your ticket with ticket id " + str(ticket_id) + " has been set. Your apppointment is on " + new_date + ' . A facilites member will come to assist with the maintenace issue. we look forward to see you. \nHave a good day.'
+        Extra_functionality.send_email(
+            email_subj = email_subj,
+            recipient_email=recipeint_email,
+            email_body = email_body
+            )
     
     def update_appointment_time(self, ticket_id, new_time):
         database.update_ticket_appointment_time(ticket_id = ticket_id, new_time = new_time)
