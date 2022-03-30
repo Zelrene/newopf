@@ -15,10 +15,11 @@
   <p>{{ticket.additional_notes}}</p>
  -->
 <form action = "/view_single_ticket.html" method = "POST">
-  <div class="container">
+  <div class="singleticket-container">
   <h1>{{ name }}</h1>
   <p>{{ticket.title}}</p>
   <p>Submitted on {{ticket.submission_date}}</p>
+  <p>Appointment: {{ticket.appointment_date}}</p>
   <p>Ticket ID: {{ticket.id}}</p>
   <p>Status: {{ticket.status}}</p>
   <p>Severity: {{ticket.severity_level}}</p>
@@ -28,7 +29,8 @@
   <p>{{ticket.additional_notes}}</p>
   <p>{{ticket.description}}</p>
 </div>
-  
+  <div class="admincontrols">
+    <p>Edit Status</p>
     <select name="Status" value="{{request.form['Status']}}">
       <option class="option1">Submitted</option>
       <option class="option2">In Progress</option>
@@ -37,11 +39,13 @@
   </select>
   <p>Make an appointment</p>
   <input type="date" name="Appointment_date" value="{{request.form['Appointment_date']}}">
+
   <p>Add a message</p>
   <textarea></textarea>
 
   <button type="submit" 
   class="btn btn-default">Save Changes</button>
+</div>
  
 </form>
 {% endblock %}
