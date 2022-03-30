@@ -4,42 +4,44 @@
   <link rel="stylesheet" href="/static/singleticket.css"/>
 </head>
 {% block content %}
- <!-- <p>{{ticket.title}}</p>
-  <p>{{ticket.description}}</p>
-  <p>{{ticket.id}}</p>
-  <p>{{ticket.status}}</p>
-  <p>{{ticket.severity_level}}</p>
-  <p>{{ticket.location}}</p>
-  <p>{{ticket.building}}</p>
-  <p>{{ticket.unit}}</p>
-  <p>{{ticket.additional_notes}}</p>
- -->
+<h1>View a ticket</h1>
 <form action = "/view_single_ticket.html" method = "POST">
   <div class="singleticket-container">
-  <h1>{{ name }}</h1>
-  <p>{{ticket.title}}</p>
-  <p>Submitted on {{ticket.submission_date}}</p>
-  <p>Appointment: {{ticket.appointment_date}}</p>
+  <h1>{{ ticket.user.first_name }}</h1>
+  <h2 >{{ticket.title}}</h2>
+  
+  <p class="submission-date">Submitted on {{ticket.submission_date}}</p>
+  <br>
+  <p class="appt-heading">Appointment:<p>
+    <p class="appt">{{ticket.appointment_date}}</p>
+    <br>
+  <div class="ticket-details">
   <p>Ticket ID: {{ticket.id}}</p>
   <p>Status: {{ticket.status}}</p>
   <p>Severity: {{ticket.severity_level}}</p>
   <p>Location: {{ticket.location}}</p>
   <p>Building: {{ticket.building}}</p>
   <p>Unit#: {{ticket.unit}}</p>
-  <p>{{ticket.additional_notes}}</p>
   <p>{{ticket.description}}</p>
+  <p>{{ticket.additional_notes}}</p>
+</div>
+  <br>
+  <div class="message">
+  <p class="msg">Message from Facility</p>
   <p>{{ ticket.admin_message }}</p>
+  </div>
 </div>
   
   {% if allow_edit %}
   <div class="admincontrols">
     <p>Edit Status</p>
-    <select name="Status" value="{{request.form['Status']}}">
+    <select class="select"name="Status" value="{{request.form['Status']}}">
     <option class="option1">Submitted</option>
     <option class="option2">In Progress</option>
     <option class="option3">Denied</option>
     <option class="option4">Completed</option>
     </select>
+   
     <p>Make an appointment</p>
     <input type="date" name="Appointment_date" value="{{request.form['Appointment_date']}}">
 
