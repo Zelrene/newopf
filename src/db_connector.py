@@ -1,4 +1,7 @@
 from opf import db
+from datetime import datetime
+from datetime import date
+
 from src.models.ticket import Ticket
 #from src.models.ticket import Status
 #from src.models.user import Role, User
@@ -62,14 +65,17 @@ class DB_Connector():
         db.session.commit()
 
     def update_ticket_appointment_date(self, ticket_id, new_date):
-         ticket = Ticket.query.filter_by(id = ticket_id).first()
-         ticket.appointment_date = new_date
-         db.session.commit()       
+        ticket = Ticket.query.filter_by(id = ticket_id).first()
+        new_date = datetime.strptime(new_date, '%Y-%m-%d')
+        ticket.appointment_date = new_date
+        db.session.commit()       
 
     def update_ticket_appointment_time(self, ticket_id, new_time):
-         ticket = Ticket.query.filter_by(id = ticket_id).first()
-         ticket.appointment_date = new_time
-         db.session.commit() 
+        ticket = Ticket.query.filter_by(id = ticket_id).first()
+        #the format(%H:%M:S) might need to changed depending on what is being sent to the user 
+        new_time = datetime.strptime(new_time, '%H:%M:%S')
+        ticket.appointment_date = new_time
+        db.session.commit() 
 
     '''user model functions'''
 
