@@ -112,9 +112,9 @@ def view_single_ticket(ticket_id):
 			ticket_id = ticket_id, 
 			new_date = appointment_date)
 
-		ticket_controller.create_admin_message(
+		ticket_controller.update_ticket_admin_message(
 			ticket_id = ticket_id,
-			admin_message = admin_message
+			new_admin_message = admin_message
 		)
 		
 

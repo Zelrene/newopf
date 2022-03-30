@@ -38,12 +38,14 @@ class DB_Connector():
         tickets = Ticket.query.all()
         return tickets
 
+    '''
     def insert_admin_message(self, admin_message):
         new_admin_message = Ticket(
             admin_message=admin_message
         )
         db.session.add(new_admin_message)
         db.session.commit()
+    '''
 
     def select_all_tickets_with_matching_user_id(self, user_id):
         tickets = Ticket.query.filter_by(creator_id = user_id).all()
@@ -101,6 +103,11 @@ class DB_Connector():
         new_time = datetime.strptime(new_time, '%H:%M:%S')
         ticket.appointment_date = new_time
         db.session.commit() 
+    
+    def update_ticket_admin_message(self, ticket_id, new_admin_message):
+        ticket = Ticket.query.filter_by(id = ticket_id).first()
+        ticket.admin_message = new_admin_message
+        db.session.commit()
 
 
     '''user model functions'''

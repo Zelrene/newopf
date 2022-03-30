@@ -1,3 +1,4 @@
+#from asyncio.windows_events import NULL
 from src.db_connector import DB_Connector
 #from src.models.ticket import Status
 
@@ -10,9 +11,10 @@ database = DB_Connector()
 
 class TicketController(): 
 
-    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes, admin_message): 
+    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes): 
         
         status = "Submitted"
+        admin_message = "NA"
         submission_date = date.today()
         #couldn't figure out how to pass in empty date so, passing in current date and time for appointment for now now
         appointment_date = datetime.now().date()
@@ -34,11 +36,13 @@ class TicketController():
             admin_message = admin_message,
             
             )
-        
+
+    ''' 
     def create_admin_message(self, admin_message):
         database.insert_admin_message(
         admin_message = admin_message
         )
+    '''
         
     def get_tickets(self):    
         tickets = database.select_all_tickets()
@@ -82,11 +86,13 @@ class TicketController():
             )
 
     
-
     def update_appointment_date(self, ticket_id, new_date):
         database.update_ticket_appointment_date(ticket_id = ticket_id, new_date = new_date)
     
     def update_appointment_time(self, ticket_id, new_time):
         database.update_ticket_appointment_time(ticket_id = ticket_id, new_time = new_time)
+
+    def update_ticket_admin_message(self, ticket_id, new_admin_message):
+        database.update_ticket_admin_message(ticket_id = ticket_id, new_admin_message = new_admin_message)
 
  
