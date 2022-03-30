@@ -1,5 +1,6 @@
 from os import environ, path
 from dotenv import load_dotenv
+#from flask import current_app
 
 basedir = path.abspath(path.dirname(__file__))
 load_dotenv(path.join(basedir, '.env'))
@@ -18,4 +19,12 @@ class Config:
     # Flask-SQLAlchemy
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db' 
+    
+    # Mail config
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 465
+    MAIL_USERNAME = 'newopf@gmail.com'
+    MAIL_PASSWORD = 'passOpf@985'
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
     
