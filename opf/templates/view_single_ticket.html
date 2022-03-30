@@ -1,17 +1,47 @@
 <!doctype html>
 {% extends "layout.html" %}
-
+<head>
+  <link rel="stylesheet" href="/static/singleticket.css"/>
+</head>
 {% block content %}
-<h1>View a ticket</h1>
-<p>{{ ticket.title }}</p>
+ <!-- <p>{{ticket.title}}</p>
+  <p>{{ticket.description}}</p>
+  <p>{{ticket.id}}</p>
+  <p>{{ticket.status}}</p>
+  <p>{{ticket.severity_level}}</p>
+  <p>{{ticket.location}}</p>
+  <p>{{ticket.building}}</p>
+  <p>{{ticket.unit}}</p>
+  <p>{{ticket.additional_notes}}</p>
+ -->
 <form action = "/view_single_ticket.html" method = "POST">
+  <div class="container">
+  <h1>{{ name }}</h1>
+  <p>{{ticket.title}}</p>
+  <p>Submitted on {{ticket.submission_date}}</p>
+  <p>Ticket ID: {{ticket.id}}</p>
+  <p>Status: {{ticket.status}}</p>
+  <p>Severity: {{ticket.severity_level}}</p>
+  <p>Location: {{ticket.location}}</p>
+  <p>Building: {{ticket.building}}</p>
+  <p>Unit#: {{ticket.unit}}</p>
+  <p>{{ticket.additional_notes}}</p>
+  <p>{{ticket.description}}</p>
+</div>
+  
     <select name="Status" value="{{request.form['Status']}}">
       <option class="option1">Submitted</option>
       <option class="option2">In Progress</option>
       <option class="option3">Denied</option>
       <option class="option4">Completed</option>
   </select>
+  <p>Make an appointment</p>
+  <input type="date" name="Appointment_date" value="{{request.form['Appointment_date']}}">
+  <p>Add a message</p>
+  <textarea></textarea>
+
   <button type="submit" 
   class="btn btn-default">Save Changes</button>
+ 
 </form>
 {% endblock %}

@@ -13,7 +13,7 @@ class TicketController():
         status = "Submitted"
         submission_date = date.today()
         #couldn't figure out how to pass in empty date so, passing in current date and time for appointment for now now
-        appointment_date = date.today()
+        appointment_date = datetime.date()
         appointment_time = datetime.now().time()
 
         database.insert_ticket(
