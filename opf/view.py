@@ -95,12 +95,21 @@ def view_single_ticket(ticket_id):
 		
 	if request.method == 'POST':
 		status = request.form['Status']
+		appointment_date = request.form['Appointment_date']
+		
 		
 		ticket_controller.update_ticket_status(
 			ticket_id = ticket_id, 
 			new_status = status)
 
+		ticket_controller.update_appointment_date(
+			ticket_id = ticket_id, 
+			new_date = appointment_date)
+		
+
 		return redirect(url_for('main_bp.view_tickets'))
+
+	
 
 @main_bp.route('/dashboard.html')
 @login_required

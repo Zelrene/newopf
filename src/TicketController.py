@@ -10,12 +10,12 @@ database = DB_Connector()
 
 class TicketController(): 
 
-    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes,): 
+    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes): 
         
         status = "Submitted"
         submission_date = date.today()
         #couldn't figure out how to pass in empty date so, passing in current date and time for appointment for now now
-        appointment_date = date.today()
+        appointment_date = datetime.now().date()
         appointment_time = datetime.now().time()
 
         database.insert_ticket(
@@ -30,7 +30,8 @@ class TicketController():
             additionalNotes = additionalNotes, 
             submission_date = submission_date, 
             appointment_date = appointment_date, 
-            appointment_time= appointment_time
+            appointment_time= appointment_time,
+            
             )
 
 
@@ -78,3 +79,5 @@ class TicketController():
     
     def update_appointment_time(self, ticket_id, new_time):
         database.update_ticket_appointment_time(ticket_id = ticket_id, new_time = new_time)
+
+ 
