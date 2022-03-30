@@ -15,9 +15,7 @@
             <th>Date Created</th>
             <th>Severity</th>
             <th>Location</th>
-            {% if allow_edit %}
             <th>Actions</th>
-            {% endif %}
         </tr>
         {% for ticket in tickets %}
         <tr>
@@ -27,9 +25,7 @@
             <td>{{ ticket.submission_date }}</td>
             <td>{{ ticket.severity_level }}</td>
             <td>{{ ticket.location }}</td>
-            {% if allow_edit %}
             <td><a href="{{ url_for('main_bp.view_single_ticket', ticket_id=ticket.id) }}">• • •</a></td>
-            {% endif %}
 
         </tr>
         {% endfor %}
