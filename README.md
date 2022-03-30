@@ -29,6 +29,7 @@ pip install flask-login
 pip install flask-principal
 pip install config
 pip install python-dotenv
+pip install Flask-Mail
 ```
 
 ### Run the Project

@@ -54,6 +54,18 @@ class DB_Connector():
         status = ticket.status
         return status
 
+    def select_creator_email_with_matching_ticket_id(self, ticket_id):
+        ticket = Ticket.query.filter_by(id = ticket_id).first()
+        creator_email =  ticket.user.contact_email
+        return creator_email
+
+    def select_creator_name_with_matching_ticket_id(self, ticket_id):
+        ticket = Ticket.query.filter_by(id = ticket_id).first()
+        first_name = ticket.user.first_name
+        last_name = ticket.user.last_name 
+        name = first_name + " " + last_name
+        return name
+
     def delete_ticket(self, ticket_id):
         ticket_to_del = Ticket.query.filter_by(id = ticket_id).first()
         db.session.delete(ticket_to_del)
@@ -76,6 +88,7 @@ class DB_Connector():
         new_time = datetime.strptime(new_time, '%H:%M:%S')
         ticket.appointment_date = new_time
         db.session.commit() 
+
 
     '''user model functions'''
 
