@@ -62,8 +62,12 @@ def create_tickets():
 @login_required
 def view_tickets():
 	tickets = []
-	#tickets = ticket_controller.get_tickets()
-	tickets = ticket_controller.get_all_tickets_with_matching_user_id(current_user.id)
+	user_role = user_controller.get_role_with_matching_netid(current_user.net_id)
+
+	if user_role == 'Admin':
+		tickets = ticket_controller.get_tickets()
+	else:
+		tickets = ticket_controller.get_all_tickets_with_matching_user_id(current_user.id)
 
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
