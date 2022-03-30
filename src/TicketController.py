@@ -1,8 +1,7 @@
 from src.db_connector import DB_Connector
 #from src.models.ticket import Status
 
-from flask_mail import Message
-from opf import mail
+from src.extra_functionality import Extra_functionality 
 
 from datetime import datetime
 from datetime import date
@@ -62,11 +61,16 @@ class TicketController():
         database.update_ticket_status(ticket_id = ticket_id, new_status = new_status)
 
         #send email 
+        email_subj = "Ticket status update"
         recipeint_email = database.select_creator_email_with_matching_ticket_id(ticket_id)
         recipeint_name = database.select_creator_name_with_matching_ticket_id(ticket_id)
-        msg = Message('Ticket Status update', sender = 'opf@gmail.com', recipients = [recipeint_email] )
-        msg.body = "Hi " + recipeint_name + ", \nThe status of your ticket with ticket id " + str(ticket_id) + " has been updated. The new status is " + new_status + ' .'
-        mail.send(msg)
+        email_body = "Hi " + recipeint_name + ", \nThe status of your ticket with ticket id " + str(ticket_id) + " has been updated. The new status is " + new_status + ' .'
+        Extra_functionality.send_email(
+            email_subj = email_subj,
+            recipient_email=recipeint_email,
+            email_body = email_body
+            )
+
     
 
     def update_appointment_date(self, ticket_id, new_date):
