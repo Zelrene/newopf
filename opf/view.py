@@ -67,8 +67,9 @@ def view_tickets():
 
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+		user_role = user_controller.get_role_with_matching_netid(current_user.net_id)
 
-		return render_template('view_tickets.html', tickets=tickets, name=curr_user_name)#, status=status)
+		return render_template('view_tickets.html', tickets=tickets, name=curr_user_name)#, allow_edit = True if user_role == 'admin' else False)
 
 # Global Variable for View Single Ticket
 curr_ticket_id = 0
