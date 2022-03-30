@@ -14,7 +14,7 @@ class DB_Connector():
 
     '''ticket model functions'''
 
-    def insert_ticket(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, submission_date, appointment_date, appointment_time):
+    def insert_ticket(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, submission_date, appointment_date, appointment_time, admin_message):
         
         new_ticket = Ticket(
             title = title,
@@ -28,7 +28,8 @@ class DB_Connector():
             additionalNotes = additionalNotes,
             submission_date = submission_date,
             appointment_date = appointment_date,
-            appointment_time = appointment_time)
+            appointment_time = appointment_time,
+            admin_message = admin_message)
 
         db.session.add(new_ticket)
         db.session.commit()
@@ -36,6 +37,13 @@ class DB_Connector():
     def select_all_tickets(self):
         tickets = Ticket.query.all()
         return tickets
+
+    def insert_admin_message(self, admin_message):
+        new_admin_message = Ticket(
+            admin_message=admin_message
+        )
+        db.session.add(new_admin_message)
+        db.session.commit()
 
     def select_all_tickets_with_matching_user_id(self, user_id):
         tickets = Ticket.query.filter_by(creator_id = user_id).all()
@@ -54,6 +62,11 @@ class DB_Connector():
         status = ticket.status
         return status
 
+    def select_admin_message(self, ticket_id):
+        ticket = self.select_single_ticket_with_matching_ticket_id(ticket_id)
+        admin_messsge = ticket.admin_message
+        return admin_messsge
+        
     def select_creator_email_with_matching_ticket_id(self, ticket_id):
         ticket = Ticket.query.filter_by(id = ticket_id).first()
         creator_email =  ticket.user.contact_email

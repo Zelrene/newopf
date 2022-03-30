@@ -48,7 +48,8 @@ def create_tickets():
 			severity_level = severity_level,
 			unit = unit,
 			additionalNotes = additonalNotes,
-			creator_id = creator_id)
+			creator_id = creator_id,
+			)
 
 		role = user_controller.get_role_with_matching_netid(current_user.net_id)
 
@@ -100,6 +101,7 @@ def view_single_ticket(ticket_id):
 	if request.method == 'POST':
 		status = request.form['Status']
 		appointment_date = request.form['Appointment_date']
+		admin_message = request.form['Admin_message']
 		
 		
 		ticket_controller.update_ticket_status(
@@ -109,6 +111,11 @@ def view_single_ticket(ticket_id):
 		ticket_controller.update_appointment_date(
 			ticket_id = ticket_id, 
 			new_date = appointment_date)
+
+		ticket_controller.create_admin_message(
+			ticket_id = ticket_id,
+			admin_message = admin_message
+		)
 		
 
 		return redirect(url_for('main_bp.view_tickets'))

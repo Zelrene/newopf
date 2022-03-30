@@ -28,6 +28,7 @@
   <p>Unit#: {{ticket.unit}}</p>
   <p>{{ticket.additional_notes}}</p>
   <p>{{ticket.description}}</p>
+  <p>{{ ticket.admin_message }}</p>
 </div>
   
   {% if allow_edit %}
@@ -43,7 +44,7 @@
     <input type="date" name="Appointment_date" value="{{request.form['Appointment_date']}}">
 
     <p>Add a message</p>
-    <textarea></textarea>
+    <textarea name="Admin_message" value="{{request.form['Admin_message']}}"></textarea>
 
     <button type="submit" 
     class="btn btn-default">Save Changes</button>

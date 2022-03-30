@@ -10,7 +10,7 @@ database = DB_Connector()
 
 class TicketController(): 
 
-    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes): 
+    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes, admin_message): 
         
         status = "Submitted"
         submission_date = date.today()
@@ -31,10 +31,15 @@ class TicketController():
             submission_date = submission_date, 
             appointment_date = appointment_date, 
             appointment_time= appointment_time,
+            admin_message = admin_message,
             
             )
-
-
+        
+    def create_admin_message(self, admin_message):
+        database.insert_admin_message(
+        admin_message = admin_message
+        )
+        
     def get_tickets(self):    
         tickets = database.select_all_tickets()
         return tickets
@@ -55,6 +60,10 @@ class TicketController():
         status = database.select_ticket_status(ticket_id)
         return status
 
+    def get_admin_message(self, ticket_id):
+        admin_message = database.select_admin_message(ticket_id)
+        return admin_message
+        
     def delete_ticket(self, ticket_id):
         database.delete_ticket(ticket_id)
 
