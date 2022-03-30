@@ -55,6 +55,14 @@ class TicketController():
         status = database.select_ticket_status(ticket_id)
         return status
 
+    def get_ticket_creator_email_with_matching_icket_id(self, ticket_id):
+        creator_email = database.select_creator_email_with_matching_ticket_id(ticket_id)
+        return creator_email
+
+    def get_creator_name_with_matching_ticket_id(self, ticket_id):
+        creator_name = database.select_creator_name_with_matching_ticket_id(ticket_id)
+        return creator_name
+
     def delete_ticket(self, ticket_id):
         database.delete_ticket(ticket_id)
 
