@@ -8,7 +8,7 @@ database = DB_Connector()
 
 class TicketController(): 
 
-    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes,): 
+    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes): 
         
         status = "Submitted"
         submission_date = date.today()
@@ -28,7 +28,8 @@ class TicketController():
             additionalNotes = additionalNotes, 
             submission_date = submission_date, 
             appointment_date = appointment_date, 
-            appointment_time= appointment_time
+            appointment_time= appointment_time,
+            
             )
 
 
@@ -63,3 +64,5 @@ class TicketController():
     
     def update_appointment_time(self, ticket_id, new_time):
         database.update_ticket_appointment_time(ticket_id = ticket_id, new_time = new_time)
+
+ 
