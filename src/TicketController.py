@@ -62,10 +62,12 @@ class TicketController():
         database.update_ticket_status(ticket_id = ticket_id, new_status = new_status)
 
         #send email 
-        msg = Message('Ticket Status update', sender = 'opf@gmail.com', recipients = ['njuana@nevada.unr.edu'])
-        msg.body = "The status of your ticket with ticket id " + str(ticket_id) + " has be updated. The new status is " + new_status + ' .'
+        recipeint_email = database.select_creator_email_with_matching_ticket_id(ticket_id)
+        recipeint_name = database.select_creator_name_with_matching_ticket_id(ticket_id)
+        msg = Message('Ticket Status update', sender = 'opf@gmail.com', recipients = [recipeint_email] )
+        msg.body = "Hi " + recipeint_name + ", \nThe status of your ticket with ticket id " + str(ticket_id) + " has been updated. The new status is " + new_status + ' .'
         mail.send(msg)
-        #print("mail is sent.")
+    
 
     def update_appointment_date(self, ticket_id, new_date):
         database.update_ticket_appointment_date(ticket_id = ticket_id, new_date = new_date)
