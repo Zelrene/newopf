@@ -148,8 +148,21 @@ def log_out():
 @main_bp.route('/analytics')
 @login_required
 def analytics():
-	df = px.data.medals_wide()
-	fig1 = px.bar(df, x = "nation", y = ['gold', 'silver', 'bronze'], title = "Wide=Form Input")
+	#df = px.data.medals_wide()
+	#fig1 = px.bar(df, x = "nation", y = ['gold', 'silver', 'bronze'], title = "Wide=Form Input")
+	dorms = ['Argenta Hall', 
+			'Canada Hall',
+			'Great Basin Hall',
+			'Juniper Hall',
+			'Living Learning Community',
+			'Manzanita Hall',
+			'Nye Hall',
+			'Peavine Hall',
+			'Sierra Hall']
+
+	total_tickets = [12, 32, 10, 4, 49, 30, 64, 22, 60]
+
+	fig1 = px.bar(x = dorms, y = total_tickets, title = "All Tickets per Residence Hall")
 	graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
 	
 	return render_template('analytics.html', graph1JSON=graph1JSON)
