@@ -5,6 +5,10 @@ from flask_login import login_required, current_user, logout_user
 
 from .auth import admin_permission, student_permission
 
+import plotly.express as px
+import plotly
+import json
+
 main_bp = Blueprint(
 	"main_bp", __name__, 
 	static_folder="static", 
@@ -140,6 +144,15 @@ def faq():
 def log_out():
 	logout_user()
 	return redirect(url_for('auth_bp.log_in'))
+
+@main_bp.route('/analytics')
+@login_required
+def analytics():
+	df = px.data.medals_wide()
+	fig1 = px.bar(df, x = "nation", y = ['gold', 'silver', 'bronze'], title = "Wide=Form Input")
+	graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+	
+	return render_template('analytics.html', graph1JSON=graph1JSON)
 
 @main_bp.errorhandler(403)
 @login_required

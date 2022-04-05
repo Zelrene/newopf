@@ -1,0 +1,20 @@
+<!doctype html>
+{% extends "layout.html" %}
+<head>
+    <link rel="stylesheet" href="/static/analytics.css"/>
+</head>
+{% block content %}
+    <h1>Analytics Page</h1>
+
+    <div>
+        <div id="chart1"></div>
+    </div>
+
+    <!-- Plotly CDN -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
+        var graph1 = {{ graph1JSON | safe }};
+        Plotly.plot("chart1", graph1, {});
+    </script>
+
+{% endblock %}
