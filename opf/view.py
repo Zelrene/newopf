@@ -147,6 +147,7 @@ def log_out():
 	return redirect(url_for('auth_bp.log_in'))
 
 @main_bp.route('/analytics')
+#@admin_permission.require()
 @login_required
 def analytics():
 	#df = px.data.medals_wide()
