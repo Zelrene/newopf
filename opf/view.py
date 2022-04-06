@@ -147,42 +147,45 @@ def log_out():
 	return redirect(url_for('auth_bp.log_in'))
 
 @main_bp.route('/analytics')
-#@admin_permission.require()
 @login_required
 def analytics():
-	#df = px.data.medals_wide()
-	#fig1 = px.bar(df, x = "nation", y = ['gold', 'silver', 'bronze'], title = "Wide=Form Input")
-	dorms = ['Argenta Hall', 
-			'Canada Hall',
-			'Great Basin Hall',
-			'Juniper Hall',
-			'Living Learning Community',
-			'Manzanita Hall',
-			'Nye Hall',
-			'Peavine Hall',
-			'Sierra Hall']
-	total_tickets = [12, 32, 10, 4, 49, 30, 64, 22, 60]
+	if current_user.user_role != 'Admin':
+		abort(401)
 
-	df_1 = pd.DataFrame({
-		"Dorms": dorms,
-		"Ticket Count": total_tickets
-	})
+	with admin_permission.require():
+		#df = px.data.medals_wide()
+		#fig1 = px.bar(df, x = "nation", y = ['gold', 'silver', 'bronze'], title = "Wide=Form Input")
+		dorms = ['Argenta Hall', 
+				'Canada Hall',
+				'Great Basin Hall',
+				'Juniper Hall',
+				'Living Learning Community',
+				'Manzanita Hall',
+				'Nye Hall',
+				'Peavine Hall',
+				'Sierra Hall']
+		total_tickets = [12, 32, 10, 4, 49, 30, 64, 22, 60]
 
-	fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", title="All Tickets per Residence Halls")
-	graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+		df_1 = pd.DataFrame({
+			"Dorms": dorms,
+			"Ticket Count": total_tickets
+		})
 
-	genders = ['Female',
-				'Male',
-				'Did not want to disclose']
-	residents = [9000, 11000, 2000]
+		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", title="All Tickets per Residence Halls")
+		graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+
+		genders = ['Female',
+					'Male',
+					'Did not want to disclose']
+		residents = [9000, 11000, 2000]
+		
+		df_2 = pd.DataFrame({
+			"Genders": genders,
+			"Residents": residents
+		})
+		
+		fig2 = px.pie(df_2, values=residents, names=genders, hole=0.5, title="Genders in Residence Halls")
+		graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
 	
-	df_2 = pd.DataFrame({
-		"Genders": genders,
-		"Residents": residents
-	})
-	
-	fig2 = px.pie(df_2, values=residents, names=genders, hole=0.5, title="Genders in Residence Halls")
-	graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-	
-	return render_template('analytics.html', graph1JSON=graph1JSON, graph2JSON=graph2JSON)
+		return render_template('analytics.html', graph1JSON=graph1JSON, graph2JSON=graph2JSON)
 
