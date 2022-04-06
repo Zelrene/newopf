@@ -25,6 +25,7 @@ def create_app():
 	with app.app_context():
 		from . import view
 		from . import auth
+		from . import error
 
 		db.init_app(app)
 		login_manager.init_app(app)
@@ -33,5 +34,6 @@ def create_app():
 
 		app.register_blueprint(view.main_bp)
 		app.register_blueprint(auth.auth_bp)
+		app.register_blueprint(error.error_bp)
 
 	return app
