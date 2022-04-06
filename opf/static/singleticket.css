@@ -1,0 +1,56 @@
+.singleticket-container{
+  background-color: rgb(255, 255, 255);
+  margin-right: 20px;
+  padding: 50px;
+  border-radius: 5px;
+  border-color: rgb(0, 0, 0);
+  box-shadow: #ee6c4d;
+}
+
+h2{
+    color: #ee6c4d;
+    text-align: center;
+    font-size: 20px;
+}
+
+
+h1{
+    text-align: center;
+}
+
+.submission-date{
+    text-align: center;
+    color:rgb(133, 133, 133)
+}
+
+.appt-heading{
+    text-align: center;
+    color: #D12727;
+}
+
+.appt{
+    text-align: center;
+    color: #D12727;
+}
+
+.msg{
+    color: #D12727;
+}
+
+.ticket-details{
+    margin-right: 100px;
+}
+
+.ticket-details p{
+    padding-bottom: 10px;
+}
+
+.admincontrols .select{
+    background-color: white;
+    padding: 2px 20px;
+    font-family: effra, sans-serif;
+    border-radius: 5px;
+    border-color: #d2d3d4;
+}
+
+

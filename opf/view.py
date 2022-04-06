@@ -48,30 +48,79 @@ def create_tickets():
 			severity_level = severity_level,
 			unit = unit,
 			additionalNotes = additonalNotes,
-			creator_id = creator_id)
+			creator_id = creator_id,
+			)
 
 		role = user_controller.get_role_with_matching_netid(current_user.net_id)
 
-		if role == 'Admin':
-			return redirect(url_for('main_bp.view_tickets'))
+		'''if role == 'Admin':
+			return redirect(url_for('main_bp.view_tickets_admin'))
 		else:
-			return redirect(url_for('main_bp.view_single_ticket'))
+		'''
+		return redirect(url_for('main_bp.view_tickets'))
 
-@main_bp.route('/view_tickets.html')
+@main_bp.route('/view_tickets.html', methods = ['GET', 'POST'])
 @login_required
-@admin_permission.require(http_exception=403)
 def view_tickets():
 	tickets = []
-	tickets = ticket_controller.get_tickets()
-	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('view_tickets.html', tickets=tickets, name=curr_user_name)
+	user_role = user_controller.get_role_with_matching_netid(current_user.net_id)
 
-@main_bp.route('/view_single_ticket.html')
+	if user_role == 'Admin':
+		tickets = ticket_controller.get_tickets()
+	else:
+		tickets = ticket_controller.get_all_tickets_with_matching_user_id(current_user.id)
+
+	if request.method == 'GET':
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+
+		return render_template('view_tickets.html', tickets=tickets, name=curr_user_name)
+
+# Global Variable for View Single Ticket
+curr_ticket_id = 0
+
+@main_bp.route('/view_single_ticket.html', defaults = {'ticket_id' : 0}, methods = ['GET', 'POST'])
+@main_bp.route('/view_single_ticket.html/<int:ticket_id>',  methods = ['GET', 'POST'])
 @login_required
-@student_permission.require(http_exception=403)
-def view_single_ticket():
-	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('view_single_ticket.html', name=curr_user_name)
+def view_single_ticket(ticket_id):
+	
+	# Make sure ticket_id is not 0 (aka NULL)
+	global curr_ticket_id
+	if ticket_id != 0:
+		curr_ticket_id = ticket_id
+	else:
+		ticket_id = curr_ticket_id
+
+	ticket = ticket_controller.get_single_ticket_with_matching_ticket_id(ticket_id)
+
+	if request.method == 'GET':
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+		user_role = user_controller.get_role_with_matching_netid(current_user.net_id)
+		
+		return render_template('view_single_ticket.html', ticket=ticket, name=curr_user_name, allow_edit = True if user_role == 'Admin' else False)
+		
+	if request.method == 'POST':
+		status = request.form['Status']
+		appointment_date = request.form['Appointment_date']
+		admin_message = request.form['Admin_message']
+		
+		
+		ticket_controller.update_ticket_status(
+			ticket_id = ticket_id, 
+			new_status = status)
+
+		ticket_controller.update_appointment_date(
+			ticket_id = ticket_id, 
+			new_date = appointment_date)
+
+		ticket_controller.update_ticket_admin_message(
+			ticket_id = ticket_id,
+			new_admin_message = admin_message
+		)
+		
+
+		return redirect(url_for('main_bp.view_tickets'))
+
+	
 
 @main_bp.route('/dashboard.html')
 @login_required
@@ -107,3 +156,10 @@ def page_not_found(e):
 	title = 'Unauthorized Page'
 	message = 'The page you are trying to access is unavailable. You lack the valid authentication credentials to view this page.'
 	return render_template('page_not_found.html', title=title, message=message, show=False)
+
+@main_bp.errorhandler(400)
+def page_not_found(e):
+	session['redirected_from'] = request.url
+	title = 'Bad Directory'
+	message = 'The page you are trying to access is unavailable. The page that directed you here should not have made a link to this page.'
+	return render_template('page_not_found.html', title=title, message=message, show=True)

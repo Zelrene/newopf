@@ -19,3 +19,11 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db' 
     
+    # Mail config
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 465
+    MAIL_USERNAME = 'newopf@gmail.com'
+    MAIL_PASSWORD = 'passOpf@985'
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
+    

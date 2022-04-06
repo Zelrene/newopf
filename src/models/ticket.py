@@ -17,8 +17,9 @@ class Ticket(db.Model):
     submission_date = db.Column(db.Date, nullable = False)
     appointment_date = db.Column(db.Date, nullable = True)
     appointment_time = db.Column(db.Time, nullable = True)
+    admin_message = db.Column(db.Text, nullable = False)
     
-    def __init__(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, submission_date, appointment_date, appointment_time):
+    def __init__(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, submission_date, appointment_date, appointment_time, admin_message):
         self.title = title
         self.creator_id = creator_id
         self.status = status
@@ -31,6 +32,7 @@ class Ticket(db.Model):
         self.submission_date = submission_date
         self.appointment_date = appointment_date
         self.appointment_time = appointment_time  
+        self.admin_message = admin_message
 
     def get_id(self):
         return self.id

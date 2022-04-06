@@ -7,16 +7,13 @@ table{
 
 }
 
+
+
 th{
     background-color: #98c1d9;
     color: white;
-    padding: 12px;
+    padding: 10px;
 
-}
-
-tr:nth-child(odd){
-    background-color: #cecece;
-    
 }
 
 tr{
@@ -32,6 +29,9 @@ td{
 
 div{
     font-size: 20px;
-    font-weight: bold;
     color: #313131;
+}
+
+tr:hover{
+    background-color: rgb(211, 229, 250);
 }
