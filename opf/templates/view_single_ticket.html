@@ -32,7 +32,7 @@
   </div>
 </div>
   
-  {% if allow_edit %}
+  {% if isAdmin %}
   <div class="admincontrols">
     <p>Edit Status</p>
     <select class="select"name="Status" value="{{request.form['Status']}}">

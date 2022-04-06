@@ -28,8 +28,9 @@ def index():
 @login_required
 def create_tickets():
 	if request.method == 'GET':
+		isAdmin = user_controller.is_user_admin(current_user.net_id)
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-		return render_template('create_tickets.html', name=curr_user_name)
+		return render_template('create_tickets.html', name=curr_user_name, isAdmin=isAdmin)
 	
 	if request.method == 'POST':
 		title = request.form['Title']
@@ -77,8 +78,9 @@ def view_tickets():
 
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+		isAdmin = user_controller.is_user_admin(current_user.net_id)
 
-		return render_template('view_tickets.html', tickets=tickets, name=curr_user_name)
+		return render_template('view_tickets.html', tickets=tickets, name=curr_user_name, isAdmin=isAdmin)
 
 # Global Variable for View Single Ticket
 curr_ticket_id = 0
@@ -99,9 +101,9 @@ def view_single_ticket(ticket_id):
 
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-		user_role = user_controller.get_role_with_matching_netid(current_user.net_id)
+		isAdmin = user_controller.is_user_admin(current_user.net_id)
 		
-		return render_template('view_single_ticket.html', ticket=ticket, name=curr_user_name, allow_edit = True if user_role == 'Admin' else False)
+		return render_template('view_single_ticket.html', ticket=ticket, name=curr_user_name, isAdmin = isAdmin)
 		
 	if request.method == 'POST':
 		status = request.form['Status']
@@ -130,14 +132,16 @@ def view_single_ticket(ticket_id):
 @main_bp.route('/dashboard.html')
 @login_required
 def dashboard():
+	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('dashboard.html', name=curr_user_name)
+	return render_template('dashboard.html', name=curr_user_name, isAdmin=isAdmin)
 
 @main_bp.route('/faq.html')
 @login_required
 def faq():
+	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('faq.html', name=curr_user_name)
+	return render_template('faq.html', name=curr_user_name, isAdmin=isAdmin)
 
 	
 @main_bp.route('/log_out')
@@ -146,15 +150,15 @@ def log_out():
 	logout_user()
 	return redirect(url_for('auth_bp.log_in'))
 
-@main_bp.route('/analytics')
+@main_bp.route('/analytics.html')
 @login_required
 def analytics():
 	if current_user.user_role != 'Admin':
 		abort(401)
 
 	with admin_permission.require():
-		#df = px.data.medals_wide()
-		#fig1 = px.bar(df, x = "nation", y = ['gold', 'silver', 'bronze'], title = "Wide=Form Input")
+		isAdmin = user_controller.is_user_admin(current_user.net_id)
+		
 		dorms = ['Argenta Hall', 
 				'Canada Hall',
 				'Great Basin Hall',
@@ -187,5 +191,5 @@ def analytics():
 		fig2 = px.pie(df_2, values=residents, names=genders, hole=0.5, title="Genders in Residence Halls")
 		graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
 	
-		return render_template('analytics.html', graph1JSON=graph1JSON, graph2JSON=graph2JSON)
+		return render_template('analytics.html', graph1JSON=graph1JSON, graph2JSON=graph2JSON, isAdmin=isAdmin)
 
