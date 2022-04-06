@@ -82,9 +82,9 @@ class UserController():
         #else return false
         user = database.select_user_with_matching_email(contact_email)
         if user:
-            return true
+            return True
         else:
-            return false
+            return False
 
     def check_user_with_netid_exist(self, net_id):
         #will check if a user with given netid already exists in the db
@@ -92,9 +92,9 @@ class UserController():
         #else return false
         user = database.select_user_with_matching_netid(net_id)
         if user:
-            return true
+            return True
         else:
-            return false
+            return False
 
     def get_role_with_matching_email(self, contact_email):
         role = database.select_role_with_matching_email(contact_email)
@@ -103,3 +103,11 @@ class UserController():
     def get_role_with_matching_netid(self, net_id):
         role = database.select_role_with_matching_netid(net_id)
         return role    
+
+    def is_user_admin(self, net_id):
+        role = database.select_role_with_matching_netid(net_id)
+
+        if role == 'Admin':
+            return True
+        else:
+            return False
