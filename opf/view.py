@@ -7,6 +7,7 @@ from .auth import admin_permission, student_permission
 
 import plotly.express as px
 import plotly
+import pandas as pd
 import json
 
 main_bp = Blueprint(
@@ -159,13 +160,30 @@ def analytics():
 			'Nye Hall',
 			'Peavine Hall',
 			'Sierra Hall']
-
 	total_tickets = [12, 32, 10, 4, 49, 30, 64, 22, 60]
 
-	fig1 = px.bar(x = dorms, y = total_tickets, title = "All Tickets per Residence Hall")
+	df_1 = pd.DataFrame({
+		"Dorms": dorms,
+		"Ticket Count": total_tickets
+	})
+
+	fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", title="All Tickets per Residence Halls")
 	graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+
+	genders = ['Female',
+				'Male',
+				'Did not want to disclose']
+	residents = [9000, 11000, 2000]
 	
-	return render_template('analytics.html', graph1JSON=graph1JSON)
+	df_2 = pd.DataFrame({
+		"Genders": genders,
+		"Residents": residents
+	})
+	
+	fig2 = px.pie(df_2, values=residents, names=genders, hole=0.5, title="Genders in Residence Halls")
+	graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+	
+	return render_template('analytics.html', graph1JSON=graph1JSON, graph2JSON=graph2JSON)
 
 @main_bp.errorhandler(403)
 @login_required
