@@ -64,6 +64,15 @@ background: transparent;
 color: white;
 }
 
+.form-container input[type=password]{
+border-color: white;
+border-width: 1px;
+padding: 5px 30px;
+border-radius: 5px;
+background: transparent;
+color: white;
+}
+
 .select{
 padding: 5px 10px;
 border-radius: 5px;
