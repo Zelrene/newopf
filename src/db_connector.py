@@ -109,6 +109,17 @@ class DB_Connector():
         ticket.admin_message = new_admin_message
         db.session.commit()
 
+    def get_tickets_num_with_matching_single_building(self, dorm):
+        tickets_num = Ticket.query.filter_by(building = dorm).count()
+        
+        if(tickets_num):
+            tickets_num = tickets_num
+        else:
+            tickets_num = 0
+        
+        return tickets_num
+
+
 
     '''user model functions'''
 
@@ -176,6 +187,16 @@ class DB_Connector():
         user = self.select_user_with_matching_netid(net_id)
         return user.user_role
 
+
+    def get_residents_num_with_matching_gender(self, gender):
+        residents_num = User.query.filter_by(gender = gender).count()
+        
+        if(residents_num):
+            residents_num = residents_num
+        else:
+            residents_num = 0
+        
+        return residents_num
 
     '''faq model functions'''
 

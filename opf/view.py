@@ -1,3 +1,5 @@
+from distutils.ccompiler import gen_lib_options
+from operator import ge
 from unicodedata import name
 from flask import Flask, Blueprint, abort, render_template, request, redirect, flash, session, url_for
 
@@ -161,7 +163,8 @@ def analytics():
 			'Nye Hall',
 			'Peavine Hall',
 			'Sierra Hall']
-	total_tickets = [12, 32, 10, 4, 49, 30, 64, 22, 60]
+	#total_tickets = [12, 32, 10, 4, 49, 30, 64, 22, 60]
+	total_tickets = ticket_controller.get_number_of_tickets_with_matching_buildings(dorms=dorms)
 
 	df_1 = pd.DataFrame({
 		"Dorms": dorms,
@@ -174,7 +177,11 @@ def analytics():
 	genders = ['Female',
 				'Male',
 				'Did not want to disclose']
-	residents = [9000, 11000, 2000]
+	#residents = [9000, 11000, 2000]
+	genders_to_send = ['F',
+						'M',
+						'NA']
+	residents = ticket_controller.get_resident_num_with_matching_genders(genders=genders_to_send)
 	
 	df_2 = pd.DataFrame({
 		"Genders": genders,
