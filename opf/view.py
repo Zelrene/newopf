@@ -112,19 +112,20 @@ def view_single_ticket(ticket_id):
 		appointment_date = request.form['Appointment_date']
 		admin_message = request.form['Admin_message']
 		
-		
-		ticket_controller.update_ticket_status(
-			ticket_id = ticket_id, 
-			new_status = status)
+		if ticket.status != status:
+			ticket_controller.update_ticket_status(
+				ticket_id = ticket_id, 
+				new_status = status)
 
-		ticket_controller.update_appointment_date(
-			ticket_id = ticket_id, 
-			new_date = appointment_date)
+		if appointment_date and (appointment_date != str(ticket.appointment_date)):
+			ticket_controller.update_appointment_date(
+				ticket_id = ticket_id, 
+				new_date = appointment_date)
 
-		ticket_controller.update_ticket_admin_message(
-			ticket_id = ticket_id,
-			new_admin_message = admin_message
-		)
+		if admin_message and (admin_message != ticket.admin_message):
+			ticket_controller.update_ticket_admin_message(
+				ticket_id = ticket_id,
+				new_admin_message = admin_message)
 		
 
 		return redirect(url_for('main_bp.view_tickets'))
