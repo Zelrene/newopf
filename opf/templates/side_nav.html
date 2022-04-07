@@ -3,15 +3,12 @@
 
 <ul>
     <li class="nav-item"><a href="{{url_for('main_bp.dashboard')}}">Dashboard</a></li>
-    <hr>
     <li class="nav-item"><a href="{{url_for('main_bp.create_tickets')}}">Create Ticket</a></li>
-    <hr>
     <li class="nav-item"><a href="{{url_for('main_bp.view_tickets')}}">View Tickets</a></li>
-    <hr>
     <li class="nav-item"><a href="{{url_for('main_bp.faq')}}">FAQ</a></li>
     
     {% if isAdmin %}
-    <hr>
+
     <li class="nav-item"><a href="{{url_for('main_bp.analytics')}}">Analytics</a></li>
     {% endif %}
 </ul>
