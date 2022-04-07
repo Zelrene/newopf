@@ -30,6 +30,8 @@ pip install flask-principal
 pip install config
 pip install python-dotenv
 pip install Flask-Mail
+pip install plotly
+pip install pandas
 ```
 
 ### Run the Project

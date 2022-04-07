@@ -32,7 +32,7 @@
   </div>
 </div>
   
-  {% if allow_edit %}
+  {% if isAdmin %}
   <div class="admincontrols">
     <p>Edit Status</p>
     <select class="select"name="Status" value="{{request.form['Status']}}">
@@ -54,4 +54,14 @@
   {% endif %}
  
 </form>
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+  <script type="text/javascript">
+    let text = '{{ ticket.status }}';
+    $("select option").filter(function() {
+      return $(this).text() == text;
+    }).prop('selected', true);
+  </script>
 {% endblock %}

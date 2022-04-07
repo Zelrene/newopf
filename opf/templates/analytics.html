@@ -1,0 +1,27 @@
+<!doctype html>
+{% extends "layout.html" %}
+<head>
+    <link rel="stylesheet" href="/static/analytics.css"/>
+</head>
+{% block content %}
+    <h1>Analytics Page</h1>
+
+    <div>
+        <div class="chart-container" id="chart1"></div>
+        <br>
+        <div class="chart-container" id="chart2"></div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <!-- Plotly CDN -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
+        var graph1 = {{ graph1JSON | safe }};
+        Plotly.plot("chart1", graph1, {});
+
+        var graph2 = {{ graph2JSON | safe }};
+        Plotly.plot("chart2", graph2, {});
+    </script>
+{% endblock %}
