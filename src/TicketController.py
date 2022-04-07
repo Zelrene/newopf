@@ -106,4 +106,33 @@ class TicketController():
     def update_ticket_admin_message(self, ticket_id, new_admin_message):
         database.update_ticket_admin_message(ticket_id = ticket_id, new_admin_message = new_admin_message)
 
+    def get_number_of_tickets_with_matching_single_building(self, dorm):
+        tickets_num = database.get_tickets_num_with_matching_single_building(dorm = dorm)
+        return tickets_num
+
+  
+    def get_number_of_tickets_with_matching_buildings(self, dorms):
+        dorms = dorms
+        total_tickets = []
+        
+        for dorm in dorms:
+            ticket_num = self.get_number_of_tickets_with_matching_single_building(dorm)
+            total_tickets.append(ticket_num)
+            
+        return total_tickets
+
+    def get_resident_num_with_matching_gender(self, gender):
+        resident_num = database.get_residents_num_with_matching_gender(gender = gender)
+        return resident_num
+
+  
+    def get_resident_num_with_matching_genders(self, genders):
+        genders = genders
+        total_residents = []
+        
+        for gender in genders:
+            resident_num = self.get_resident_num_with_matching_gender(gender)
+            total_residents.append(resident_num)
+            
+        return total_residents
  
