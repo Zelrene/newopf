@@ -4,35 +4,46 @@
 
 .container p {
     font-weight: light;
-    color: #919191;
+    color: #ffffff;
 }
 .form-container {
     position: absolute;
 	top: 0;
-	left: 50%;
-	width: 50%;
+	left: 380px;
+	width: 1070px;
 	height: 100%;
     background-color: #293241;
     color: white;
 }
-.overlay-container {
-	position: absolute;
-	top: 0;
-	height: 100%;
-}
 
-.overlay {
-	background: #ffffff;
-	background-size: cover;
-	background-position: 0 0;
-	color: #313131;
-	position: relative;
-	height: 100%;
-    text-align: center;
+.overlay h1{
+   color:#313131;
+   padding-right: 1070px;
+   text-align: center;
+   padding-top: 200px;
 }
 
 .overlay p{
     color: #313131;
+    text-align: center;
+    padding-right: 1100px;
+    padding-right: 1070px;
+    font-size: 14px;
+}
+
+.overlay img{
+    width: 250px;
+    padding-left: 50px;
+    padding-top: 20px;
+}
+
+.overlay .footer{
+ font-weight: bold;
+ color: #313131;
+ text-align: center;
+ padding-right: 1070px;
+ padding-top: 220px;
+ font-size: 12px;
 }
 
 form {
@@ -44,6 +55,19 @@ form {
 	text-align: center;
 }
 
+.overlay .btn{
+    background-color: #ee6c4d;
+    font-weight: 700;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 5px 30px;
+    cursor: pointer; 
+    margin-left: 130px;
+}
+
+
+
 .btn{
     background-color: #ee6c4d;
     font-weight: 700;
@@ -52,22 +76,32 @@ form {
     border-radius: 8px;
     padding: 5px 30px;
     cursor: pointer; 
+    left: 50px;
 }
 
 .form-container input[type=text]{
     border-color: white;
     border-width: 1px;
-    padding: 5px 30px;
+    padding: 5px 40px;
     border-radius: 5px;
-    background: transparent;
-    
+    color: #313131
 }
 
 .form-container input[type=password]{
     border-color: white;
     border-width: 1px;
-    padding: 5px 30px;
+    padding: 5px 40px;
     border-radius: 5px;
-    background: transparent;
-    
+    color: #313131;
 }
+.form-container h1{
+    font-size: 40px;
+}
+
+
+.form-container select{
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: none;
+    color: white;
+    }
