@@ -1,37 +1,13 @@
-table{
-    border-collapse: collapse;
-    width: 900px;
-    margin: auto;
-    position: relative;
-    left: 80px;
-
-}
-
-
-
-th{
+thead{
     background-color: #98c1d9;
-    color: black;
+    color: rgb(255, 255, 255);
     padding: 10px;
-
 }
 
-tr{
-    text-align: center;
-    background-color: white;
-    
-}
-
-td{
-    font-size: 12px;
-    padding: 12px;
-}
-
-div{
-    font-size: 20px;
-    color: #313131;
-}
-
-tr:hover{
+tbody tr:hover{
     background-color: rgb(211, 229, 250);
+}
+
+table{
+    width: auto;
 }
