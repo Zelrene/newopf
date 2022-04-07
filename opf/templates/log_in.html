@@ -6,6 +6,7 @@
 {% block content %}
 <div class="container">
     <div class="form-container">
+       
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="notification-danger">
@@ -33,13 +34,17 @@
             <!--button class="btn" type="submit" name="log-in" value="go-to-user-page">Log In</button-->
             <input class="btn" type="submit" name="submit_btn" value="Log In">
     </div>
+
     <div class="overlay-container">
         <div class="overlay">
             <div class="overlay-panel overlay-left">
+                <img class="logo-image" src="/static/OPF (1).png">
                 <h1>New Here?</h1>
-                <p>Sign up now to report your first maintenance issue and receive Optimum Service!</p>
+                <p>Sign up now to report your first maintenance <br>issue and receive Optimum Service!</p>
                 <!--button class="btn" type="submit">Sign Up</button-->
                 <input class="btn" type="submit" name="submit_btn" value="Sign Up">
+                <br>
+                <p class="footer">Optimum Maintenance Service <br>for your University's Housing</p>
             </div>
         </div>
     </div>
