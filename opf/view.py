@@ -37,35 +37,32 @@ def create_tickets():
 	if request.method == 'POST':
 		title = request.form['Title']
 		description = request.form['Description']
-		location = request.form['Location']
-		building = request.form['Building']
-		severity_level = request.form['Severity_level']
 		unit = request.form['Unit#']
 		additonalNotes = request.form['AdditionalNotes']
 		creator_id = current_user.id
 		
-		if not title or not description or not location or not building or not unit:
+		#if not title or not description or not location or not building or not unit:
+		if not title or not description or not request.form['Location'] or not request.form['Building'] or not request.form['Severity_level'] or not unit:
 			flash('Not all required fields are filled. Please fill all required fields before submitting your ticket.')
 			return redirect(url_for('main_bp.create_tickets'))
 
-		ticket_controller.create_ticket(
-			title = title,
-			description = description, 
-			location = location,
-			building = building,
-			severity_level = severity_level,
-			unit = unit,
-			additionalNotes = additonalNotes,
-			creator_id = creator_id,
-			)
-
-		role = user_controller.get_role_with_matching_netid(current_user.net_id)
-
-		'''if role == 'Admin':
-			return redirect(url_for('main_bp.view_tickets_admin'))
 		else:
-		'''
-		return redirect(url_for('main_bp.view_tickets'))
+			location = request.form['Location']
+			building = request.form['Building']
+			severity_level = request.form['Severity_level']
+
+			ticket_controller.create_ticket(
+				title = title,
+				description = description, 
+				location = location,
+				building = building,
+				severity_level = severity_level,
+				unit = unit,
+				additionalNotes = additonalNotes,
+				creator_id = creator_id,
+				)
+
+			return redirect(url_for('main_bp.view_tickets'))
 
 @main_bp.route('/view_tickets.html', methods = ['GET', 'POST'])
 @login_required
