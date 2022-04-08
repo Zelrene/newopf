@@ -8,6 +8,7 @@ from flask_login import login_required, current_user, logout_user
 from .auth import admin_permission, student_permission
 
 import plotly.express as px
+import plotly.graph_objects as go
 import plotly
 import pandas as pd
 import json
@@ -158,7 +159,8 @@ def analytics():
 
 	with admin_permission.require():
 		isAdmin = user_controller.is_user_admin(current_user.net_id)
-		
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+
 		dorms = ['Argenta Hall', 
 				'Canada Hall',
 				'Great Basin Hall',
@@ -178,6 +180,18 @@ def analytics():
 		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", title="All Tickets per Residence Halls")
 		graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
 
+		table1 = go.Figure(data=[go.Table(
+			header = dict(values = [['Dorms'],['# of Tickets']],
+				fill_color = 'paleturquoise',
+				align=['center', 'center']
+			),
+			cells = dict(
+				values = [dorms, total_tickets],
+				align = ['center', 'center']
+			)
+		)])
+		table1JSON = json.dumps(table1, cls=plotly.utils.PlotlyJSONEncoder)
+
 		genders = ['Female',
 					'Male',
 					'Did not want to disclose']
@@ -194,5 +208,22 @@ def analytics():
 		
 		fig2 = px.pie(df_2, values=residents, names=genders, hole=0.5, title="Genders in Residence Halls")
 		graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-	
-		return render_template('analytics.html', graph1JSON=graph1JSON, graph2JSON=graph2JSON, isAdmin=isAdmin)
+		'''
+		table2 = go.Figure(data=[go.Table(
+			header = dict(values = [['Gender'],['# of Residents']],
+				fill_color = 'paleturquoise',
+				align=['center', 'center']
+			),
+			cells = dict(
+				values = [genders, residents],
+				align = ['center', 'center']
+			)
+		)])
+		table2JSON = json.dumps(table2, cls=plotly.utils.PlotlyJSONEncoder)
+		'''
+		return render_template('analytics.html', 
+								name=curr_user_name,
+								graph1JSON=graph1JSON, 
+								table1JSON=table1JSON, 
+								graph2JSON=graph2JSON, 
+								isAdmin=isAdmin)
