@@ -11,3 +11,7 @@ tbody tr:hover{
 table{
     margin-left: 200px;
 }
+
+p{
+    font-weight: bold;
+}
