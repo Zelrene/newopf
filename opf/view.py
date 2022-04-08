@@ -177,7 +177,8 @@ def analytics():
 			"Ticket Count": total_tickets
 		})
 
-		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", title="All Tickets per Residence Halls")
+		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", 
+						title="All Tickets per Residence Halls")
 		graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
 
 		table1 = go.Figure(data=[go.Table(
