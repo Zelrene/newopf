@@ -6,12 +6,7 @@
         
         <!-- Style Sheets for Formatting w/ CSS -->
         <link rel="stylesheet" href="/static/layout.css"/>
-        <link rel="stylesheet" href="/static/ticket_form.css"/>
-        <link rel="stylesheet" href="/static/tickets_table.css"/> 
-
-        <link rel="stylesheet" href="/static/singleticket.css"/>
-        <link rel="stylesheet" href="/static/analytics.css"/>
-        {%block css %} {% endblock %}
+        {% block css %}{% endblock %}
         
         <title>{% block title %}{% endblock %}</title>
     </head>
@@ -26,10 +21,8 @@
             {% include "header.html" %}
         </div>
         <div class="main_content">
-                    {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
         </div>
-
-
 
         {% block scripts %}{% endblock %}
     </body>

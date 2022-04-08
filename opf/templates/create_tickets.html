@@ -1,6 +1,12 @@
 <!doctype html>
 {% extends "layout.html" %}
 
+{% block css %}
+        <link rel="stylesheet" href="/static/ticket_form.css"/>
+{% endblock %}
+
+{% block title %} Create A Ticket {% endblock %}
+
 {% block content %}
     {% with messages = get_flashed_messages() %}
         {% if messages %}
