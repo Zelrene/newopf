@@ -7,6 +7,7 @@ from src.models.ticket import Ticket
 #from src.models.user import Role, User
 from src.models.user import User
 from src.models.faq import Faq
+from src.models.feedback import Feedback
 
 class DB_Connector():
     def __init__(self):
@@ -218,3 +219,30 @@ class DB_Connector():
         faq_to_del = Faq.query.filter_by(id = faq_id).first()
         db.session.delete(faq_to_del)
         db.session.commit()
+
+
+    '''feedback model functions'''
+    def insert_feedback(self, ticket_id, experience_rate, satisfied_level, additional_comments):
+        new_feedback = Feedback(
+            ticekt_id = ticket_id,
+            experience_rate = experience_rate,
+            satisfied_level = satisfied_level,
+            additional_comments = additional_comments
+        )
+
+        db.session.add(new_feedback)
+        db.session.commit()
+
+    def select_all_feedback(self):
+        all_feedback = Feedback.query.all()
+        return all_feedback
+
+    def select_single_feedback(self, feedback_id):
+        feedback = Feedback.query.filter_by(id = feedback_id).first()
+        return feedback
+
+    def delete_feedback(self, feedback_id):
+        feedback_to_del = Feedback.query.filter_by(id = feedback_id).first()
+        db.session.delete(feedback_to_del)
+        db.session.commit()  
+    

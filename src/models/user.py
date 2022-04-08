@@ -67,12 +67,10 @@ class User(db.Model, UserMixin):
     student_year = db.Column(db.String(50))
     password = db.Column(db.String(500), nullable = False)
 
-    # Define the user role relationship to Role via UserRoles
-    #roles = db.relationship('Role', backref='user', lazy ='dynamic')
 
     # Define the user ticket relationship to Role via tickets
     # a user can have multiple tickets (one to many relationstip)
-    tickets = db.relationship('Ticket', backref= 'user', lazy = 'dynamic')
+    tickets = db.relationship('Ticket', backref = 'user', lazy = 'dynamic')
 
     def __init__(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password):
         self.first_name = first_name
