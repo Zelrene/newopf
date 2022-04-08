@@ -7,6 +7,7 @@ from src.models.ticket import Ticket
 #from src.models.user import Role, User
 from src.models.user import User
 from src.models.faq import Faq
+from src.models.feedback import Feedback
 
 class DB_Connector():
     def __init__(self):
@@ -218,3 +219,8 @@ class DB_Connector():
         faq_to_del = Faq.query.filter_by(id = faq_id).first()
         db.session.delete(faq_to_del)
         db.session.commit()
+
+
+    '''feedback model functions'''
+
+    

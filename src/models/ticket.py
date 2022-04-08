@@ -18,6 +18,10 @@ class Ticket(db.Model):
     appointment_date = db.Column(db.Date, nullable = True)
     appointment_time = db.Column(db.Time, nullable = True)
     admin_message = db.Column(db.Text, nullable = False)
+
+    #define the ticekt feedback relationship
+    # 1 ticket can have only 1 feedback and vice versa (one-to-one reationship)
+    ticket_feedback = db.relationship('Feedback', backref = 'ticket', uselist = False )
     
     def __init__(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, submission_date, appointment_date, appointment_time, admin_message):
         self.title = title
