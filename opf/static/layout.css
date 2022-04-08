@@ -143,3 +143,7 @@ body {
   border-radius: 2px;
 }
 
+.main_content {
+  margin-left: 200px;
+  margin-right: 30px;
+}
