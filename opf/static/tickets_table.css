@@ -1,13 +1,9 @@
-thead{
+.table-striped thead{
     background-color: #98c1d9;
     color: rgb(255, 255, 255);
     padding: 10px;
 }
 
-tbody tr:hover{
+.table-striped tbody tr:hover{
     background-color: rgb(211, 229, 250);
-}
-
-p{
-    font-weight: bold;
 }

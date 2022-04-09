@@ -5,21 +5,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <!-- Style Sheets for Formatting w/ CSS -->
-        <link rel="stylesheet" href="/static/layout.css"/>
         {% block css %}{% endblock %}
+        <link rel="stylesheet" href="/static/layout.css"/>
         
         <title>{% block title %}{% endblock %}</title>
     </head>
 
     <body>
-        <div class="wrapper">
-            <div class="sidebar">
-                {% include "side_nav.html" %}
-            </div>
+        <div class="sidebar">
+            {% include "side_nav.html" %}
         </div>
+
         <div class="header">
             {% include "header.html" %}
         </div>
+        
         <div class="main_content">
             {% block content %}{% endblock %}
         </div>
