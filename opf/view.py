@@ -195,7 +195,7 @@ def analytics():
 
 		genders = ['Female',
 					'Male',
-					'Did not want to disclose']
+					'Did not wish to disclose']
 		
 		genders_to_send = ['F',
 						'M',
@@ -209,7 +209,7 @@ def analytics():
 		
 		fig2 = px.pie(df_2, values=residents, names=genders, hole=0.5, title="Genders in Residence Halls")
 		graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-		'''
+		
 		table2 = go.Figure(data=[go.Table(
 			header = dict(values = [['Gender'],['# of Residents']],
 				fill_color = 'paleturquoise',
@@ -221,10 +221,11 @@ def analytics():
 			)
 		)])
 		table2JSON = json.dumps(table2, cls=plotly.utils.PlotlyJSONEncoder)
-		'''
+		
 		return render_template('analytics.html', 
 								name=curr_user_name,
 								graph1JSON=graph1JSON, 
 								table1JSON=table1JSON, 
 								graph2JSON=graph2JSON, 
+								table2JSON=table2JSON, 
 								isAdmin=isAdmin)
