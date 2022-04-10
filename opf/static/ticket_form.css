@@ -1,10 +1,7 @@
- 
-form{
+ form{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 80px;
-    margin-left: 400px;
     background-color: #282828;
     width: 700px;
     padding-top: 40px;
