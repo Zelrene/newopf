@@ -1,8 +1,40 @@
-.header{
+.header1{
     font-weight: bold;
     color: white;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
 
 h1{
     color: white;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-bottom: -10px;
+    margin-top: -10px;
+}
+
+.card{
+    margin-left: 10px;
+    background-color: #ffffff30;
+}
+
+.card-title{
+    color: white;
+}
+
+.card-submitted{
+    color: rgb(26, 26, 26);
+    font-size: 14px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2px;
+    padding: 10px 10px;
+    width: 45%;
+}
+
+.card-text{
+    color: white;
+    font-size: 14px;
+}
+button{
+    float: right;
 }

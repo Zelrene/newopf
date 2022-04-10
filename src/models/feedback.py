@@ -13,7 +13,7 @@ class Feedback(db.Model):
 
     
     def __init__(self, ticekt_id, experience_rate, satisfied_level, additional_comments):
-        self.ticket_id = ticekt_id
+        self.ticket_id = ticket_id
         self.experience_rate = experience_rate
         self.satisfied_level = satisfied_level
         self.additional_comments = additional_comments

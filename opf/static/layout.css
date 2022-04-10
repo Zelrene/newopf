@@ -90,6 +90,7 @@ hr{
 
   padding-top: 10px;
   margin-right: 20px;
+  
 }
 
 .header-right {
@@ -149,9 +150,9 @@ hr{
 }
 
 .header-right button{
-  background-color: #bebebe;
+  background-color: #1d1d1d;
   opacity: 0.8;
-  color: #1d1d1d;
+  color: #ffffff;
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
@@ -161,7 +162,7 @@ hr{
 }
 
 .header-right button:hover{
-    background-color: #bebebe;
+    background-color: #1d1d1d30;
     opacity: 0.8;
     color: #ffffff;;
     padding: 10px 20px;
