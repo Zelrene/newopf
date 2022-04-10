@@ -23,7 +23,7 @@ a {
   background: #1d1d1d;
   padding: 30px 0;
 
-  border-radius: 15px;
+  border-radius: 0px 15px 15px 0px;
   z-index: 1;
 }
 
