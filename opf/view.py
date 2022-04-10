@@ -43,7 +43,7 @@ def create_tickets():
 		creator_id = current_user.id
 		
 		#if not title or not description or not location or not building or not unit:
-		if not title or not description or not request.form.get('Location') or not request.form.get('Building') or not request.form.get('Severity_Level') or not unit:
+		if not title or not description or not request.form.get('Location') or not request.form.get('Building') or not request.form.get('Severity_level') or not unit:
 			flash('Not all required fields are filled. Please fill all required fields before submitting your ticket.')
 			return redirect(url_for('main_bp.create_tickets'))
 
