@@ -18,7 +18,7 @@ a {
 
 .sidebar {
   position: fixed;
-  width: 130px;
+  width: 140px;
   height: 100%;
   background: #1d1d1d;
   padding: 30px 0;
@@ -38,30 +38,51 @@ a {
   margin: auto;
 }
 
-.sidebar ul li.nav-item {
+.sidebar ul li {
   font-weight: bold;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
-.sidebar ul li.nav-item a{
+.sidebar ul li a{
   color: #ffffff;
   display: block;
   font-size: 12px;
-  text-align: center;
+  text-align: left;
+  margin-left: 35%;
   text-decoration: none;
+  
+}
+.sidebar ul .nav-item1{
+  background: url(house-door-fill.svg) no-repeat 15%;
+}
+.sidebar ul .nav-item2{
+  background: url(pencil-square.svg) no-repeat 15% ;
+}
+.sidebar ul .nav-item3{
+  background: url(view-stacked.svg) no-repeat 15%;
+}
+.sidebar ul .nav-item4{
+  background: url(question-circle.svg) no-repeat 15% ;
+}
+.sidebar ul .nav-item5{
+  background: url(bar-chart-fill.svg) no-repeat 15% ;
 }
 
-.nav-item:hover{
+.sidebar ul li:hover{
   font-weight: bold;
   background-color: #3c3c3c80;
   border-radius: 2px;
 }
 
 .logo-image{
-  width: 45px;
+  width: 50px;
   height: auto;
-  margin-left: 43px;
-  margin-bottom: 20px;
+  margin-left: 47px;
+  margin-bottom:20px;
+  margin-top: 10px;
+}
+hr{
+  color: white;
 }
 
 .header {
