@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #293241;
   font-family: effra, sans-serif;
 }
 
@@ -20,8 +20,10 @@ a {
   position: fixed;
   width: 130px;
   height: 100%;
-  background: #293241;
+  background: #1d1d1d;
   padding: 30px 0;
+
+  border-radius: 15px;
 }
 
 .sidebar ul {
@@ -63,7 +65,7 @@ a {
 }
 
 .header {
-  background-color: #ffffff;
+
   padding-top: 10px;
   margin-right: 20px;
 
@@ -88,7 +90,7 @@ a {
 
 .header-left p{
   font-weight: bold;
-  color: #293241;
+  color: #ffffff;
   font-size: 16px;
 }
 
@@ -108,7 +110,7 @@ a {
   display: none; 
   width: 100%;
   overflow: auto;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 .dropdown:hover .dropdown-content {
   display: block;
@@ -118,31 +120,31 @@ a {
   color: #293241;
   padding: 5px;
   text-decoration: none;
+  font-weight: bold;
 }
 .dropdown-content a:hover {
-  color: #313131;
-  background-color: #d4d4d4;
-  font-size: light;
+  color: #ffffff;
+
 }
 
 .header-right button{
-  background-color: #ffffff;
+  background-color: #bebebe;
   opacity: 0.8;
-  color: #ee6c4d;;
+  color: #1d1d1d;
   padding: 10px 20px;
-  border-radius: 2px;
+  border-radius: 5px;
   border: none;
   font-size: 16px;
   font-family: effra, sans-serif;
-
+  font-weight: bold;
 }
 
 .header-right button:hover{
-    background-color: #293241;
+    background-color: #bebebe;
     opacity: 0.8;
     color: #ffffff;;
     padding: 10px 20px;
-    border-radius: 2px;
+    border-radius: 5px;
     border: none;
     font-size: 16px;
     font-family: effra, sans-serif;

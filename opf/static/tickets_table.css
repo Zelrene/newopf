@@ -7,3 +7,13 @@
 .table-striped tbody tr:hover{
     background-color: rgb(211, 229, 250);
 }
+
+.table-striped tbody {
+    background-color: rgb(255, 255, 255);
+}
+
+
+body{
+    color: white;
+  
+}
