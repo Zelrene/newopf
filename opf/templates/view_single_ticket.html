@@ -16,6 +16,7 @@
         <div class="card-body">
             <div class="box-right">
               <h1>Contact Information</h1>
+              <hr> 
             <h5 class="card-title">Submitted by: {{ ticket.user.first_name }} {{ ticket.user.last_name }}</h5>
             <h5 class="card-title">Email: {{ticket.user.contact_email}}</h5>
             <h5 class="card-title">Net Id: {{ticket.user.net_id}}</h5>
@@ -36,11 +37,10 @@
         </div>
       </div>
 
-      <div class = "deleteTicket">
+      <div class = "actions">
+        <div class="deletetix">
         <input class="btn" type="submit" name="submit_btn" value="Delete Ticket">
       </div>
-
-      <div class = "resubmitTicket">
         <input class="btn" type="submit" name="submit_btn" value="Resubmit Ticket">
       </div>
 
@@ -94,9 +94,9 @@
   
         <p>Make an appointment</p>
         <input type="date" name="Appointment_date" value="{{request.form['Appointment_date']}}">
-        <input type="time" name="Appointment_time" value="{{ request.form['Appoint_time']}}"
+        <input type="time" name="Appointment_time" value="{{ request.form['Appoint_time']}}">
 
-        <p>Add a message</p>
+        <p class="addmsg">Add a message</p>
         <textarea name="Admin_message" value="{{request.form['Admin_message']}}"></textarea>
         <br>
         <p class="note">Note: Changes will be sent to the user via email</p>
