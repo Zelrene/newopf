@@ -224,7 +224,7 @@ class DB_Connector():
     '''feedback model functions'''
     def insert_feedback(self, ticket_id, experience_rate, satisfied_level, additional_comments):
         new_feedback = Feedback(
-            ticekt_id = ticket_id,
+            ticket_id = ticket_id,
             experience_rate = experience_rate,
             satisfied_level = satisfied_level,
             additional_comments = additional_comments
