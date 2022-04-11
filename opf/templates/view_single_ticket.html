@@ -62,8 +62,31 @@
           <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Send us your feedback!</h5>
-                
+                    <h5 class="modal-title">Submit Feedback</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                 
+                    <div class="mb-3">
+                        <label class="form-label required">Rate Your Experience</label>
+                        <input type="text"  name = "Experience_Rate"
+                        value="{{ request.form['Experience_Rate'] }}"class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label required">Were you satisfied with our service?</label>
+                        <input type="text"  name = "Satisfied_Level"
+                        value="{{ request.form['Satisfied_Level'] }}"class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label required">Additional comments or concerns</label>
+                        <textarea class="form-control"  name = "Additional_Comments"
+                        value="{{ request.form['Additional_Comments'] }}"></textarea>
+                    </div>
+  
+                </div>
+                <div class="modal-footer">
+                  <input class="btn" type="submit" name="submit_btn" value="Submit ">
+                  <button type="submit" class="btn btn-danger">Cancel</button>
                 </div>
               </div>
             </div>
