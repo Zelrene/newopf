@@ -17,14 +17,17 @@
 
         {% for faq in all_faq %}
 
-        <div id="question_div" class="question_div "> 
-            {{faq.question}}
-            <button id="toggle_button" onclick="toggle_answer()"> + </button>
+        <div class="faq_content"> 
+            <div id="question_div" class="question_div "> 
+                {{faq.question}}
+                <button type="button" id="toggle_button" onclick="toggle_answer()"> + </button>
+            </div>
+            <div id="answer_div" class="answer_div">
+                {{ faq.answer}}
+            </div>
+            
         </div>
-        <div id="answer_div" class="answer_div">
-            {{ faq.answer}}
-        </div>
-    
+
         {% endfor %}
 
     </div>
@@ -37,12 +40,20 @@
         
         function toggle_answer(){
             var target = document.getElementById("answer_div")
+            var target_button = document.getElementById("toggle_button")
 
             if (target.style.display === "none"){
                 target.style.display = "block";
             }
             else {
                 target.style.display = "none";
+            }
+
+            if(target_button.innerHTML === "+"){
+                target_button.innerHTML = "-";
+            }
+            else{
+                target_button.innerHTML = "+";
             }
         } 
     </script>
