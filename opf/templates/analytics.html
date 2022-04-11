@@ -7,20 +7,25 @@
 {% block title %} Analytics {% endblock %}
 
 {% block content %}
-<h1>Analytics</h1>
-    <div class="diagrams">
-        <div class="chart-container" id="chart1"></div>
-        <div class="chart-container" id="table1"></div>
+    <input type="submit" name="download" value="Export Report" class="btn-download"/>
+    <div class="diagrams" id="diagrams">
+        <h1>Ticket Analytics</h1>
+        <div class="row">
+            <div class="chart-container" id="chart1"></div>
+            <div class="table-container" id="table1"></div>
+        </div>
         <br>
-        <div class="chart-container" id="chart2"></div>
-        <div class="chart-container" id="table2"></div>
+        <div class="row">
+            <div class="chart-container" id="chart2"></div>
+            <div class="table-container" id="table2"></div>
+        </div>
     </div>
-
 {% endblock %}
 
 {% block scripts %}
     <!-- Plotly CDN -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
     <script type="text/javascript">
         var graph1 = {{ graph1JSON | safe }};
         Plotly.plot("chart1", graph1, {});
@@ -33,5 +38,37 @@
 
         var table2 = {{ table2JSON | safe }};
         Plotly.plot("table2", table2, {});
+    </script>
+
+    <!-- JavaScript files for exporting HTML as PDF -->
+    <script src="/static/js/jspdf.debug.js"></script>
+    <script src="/static/js/html2canvas.min.js"></script>
+    <script src="/static/js/html2pdf.min.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+
+    <script>
+        const options = {
+            margin: 0.5,
+            filename: 'ticket-statistics.pdf',
+            
+            image: { 
+                type: 'jpeg', 
+                quality: 500
+            },
+            html2canvas: { 
+                scale: 1 
+            },
+            jsPDF: { 
+                unit: 'in', 
+                format: 'letter', 
+                orientation: 'portrait' 
+            }
+        }
+            
+        $('.btn-download').click(function(e){
+            e.preventDefault();
+            const element = document.getElementById('diagrams');
+            html2pdf().from(element).set(options).save();
+        });
     </script>
 {% endblock %}

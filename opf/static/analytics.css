@@ -9,6 +9,21 @@
     max-width: fit-content;
 }
 
+.table-container {
+    overflow: auto;
+    float: left;
+    width: 50%;
+    max-width: fit-content;
+    justify-content: center;
+}
+
+.btn-download {
+    float: right;
+    padding: 5px 10px;
+    border-radius: 2px;
+    border: none;
+}
+
 h1{
     color: white;
 
