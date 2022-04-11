@@ -1,10 +1,16 @@
 .singleticket-container{
 
-  margin-right: 20px;
-  padding: 50px;
+  margin-right: 15px;
+  padding: 30px;
   border-radius: 5px;
-  border-color: rgb(0, 0, 0);
-  box-shadow: #ee6c4d;
+}
+
+.formcontainer{
+    background-color: white;
+    width: 50%;
+    height: 500px;
+    border-radius: 5px;
+    margin-left: 10px;
 }
 
 h2{
@@ -13,19 +19,28 @@ h2{
     font-size: 20px;
 }
 
+h4{
+    color: white;
+}
 
 h1{
+    color: #1d1d1d;
+    font-size: 22px;
     text-align: center;
 }
 
+.headings{
+    background-color: #1d1d1d60;
+    border-radius: 10px;
+}
 .submission-date{
     text-align: center;
     color:rgb(133, 133, 133)
 }
 
 .appt-heading{
-    text-align: center;
     color: #D12727;
+    text-align: center;
 }
 
 .appt{
@@ -39,10 +54,13 @@ h1{
 
 .ticket-details{
     margin-right: 100px;
+    display: block;
+    justify-content: space-between;
 }
 
 .ticket-details p{
     padding-bottom: 10px;
+    background-color: red;
 }
 
 .admincontrols .select{
@@ -51,6 +69,42 @@ h1{
     font-family: effra, sans-serif;
     border-radius: 5px;
     border-color: #d2d3d4;
+    margin-bottom: 15px;
 }
 
+.admincontrols input[type=date]{
+    background-color: white;
+    padding: 2px 20px;
+    font-family: effra, sans-serif;
+    border-radius: 5px;
+    border-color: #d2d3d4;
+    margin-bottom: 15px;
+}
 
+.admincontrols textarea{
+    margin-bottom: 15px;
+}
+.admincontrols{
+    background-color: #1d1d1d90;
+    padding: 30px 40px;
+    border-radius: 5px;
+    width: 50%;
+    margin-top: -100px;
+    margin-left: 980px;
+
+}
+
+.admincontrols p{
+    color: white;
+}
+
+.btn{
+    background-color: #ee6c4d;
+    font-weight: 700;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 7px 20px;
+    cursor: pointer;
+    
+}
