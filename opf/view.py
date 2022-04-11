@@ -143,14 +143,16 @@ def view_single_ticket(ticket_id):
 
 @main_bp.route('/feedback.html',  methods = ['GET'])
 @login_required
-def feedback(feedback_id):
-	feedback = feedback_controller.get_single_feedback(feedback_id)
+def feedback():
+	#feedback = feedback_controller.get_single_feedback(feedback_id)
+	all_feedback = feedback_controller.get_all_feedback()
+
 
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 		isAdmin = user_controller.is_user_admin(current_user.net_id)
 		
-		return render_template('feedback.html', name=curr_user_name, isAdmin = isAdmin, feedback=feedback)
+		return render_template('feedback.html', name=curr_user_name, isAdmin = isAdmin, all_feedback=all_feedback)
 	
 
 @main_bp.route('/dashboard.html')

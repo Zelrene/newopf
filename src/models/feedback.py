@@ -7,13 +7,9 @@ class Feedback(db.Model):
     __tablename__ = 'feedback'
     id = db.Column(db.Integer, primary_key = True)
     ticket_id = db.Column(db.Integer, db.ForeignKey('ticket.id'), nullable = False, unique = True)
-<<<<<<< HEAD
     experience_rate = db.Column(db.Text, nullable = False)
     satisfied_level = db.Column(db.Enum('Yes', 'No', 'Could improve'), nullable = False)
-=======
-    experience_rate = db.Column(db.Integer, nullable = False)
     satisfied_level = db.Column(db.String(50), nullable = False)
->>>>>>> main
     additional_comments = db.Column(db.Text, nullable = False)
 
     
