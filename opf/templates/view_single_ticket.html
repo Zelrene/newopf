@@ -35,26 +35,7 @@
           <p>{{ ticket.admin_message }}</p>
         </div>
       </div>
-    
-      {% if isAdmin %}
-        <div class="admincontrols">
-          <p>Edit Status</p>
-          <select class="select"name="Status" value="{{request.form['Status']}}">
-            <option class="option1">Submitted</option>
-            <option class="option2">In Progress</option>
-            <option class="option3">Denied</option>
-            <option class="option4">Completed</option>
-          </select>
-      
-          <p>Make an appointment</p>
-          <input type="date" name="Appointment_date" value="{{request.form['Appointment_date']}}">
 
-          <p>Add a message</p>
-          <textarea name="Admin_message" value="{{request.form['Admin_message']}}"></textarea>
-
-          <button type="submit" class="btn btn-default">Save Changes</button>
-        </div>
-      {% endif %}
       <div class="container mt-5">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Submit Feedback</button>
         <div class="modal" id="myModal">
@@ -85,7 +66,6 @@
                 </div>
                 <div class="modal-footer">
                   <input class="btn" type="submit" name="submit_btn" value="Submit ">
-                  <button type="submit" class="btn btn-danger">Cancel</button>
                 </div>
               </div>
             </div>
@@ -94,6 +74,7 @@
       </div>
      
       {% if isAdmin %}
+      <form action = "/view_single_ticket.html" method = "POST">
       <div class="admincontrols">
         <p>Edit Status</p>
         <select class="select"name="Status" value="{{request.form['Status']}}">
@@ -110,7 +91,7 @@
         <textarea name="Admin_message" value="{{request.form['Admin_message']}}"></textarea>
         <br>
         <p class="note">Note: Changes will be sent to the user via email</p>
-        <button type="submit" class="btn btn-default">Save Changes</button>
+        <input class="btn" type="submit" name="submit_btn" value="Save Changes">
       </div>
     {% endif %}
 
