@@ -119,6 +119,9 @@ def view_single_ticket(ticket_id):
 		if  request.form['submit_btn'] == 'Delete Ticket':
 			ticket_controller.delete_ticket(ticket_id = ticket_id)
 
+		if  request.form['submit_btn'] == 'Resubmit Ticket':
+			ticket_controller.resubmit_ticket(ticket_id = ticket_id)
+
 
 
 		if  request.form['submit_btn'] == 'Submit':
