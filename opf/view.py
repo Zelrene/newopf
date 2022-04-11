@@ -117,7 +117,6 @@ def view_single_ticket(ticket_id):
 		additional_comments = request.form['Additional_Comments']
 
 		if  request.form['submit_btn'] == 'Delete Ticket':
-			print("button pushed")
 			ticket_controller.delete_ticket(ticket_id = ticket_id)
 
 
