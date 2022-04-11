@@ -165,7 +165,11 @@ class TicketController():
             submission_dates_list.append(ticket.submission_date)
         
         today = date.today()
-        recent_submission_date = max(dt for dt in submission_dates_list if dt < today)
+        if (len(submission_dates_list) > 0):
+
+            recent_submission_date = max(submission_dates_list)
+        else:
+            recent_submission_date = None
 
         return recent_submission_date
 
