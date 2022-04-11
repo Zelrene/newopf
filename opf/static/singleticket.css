@@ -1,32 +1,28 @@
-.singleticket-container{
 
-  margin-right: 15px;
-  padding: 30px;
-  border-radius: 5px;
-}
-
-.formcontainer{
-    background-color: white;
-    width: 50%;
-    height: 500px;
-    border-radius: 5px;
-    margin-left: 10px;
-}
 
 h2{
     color: #ee6c4d;
-    text-align: center;
     font-size: 20px;
+    
 }
 
-h4{
-    color: white;
+.card{
+    margin-left: 20px;
+    height: 36rem;
+}
+
+.card-body{
+    display: flexbox;
+    justify-content: space-between;
+}
+.card-title{
+    font-size: 14px;
 }
 
 h1{
     color: #1d1d1d;
-    font-size: 22px;
-    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .headings{
@@ -50,7 +46,9 @@ h1{
 
 .msg{
     color: #D12727;
+    font-weight: bold;
 }
+
 
 .ticket-details{
     margin-right: 100px;
@@ -86,11 +84,11 @@ h1{
 }
 .admincontrols{
     background-color: #1d1d1d90;
-    padding: 30px 40px;
+    padding: 20px 30px;
     border-radius: 5px;
-    width: 50%;
-    margin-top: -100px;
-    margin-left: 980px;
+    width: 25%;
+    margin-top: -24.3rem;
+    margin-left: 65rem;
 
 }
 
@@ -98,7 +96,13 @@ h1{
     color: white;
 }
 
-.btn{
+.admincontrols .note{
+    color: white;
+    font-size: 12px;
+}
+
+
+.btn {
     background-color: #ee6c4d;
     font-weight: 700;
     border: none;
@@ -106,5 +110,18 @@ h1{
     border-radius: 8px;
     padding: 7px 20px;
     cursor: pointer;
-    
 }
+
+.container .btn{
+    float: right;
+    margin-top: -10px;
+}
+
+ .box-right{
+    float: right;
+    margin-right: 80px; 
+    background-color: #5da8f960;
+    border-radius: 5px;
+    padding: 20px 20px;
+    color: #1d1d1d;
+ }
