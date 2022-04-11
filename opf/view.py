@@ -116,6 +116,11 @@ def view_single_ticket(ticket_id):
 		satisfied_level = request.form['Satisfied_Level']
 		additional_comments = request.form['Additional_Comments']
 
+		if  request.form['submit_btn'] == 'Delete Ticket':
+			ticket_controller.delete_ticket(ticket_id = ticket_id)
+
+
+
 		if  request.form['submit_btn'] == 'Submit':
 
 			feedback_controller.create_feedback(

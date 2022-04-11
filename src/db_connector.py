@@ -97,6 +97,8 @@ class DB_Connector():
 
     def delete_ticket(self, ticket_id):
         ticket_to_del = Ticket.query.filter_by(id = ticket_id).first()
+        feedback_to_del = Feedback.query.filter_by(ticket_id = ticket_id).first()
+        db.session.delete(feedback_to_del)
         db.session.delete(ticket_to_del)
         db.session.commit()
 
