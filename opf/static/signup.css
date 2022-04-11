@@ -53,10 +53,9 @@
 }
 
 form {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+	display: block;
+	justify-content: space-around;
+
 	height: 100%;
 	text-align: center;
     padding-left: 400px;

@@ -68,6 +68,9 @@ a {
 .sidebar ul .nav-item5{
   background: url(bar-chart-fill.svg) no-repeat 15% ;
 }
+.sidebar ul .nav-item6{
+  background: url(chat-left-text.svg) no-repeat 15% ;
+}
 
 .sidebar ul li:hover{
   font-weight: bold;

@@ -110,33 +110,51 @@ def view_single_ticket(ticket_id):
 	if request.method == 'POST':
 		status = request.form['Status']
 		appointment_date = request.form['Appointment_date']
+		appointment_time = request.form['Appointment_time']
 		admin_message = request.form['Admin_message']
 		experience_rate = request.form['Experience_Rate']
 		satisfied_level = request.form['Satisfied_Level']
 		additional_comments = request.form['Additional_Comments']
 
-		feedback_controller.create_feedback(
-				ticket_id = ticket_id,
-				experience_rate = experience_rate,
-				satisfied_level = satisfied_level,
-				additional_comments = additional_comments
-				)
-		
-		if ticket.status != status:
-			ticket_controller.update_ticket_status(
-				ticket_id = ticket_id, 
-				new_status = status)
+		if  request.form['submit_btn'] == 'Delete Ticket':
+			ticket_controller.delete_ticket(ticket_id = ticket_id)
 
-		if appointment_date and (appointment_date != str(ticket.appointment_date)):
-			ticket_controller.update_appointment_date(
-				ticket_id = ticket_id, 
-				new_date = appointment_date)
+		if  request.form['submit_btn'] == 'Resubmit Ticket':
+			ticket_controller.resubmit_ticket(ticket_id = ticket_id)
 
-		if admin_message and (admin_message != ticket.admin_message):
-			ticket_controller.update_ticket_admin_message(
-				ticket_id = ticket_id,
-				new_admin_message = admin_message)
+
+
+		if  request.form['submit_btn'] == 'Submit':
+
+			feedback_controller.create_feedback(
+					ticket_id = ticket_id,
+					experience_rate = experience_rate,
+					satisfied_level = satisfied_level,
+					additional_comments = additional_comments
+					)
 		
+		if  request.form['submit_btn'] == 'Save Changes':
+				
+			if ticket.status != status:
+				ticket_controller.update_ticket_status(
+					ticket_id = ticket_id, 
+					new_status = status)
+
+			if appointment_date and (appointment_date != str(ticket.appointment_date)):
+				ticket_controller.update_appointment_date(
+					ticket_id = ticket_id, 
+					new_date = appointment_date)
+
+			if appointment_time and (appointment_time != str(ticket.appointment_time)):
+				ticket_controller.update_appointment_time(
+					ticket_id = ticket_id,
+					new_time = appointment_time)
+
+			if admin_message and (admin_message != ticket.admin_message):
+				ticket_controller.update_ticket_admin_message(
+					ticket_id = ticket_id,
+					new_admin_message = admin_message)
+			
 
 		return redirect(url_for('main_bp.view_tickets'))
 
@@ -160,7 +178,12 @@ def feedback():
 def dashboard():
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('dashboard.html', name=curr_user_name, isAdmin=isAdmin)
+
+	#get the most recently submitted ticket
+	recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
+	ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+
+	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin)
 
 @main_bp.route('/faq.html')
 @login_required
@@ -238,7 +261,7 @@ def analytics():
 		genders_to_send = ['F',
 						'M',
 						'NA']
-		residents = ticket_controller.get_resident_num_with_matching_genders(genders=genders_to_send)
+		residents = user_controller.get_resident_num_with_matching_genders(genders=genders_to_send)
 		
 		df_2 = pd.DataFrame({
 			"Genders": genders,
