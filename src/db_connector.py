@@ -114,8 +114,8 @@ class DB_Connector():
     def update_ticket_appointment_time(self, ticket_id, new_time):
         ticket = Ticket.query.filter_by(id = ticket_id).first()
         #the format(%H:%M:S) might need to changed depending on what is being sent to the user 
-        new_time = datetime.strptime(new_time, '%H:%M:%S')
-        ticket.appointment_date = new_time
+        new_time = datetime.strptime(new_time, '%H:%M').time()
+        ticket.appointment_time = new_time
         db.session.commit() 
     
     def update_ticket_admin_message(self, ticket_id, new_admin_message):

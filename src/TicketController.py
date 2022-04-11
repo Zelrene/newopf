@@ -74,6 +74,7 @@ class TicketController():
 
     def update_ticket_status(self, ticket_id, new_status):
         database.update_ticket_status(ticket_id = ticket_id, new_status = new_status)
+        
 
         #send email 
         email_subj = "Ticket status update"
@@ -103,6 +104,21 @@ class TicketController():
     
     def update_appointment_time(self, ticket_id, new_time):
         database.update_ticket_appointment_time(ticket_id = ticket_id, new_time = new_time)
+
+        new_time = datetime.strptime(new_time, '%H:%M')
+        new_time = new_time.strftime("%I:%M %p")
+
+
+       #send email 
+        email_subj = "Ticket appointment time update"
+        recipeint_email = database.select_creator_email_with_matching_ticket_id(ticket_id)
+        recipeint_name = database.select_creator_name_with_matching_ticket_id(ticket_id)
+        email_body = "Hi " + recipeint_name + ", \nThe appointment day of your ticket with ticket id " + str(ticket_id) + " has been set. Your apppointment is at " + new_time + ' . A facilites member will come to assist with the maintenace issue. we look forward to see you. \nHave a good day.'
+        Extra_functionality.send_email(
+            email_subj = email_subj,
+            recipient_email=recipeint_email,
+            email_body = email_body
+            )
 
     def update_ticket_admin_message(self, ticket_id, new_admin_message):
         database.update_ticket_admin_message(ticket_id = ticket_id, new_admin_message = new_admin_message)
