@@ -19,11 +19,12 @@ main_bp = Blueprint(
 	static_folder="static", 
 	template_folder="templates")
 
-from src import TicketController, UserController, feedbackController
+from src import TicketController, UserController, feedbackController, FaqController
 
 ticket_controller = TicketController.TicketController()
 user_controller = UserController.UserController()
 feedback_controller = feedbackController.FeedbackController()
+faq_controller = FaqController.FaqController()
 
 @main_bp.route('/')
 def index():
@@ -185,13 +186,14 @@ def dashboard():
 
 	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin)
 
-@main_bp.route('/faq.html')
+@main_bp.route('/faq.html',  methods = ['GET', 'POST'])
 @login_required
 def faq():
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 
 	all_faq = []
+	'''
 	all_faq = [
 		{"question": "who are we?",
 		"answer": "we are OPF."},
@@ -202,6 +204,27 @@ def faq():
 		{"question": "How long will it take?",
 		"answer": "we do not know at the moment."},
 	]
+	'''
+	all_faq = faq_controller.get_all_faq()
+
+	if request.method == 'GET':
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+		isAdmin = user_controller.is_user_admin(current_user.net_id)
+		
+		return render_template('faq.html', all_faq = all_faq, name=curr_user_name, isAdmin = isAdmin)
+		
+	if request.method == 'POST':
+
+		faq_question = request.form['faq_question']
+		faq_answer = request.form['faq_answer']
+
+		if  request.form['submit_btn'] == 'Submit':
+			faq_controller.create_faq(
+				question = faq_question,
+				answer = faq_answer
+			)
+
+
 	return render_template('faq.html', all_faq = all_faq, name=curr_user_name, isAdmin=isAdmin)
 
 	
