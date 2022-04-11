@@ -5,6 +5,7 @@ from flask import Flask, Blueprint, abort, render_template, request, redirect, f
 
 from flask_login import login_required, current_user, logout_user
 
+
 from .auth import admin_permission, student_permission
 
 import plotly.express as px
@@ -18,10 +19,11 @@ main_bp = Blueprint(
 	static_folder="static", 
 	template_folder="templates")
 
-from src import TicketController, UserController
+from src import TicketController, UserController, feedbackController
 
 ticket_controller = TicketController.TicketController()
 user_controller = UserController.UserController()
+feedback_controller = feedbackController.FeedbackController()
 
 @main_bp.route('/')
 def index():
@@ -109,6 +111,16 @@ def view_single_ticket(ticket_id):
 		status = request.form['Status']
 		appointment_date = request.form['Appointment_date']
 		admin_message = request.form['Admin_message']
+		experience_rate = request.form['Experience_Rate']
+		satisfied_level = request.form['Satisfied_Level']
+		additional_comments = request.form['Additional_Comments']
+
+		feedback_controller.create_feedback(
+				ticket_id = ticket_id,
+				experience_rate = experience_rate,
+				satisfied_level = satisfied_level,
+				additional_comments = additional_comments
+				)
 		
 		if ticket.status != status:
 			ticket_controller.update_ticket_status(
@@ -128,6 +140,19 @@ def view_single_ticket(ticket_id):
 
 		return redirect(url_for('main_bp.view_tickets'))
 
+
+@main_bp.route('/feedback.html',  methods = ['GET'])
+@login_required
+def feedback():
+	#feedback = feedback_controller.get_single_feedback(feedback_id)
+	all_feedback = feedback_controller.get_all_feedback()
+
+
+	if request.method == 'GET':
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+		isAdmin = user_controller.is_user_admin(current_user.net_id)
+		
+		return render_template('feedback.html', name=curr_user_name, isAdmin = isAdmin, all_feedback=all_feedback)
 	
 
 @main_bp.route('/dashboard.html')

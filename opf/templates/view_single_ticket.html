@@ -2,37 +2,36 @@
 
 {% block css %}
   <link rel="stylesheet" href="/static/singleticket.css"/>
-  <link rel="stylesheet" href="/static/ticket_form.css"/>
 {% endblock %}
 
 {% block title %} Display Ticket {{ticket.id}} {% endblock %}
 
 {% block content %}
-  <h1>View a ticket</h1>
   <div class="formcontainer">
     <form action = "/view_single_ticket.html" method = "POST">
-      <div class="singleticket-container">
-        <h1>{{ ticket.user.first_name }}</h1>
-        <h2 >{{ticket.title}}</h2>
-    
-        <p class="submission-date">Submitted on {{ticket.submission_date}}</p>
-        <br>
-        <p class="appt-heading">Appointment:<p>
-        <p class="appt">{{ticket.appointment_date}}</p>
-        <br>
-        <div class="ticket-details">
-          <p>Ticket ID: {{ticket.id}}</p>
-          <p>Status: {{ticket.status}}</p>
+      <div class="card" style="width: 60rem;">
+        <div class="card-header">
+         Ticket {{ ticket.id}} details
+        </div>
+        <div class="card-body">
+            <div class="box-right">
+              <h1>Contact Information</h1>
+            <h5 class="card-title">Submitted by: {{ ticket.user.first_name }} {{ ticket.user.last_name }}</h5>
+            <h5 class="card-title">Email: {{ticket.user.contact_email}}</h5>
+            <h5 class="card-title">Net Id: {{ticket.user.net_id}}</h5>
+            <h5 class="card-title">Year: {{ticket.user.student_year}}</h5>
+            </div>
+          <h2>{{ticket.title}}</h2>
+          <h5>Status: {{ticket.status}}</h5>
+          <br>
           <p>Severity: {{ticket.severity_level}}</p>
           <p>Location: {{ticket.location}}</p>
           <p>Building: {{ticket.building}}</p>
-          <p>Unit#: {{ticket.unit}}</p>
-          <p>{{ticket.description}}</p>
-          <p>{{ticket.additional_notes}}</p>
-        </div>
-        <br>
-        <div class="message">
-          <p class="msg">Message from Facility</p>
+        <p>Unit#: {{ticket.unit}}</p>
+        <p>Description: <br> {{ticket.description}}</p>
+        <p>Additional Notes: <br> {{ticket.additional_notes}}</p>
+         <p class="msg">Message from Facility</p>
+         <div class="message">
           <p>{{ ticket.admin_message }}</p>
         </div>
       </div>
@@ -62,15 +61,60 @@
           <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Send us your feedback!</h5>
-                
+                    <h5 class="modal-title">Submit Feedback</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                 
+                    <div class="mb-3">
+                        <label class="form-label required">Rate Your Experience</label>
+                        <input type="text"  name = "Experience_Rate"
+                        value="{{ request.form['Experience_Rate'] }}"class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label required">Were you satisfied with our service?</label>
+                        <input type="text"  name = "Satisfied_Level"
+                        value="{{ request.form['Satisfied_Level'] }}"class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label required">Additional comments or concerns</label>
+                        <textarea class="form-control"  name = "Additional_Comments"
+                        value="{{ request.form['Additional_Comments'] }}"></textarea>
+                    </div>
+  
+                </div>
+                <div class="modal-footer">
+                  <input class="btn" type="submit" name="submit_btn" value="Submit ">
+                  <button type="submit" class="btn btn-danger">Cancel</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </form>
+     
+      {% if isAdmin %}
+      <div class="admincontrols">
+        <p>Edit Status</p>
+        <select class="select"name="Status" value="{{request.form['Status']}}">
+          <option class="option1">Submitted</option>
+          <option class="option2">In Progress</option>
+          <option class="option3">Denied</option>
+          <option class="option4">Completed</option>
+        </select>
+  
+        <p>Make an appointment</p>
+        <input type="date" name="Appointment_date" value="{{request.form['Appointment_date']}}">
+
+        <p>Add a message</p>
+        <textarea name="Admin_message" value="{{request.form['Admin_message']}}"></textarea>
+        <br>
+        <p class="note">Note: Changes will be sent to the user via email</p>
+        <button type="submit" class="btn btn-default">Save Changes</button>
+      </div>
+    {% endif %}
+
+  </form>
   </div>
 {% endblock %}
 
