@@ -18,11 +18,11 @@
       <div class="col-sm-6">
         <div class="card" style="width: 500px;">
           <div class="card-body">
-            <h5 class="card-title">Faucet Leak</h5>
-            <h6 class="card-subtitle mb-2">Submitted on Feb 26, 2022</h6>
-            <p class="card-text">Ticket ID: 1</p>
-            <p class="card-text">Location: Argenta Hall</p>
-            <p class="card-text">Description:<br> With supporting text below as a natural lead-in to additional content.</p>
+            <h5 class="card-title">{{ ticket.title}} </h5>
+            <h6 class="card-subtitle mb-2">Submitted on {{ticket.submission_date}}</h6>
+            <p class="card-text">Ticket ID: {{ticket.id }}</p>
+            <p class="card-text">Location: {{ticket.building}}</p>
+            <p class="card-text">Description:<br> {{ticket.description}}</p>
           </div>
         </div>
       </div>

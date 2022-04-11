@@ -82,6 +82,19 @@ class DB_Connector():
         name = first_name + " " + last_name
         return name
 
+    def select_ticket_submission_dates(self):
+        tickets = Ticket.query.all()
+        submission_dates_list = []
+        for ticket in tickets:
+            submission_dates_list.append(ticket.submission_date)
+        
+        return submission_dates_list
+    
+    def select_ticket_with_matching_submission_date(self, submission_date):
+        ticket = Ticket.query.filter_by(submission_date = submission_date).first()
+        return ticket
+
+
     def delete_ticket(self, ticket_id):
         ticket_to_del = Ticket.query.filter_by(id = ticket_id).first()
         db.session.delete(ticket_to_del)

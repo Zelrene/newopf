@@ -7,6 +7,8 @@ from src.extra_functionality import Extra_functionality
 from datetime import datetime
 from datetime import date
 
+from src.models.ticket import Ticket
+
 database = DB_Connector()
 
 class TicketController(): 
@@ -120,18 +122,26 @@ class TicketController():
             
         return total_tickets
 
-    def get_resident_num_with_matching_gender(self, gender):
-        resident_num = database.get_residents_num_with_matching_gender(gender = gender)
-        return resident_num
+    def get_ticket_submission_dates_list( self):
+        submission_dates_list = database.select_ticket_submission_dates()
+
+    def get_recent_ticket_submission_date(self):
+        tickets = database.select_all_tickets()
+        submission_dates_list = []
+
+        for ticket in tickets:
+            submission_dates_list.append(ticket.submission_date)
+        
+        today = date.today()
+        recent_submission_date = max(dt for dt in submission_dates_list if dt < today)
+
+        return recent_submission_date
+
+    def get_ticket_with_matching_submitted_date(self, submission_date):
+        ticket = database.select_ticket_with_matching_submission_date(submission_date = submission_date)
+        return ticket
+
 
   
-    def get_resident_num_with_matching_genders(self, genders):
-        genders = genders
-        total_residents = []
-        
-        for gender in genders:
-            resident_num = self.get_resident_num_with_matching_gender(gender)
-            total_residents.append(resident_num)
-            
-        return total_residents
+
  

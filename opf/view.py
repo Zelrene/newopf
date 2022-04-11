@@ -160,7 +160,12 @@ def feedback():
 def dashboard():
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('dashboard.html', name=curr_user_name, isAdmin=isAdmin)
+
+	#get the most recently submitted ticket
+	recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
+	ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+
+	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin)
 
 @main_bp.route('/faq.html')
 @login_required
@@ -226,7 +231,7 @@ def analytics():
 		genders_to_send = ['F',
 						'M',
 						'NA']
-		residents = ticket_controller.get_resident_num_with_matching_genders(genders=genders_to_send)
+		residents = user_controller.get_resident_num_with_matching_genders(genders=genders_to_send)
 		
 		df_2 = pd.DataFrame({
 			"Genders": genders,
