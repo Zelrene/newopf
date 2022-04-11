@@ -179,7 +179,8 @@ def analytics():
 
 		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", 
 						title="All Tickets per Residence Halls")
-		graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+		
+		
 
 		table1 = go.Figure(data=[go.Table(
 			header = dict(values = [['Dorms'],['# of Tickets']],
@@ -191,11 +192,11 @@ def analytics():
 				align = ['center', 'center']
 			)
 		)])
-		table1JSON = json.dumps(table1, cls=plotly.utils.PlotlyJSONEncoder)
+		
 
 		genders = ['Female',
 					'Male',
-					'Did not wish to disclose']
+					'Did Not Disclose']
 		
 		genders_to_send = ['F',
 						'M',
@@ -208,7 +209,7 @@ def analytics():
 		})
 		
 		fig2 = px.pie(df_2, values=residents, names=genders, hole=0.5, title="Genders in Residence Halls")
-		graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+		
 		
 		table2 = go.Figure(data=[go.Table(
 			header = dict(values = [['Gender'],['# of Residents']],
@@ -220,6 +221,38 @@ def analytics():
 				align = ['center', 'center']
 			)
 		)])
+		
+		# Update Chart sizes
+		fig1.update_layout(
+			width=400,
+			height=400,
+			margin=dict(t=60, b=40)
+		)
+		table1.update_layout(
+			width=400,
+			height=400,
+			margin=dict(t=60, b=40)
+		)
+		fig2.update_layout(
+			width=400,
+			height=400,
+			margin=dict(t=60, b=40),
+			legend=dict(
+				orientation="h",
+				yanchor="bottom",
+				xanchor="right"
+			)
+		)
+		table2.update_layout(
+			width=400,
+			height=400,
+			margin=dict(t=60, b=40)
+		)
+
+		# Make charts to individual JSON objects
+		graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+		table1JSON = json.dumps(table1, cls=plotly.utils.PlotlyJSONEncoder)
+		graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
 		table2JSON = json.dumps(table2, cls=plotly.utils.PlotlyJSONEncoder)
 		
 		return render_template('analytics.html', 

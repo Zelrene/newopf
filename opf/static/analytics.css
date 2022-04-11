@@ -9,6 +9,14 @@
     max-width: fit-content;
 }
 
+.table-container {
+    overflow: auto;
+    float: left;
+    width: 50%;
+    max-width: fit-content;
+    justify-content: center;
+}
+
 h1{
     color: white;
 
