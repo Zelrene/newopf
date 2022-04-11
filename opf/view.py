@@ -115,28 +115,32 @@ def view_single_ticket(ticket_id):
 		satisfied_level = request.form['Satisfied_Level']
 		additional_comments = request.form['Additional_Comments']
 
-		feedback_controller.create_feedback(
-				ticket_id = ticket_id,
-				experience_rate = experience_rate,
-				satisfied_level = satisfied_level,
-				additional_comments = additional_comments
-				)
-		
-		if ticket.status != status:
-			ticket_controller.update_ticket_status(
-				ticket_id = ticket_id, 
-				new_status = status)
+		if  request.form['submit_btn'] == 'Submit':
 
-		if appointment_date and (appointment_date != str(ticket.appointment_date)):
-			ticket_controller.update_appointment_date(
-				ticket_id = ticket_id, 
-				new_date = appointment_date)
-
-		if admin_message and (admin_message != ticket.admin_message):
-			ticket_controller.update_ticket_admin_message(
-				ticket_id = ticket_id,
-				new_admin_message = admin_message)
+			feedback_controller.create_feedback(
+					ticket_id = ticket_id,
+					experience_rate = experience_rate,
+					satisfied_level = satisfied_level,
+					additional_comments = additional_comments
+					)
 		
+		if  request.form['submit_btn'] == 'Save Changes':
+				
+			if ticket.status != status:
+				ticket_controller.update_ticket_status(
+					ticket_id = ticket_id, 
+					new_status = status)
+
+			if appointment_date and (appointment_date != str(ticket.appointment_date)):
+				ticket_controller.update_appointment_date(
+					ticket_id = ticket_id, 
+					new_date = appointment_date)
+
+			if admin_message and (admin_message != ticket.admin_message):
+				ticket_controller.update_ticket_admin_message(
+					ticket_id = ticket_id,
+					new_admin_message = admin_message)
+			
 
 		return redirect(url_for('main_bp.view_tickets'))
 
