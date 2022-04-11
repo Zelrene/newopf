@@ -10,7 +10,42 @@
 <head>
     <link rel="stylesheet" href="/static/faq.css"/>
 </head>
+
 {% block content %}
     <h1>Frequently Asked Questions</h1>
+        <!-- put a botton to popup form to submit faq at the top. this button will show only to the admin   -->
+
+        {% for faq in all_faq %}
+
+        <div id="question_div" class="question_div "> 
+            {{faq.question}}
+            <button id="toggle_button" onclick="toggle_answer()"> + </button>
+        </div>
+        <div id="answer_div" class="answer_div">
+            {{ faq.answer}}
+        </div>
+    
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        
+        function toggle_answer(){
+            var target = document.getElementById("answer_div")
+
+            if (target.style.display === "none"){
+                target.style.display = "block";
+            }
+            else {
+                target.style.display = "none";
+            }
+        } 
+    </script>
+    
 
 {% endblock %}

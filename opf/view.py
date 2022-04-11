@@ -142,7 +142,19 @@ def dashboard():
 def faq():
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('faq.html', name=curr_user_name, isAdmin=isAdmin)
+
+	all_faq = []
+	all_faq = [
+		{"question": "who are we?",
+		"answer": "we are OPF."},
+		{"question": "how to contact us?",
+		"answer": "thorugh email."},
+		{"question": "can we resubmit a ticket",
+		"answer": "yes you will be able to do that."},
+		{"question": "How long will it take?",
+		"answer": "we do not know at the moment."},
+	]
+	return render_template('faq.html', all_faq = all_faq, name=curr_user_name, isAdmin=isAdmin)
 
 	
 @main_bp.route('/log_out')
