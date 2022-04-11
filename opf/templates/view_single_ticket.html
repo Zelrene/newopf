@@ -9,14 +9,43 @@
 {% block content %}
   <div class="formcontainer">
     <form action = "/view_single_ticket.html" method = "POST">
-      <div class="card">
+      <div class="card" style="width: 60rem;">
         <div class="card-header">
          Ticket {{ ticket.id}} details
         </div>
         <div class="card-body">
-          <h5 class="card-title">Submitted by: {{ ticket.user.first_name }}</h5>
-          <h2 >{{ticket.title}}</h2>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <div class="box-right">
+              <h1>Contact Information</h1>
+            <h5 class="card-title">Submitted by: {{ ticket.user.first_name }} {{ ticket.user.last_name }}</h5>
+            <h5 class="card-title">Email: {{ticket.user.contact_email}}</h5>
+            <h5 class="card-title">Net Id: {{ticket.user.net_id}}</h5>
+            <h5 class="card-title">Year: {{ticket.user.student_year}}</h5>
+            </div>
+          <h2>{{ticket.title}}</h2>
+          <h5>Status: {{ticket.status}}</h5>
+          <br>
+          <p>Severity: {{ticket.severity_level}}</p>
+          <p>Location: {{ticket.location}}</p>
+          <p>Building: {{ticket.building}}</p>
+        <p>Unit#: {{ticket.unit}}</p>
+        <p>Description: <br> {{ticket.description}}</p>
+        <p>Additional Notes: <br> {{ticket.additional_notes}}</p>
+         <p class="msg">Message from Facility</p>
+         <div class="message">
+          <p>{{ ticket.admin_message }}</p>
+         </div>
+         <div class="container mt-5">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Submit Feedback</button>
+          <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title">Send us your feedback!</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
      
@@ -36,23 +65,10 @@
         <p>Add a message</p>
         <textarea name="Admin_message" value="{{request.form['Admin_message']}}"></textarea>
         <br>
-        <p>Note: Changes will be sent to the user via email</p>
+        <p class="note">Note: Changes will be sent to the user via email</p>
         <button type="submit" class="btn btn-default">Save Changes</button>
       </div>
     {% endif %}
-    <div class="container mt-5">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Submit Feedback</button>
-      <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title">Send us your feedback!</h5>
-              
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </form>
   </div>
 {% endblock %}
