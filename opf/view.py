@@ -110,6 +110,7 @@ def view_single_ticket(ticket_id):
 	if request.method == 'POST':
 		status = request.form['Status']
 		appointment_date = request.form['Appointment_date']
+		appointment_time = request.form['Appointment_time']
 		admin_message = request.form['Admin_message']
 		experience_rate = request.form['Experience_Rate']
 		satisfied_level = request.form['Satisfied_Level']
@@ -135,6 +136,11 @@ def view_single_ticket(ticket_id):
 				ticket_controller.update_appointment_date(
 					ticket_id = ticket_id, 
 					new_date = appointment_date)
+
+			if appointment_time and (appointment_time != str(ticket.appointment_time)):
+				ticket_controller.update_appointment_time(
+					ticket_id = ticket_id,
+					new_time = appointment_time)
 
 			if admin_message and (admin_message != ticket.admin_message):
 				ticket_controller.update_ticket_admin_message(
