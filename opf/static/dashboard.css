@@ -4,31 +4,37 @@
     margin-left: 10px;
     margin-bottom: 10px;
 }
-
+label{
+    font-weight: bold;
+    color:white;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: -100px;
+}
 h1{
     color: white;
     font-size: 20px;
     margin-left: 10px;
-    margin-bottom: -10px;
+    margin-bottom: -5px;
     margin-top: -10px;
 }
 
 .card{
     margin-left: 10px;
-    background-color: #ffffff30;
+    background-color: #1d1d1d90;
 }
 
+.col-sm-6{
+    width: 37%;
+}
 .card-title{
-    color: white;
+    color: #ee6c4d;
 }
 
-.card-submitted{
-    color: rgb(26, 26, 26);
+
+.card-subtitle{
+    color: white;
     font-size: 14px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 2px;
-    padding: 10px 10px;
-    width: 45%;
 }
 
 .card-text{
@@ -38,3 +44,66 @@ h1{
 button{
     float: right;
 }
+
+.right{
+    color: white;
+    float: right;
+    margin-top: -52px;
+}
+
+.right .status{
+    background-color: none;
+    border: white;
+    border-style: solid;
+    border-width: 1px;
+    width: 100px;
+    height: 26px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.card a{
+    color: white;
+    float: right;
+    margin-top: 20px;
+    background-color: #84848460;
+    border-width: 1px;
+    width: 100px;
+    height: 26px;
+    text-align: center;
+    border-radius: 5px;
+    
+}
+
+.card a:hover{
+    background-color: #7eb7f560;
+
+}
+
+.row1{
+    display: flex;
+}
+
+.card-body .date {
+    background: url(calendar-check.svg) no-repeat ;
+    margin-bottom: 10px;
+
+  }
+
+  .card-body .date .card-text {
+    margin-left: 30px;
+}
+
+.card-body .time {
+    background: url(clock.svg) no-repeat ;
+ 
+  }
+
+.card-body .time .card-text {
+    margin-left: 30px;
+}
+
+
+
+
+

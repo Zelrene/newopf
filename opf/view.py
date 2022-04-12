@@ -183,6 +183,7 @@ def dashboard():
 	#get the most recently submitted ticket
 	recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
 	ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+	
 
 	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin)
 
