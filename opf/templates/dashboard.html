@@ -2,8 +2,14 @@
 
 {% block css %}
 <head>
-    <link rel="stylesheet" href="/static/dashboard.css"/>
-    <title>Dashboard</title>
+  <link rel="stylesheet" href="/static/dashboard.css"/>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css">
+
+
+
+ 
+  <title>Dashboard</title>
 </head>
 {% endblock %}
 
@@ -51,7 +57,14 @@
           </div>
         </div>
       </div>  
-    
+      
+
+      <div class="col-sm-6">
+        <div class="new"> 
+          <div id="calendar"></div>
+        </div>
+        
+       </div>
      
     </div>
     
@@ -59,4 +72,20 @@
 </body>
 
 
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+
+<script>
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth'
+    });
+    calendar.render();
+  });
+
+</script>
 {% endblock %}
