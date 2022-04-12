@@ -1,8 +1,4 @@
-#from asyncio.windows_events import NULL
-from pydoc import describe
-from turtle import title
 from src.db_connector import DB_Connector
-#from src.models.ticket import Status
 
 from src.extra_functionality import Extra_functionality 
 

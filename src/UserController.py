@@ -1,4 +1,3 @@
-from sqlalchemy import false, true
 from src.db_connector import DB_Connector
 
 database = DB_Connector()
