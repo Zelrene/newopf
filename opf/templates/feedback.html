@@ -9,18 +9,25 @@
 
 {% block content %}
 
-
+    <h1>View all feedback</h1>
 
     {% for feedback in all_feedback %}
-
-    <p>
-        Feedback id: {{feedback.id}}
-        Feedback experinect experience rate: {{feedback.experience_rate}}
-        Feedback satisfied level: {{feedback.satisfied_level}}
-        additional comments : {{ feedback.additional_comments}}
-    
-    </p>
-
+  
+    <div class="card" style="width: 40rem;">
+        <div class="card-header">
+            Feedback for ticket {{feedback.id}}
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"> Answers</li>
+          <li class="list-group-item">Rate your experience: {{feedback.experience_rate}}</li>
+         
+          <li class="list-group-item">Were you satisfied with our service? {{feedback.satisfied_level}}</li>
+          <li class="list-group-item">Any additional comments or concerns? {{ feedback.additional_comments}}</li>
+        </ul>
+        </ul>
+      </div>
+   
+      <br>
     {% endfor %}
 
 

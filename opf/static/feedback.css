@@ -7,3 +7,19 @@
     content: "*";
     color: red;
 }
+
+
+h1{
+    color: white;
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+.card{
+    margin-left: 10px;
+    display: flex;
+
+}
+.card .card-header{
+    font-weight: bold;
+}
