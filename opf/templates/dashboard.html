@@ -51,10 +51,21 @@
           </div>
         </div>
       </div>  
-    
-     
     </div>
-    
+    <h1>Hello: {{announcement.announce_title}}</h1>
+    <h1>Hello: {{announcement.announce_descrip}}</h1>
+    <form action = "/dashboard.html" method = "POST">
+    <input type = "text" 
+    name = "Announce_Title" 
+    value="{{ request.form['Announce_Title'] }}">
+    </input>
+    <input type = "text" 
+    name = "Announce_Descrip" 
+    value="{{ request.form['Announce_Descrip'] }}">
+    </input>
+    <input class="btn" type="submit" name="submit_btn" value="Submit">
+  </form>
+  
      
 </body>
 

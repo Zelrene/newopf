@@ -8,6 +8,7 @@ from src.models.ticket import Ticket
 from src.models.user import User
 from src.models.faq import Faq
 from src.models.feedback import Feedback
+from src.models.announcements import Announcements
 
 class DB_Connector():
     def __init__(self):
@@ -245,6 +246,22 @@ class DB_Connector():
         faq_to_del = Faq.query.filter_by(id = faq_id).first()
         db.session.delete(faq_to_del)
         db.session.commit()
+
+    '''announcements model functions'''
+
+    def insert_announcements(self, announce_title, announce_descrip):
+        
+        new_announcements = Announcements(
+            announce_title = announce_title,
+            announce_descrip = announce_descrip
+            )
+        
+        db.session.add(new_announcements)
+        db.session.commit()
+
+    def select_announcements(self):
+        all_announcements = Faq.query.all()
+        return all_announcements
 
 
     '''feedback model functions'''

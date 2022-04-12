@@ -1,5 +1,6 @@
 .container{
         font-family: effra, sans-serif;
+     
  }
 
 .container p {
@@ -9,7 +10,6 @@
 .form-container {
     position: absolute;
 	top: 0;
-
 	width: 100%;
 	height: 100%; 
     background-color: #293241;
@@ -54,11 +54,9 @@
 
 form {
 	display: block;
-	justify-content: space-around;
-
-	height: 100%;
 	text-align: center;
     padding-left: 400px;
+    justify-content: center;
 }
 
 .overlay .btn{
@@ -83,6 +81,7 @@ form {
     padding: 5px 30px;
     cursor: pointer; 
     left: 50px;
+    margin-top: 15px;
 }
 
 .form-container input[type=text]{
@@ -90,7 +89,9 @@ form {
     border-width: 1px;
     padding: 5px 40px;
     border-radius: 5px;
-    color: #313131
+    color: #313131;
+    margin-top: 15px;
+    margin-right: 12px;
 }
 
 .form-container input[type=password]{
@@ -99,9 +100,11 @@ form {
     padding: 5px 40px;
     border-radius: 5px;
     color: #313131;
+    margin-top: 15px;
 }
 .form-container h1{
     font-size: 40px;
+    padding-top: 12rem;
 }
 
 
@@ -110,4 +113,7 @@ form {
     border-radius: 5px;
     background: none;
     color: white;
+    margin-top: 15px;
+    margin-left: 10px;
+   
     }

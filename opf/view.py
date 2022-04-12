@@ -19,12 +19,13 @@ main_bp = Blueprint(
 	static_folder="static", 
 	template_folder="templates")
 
-from src import TicketController, UserController, feedbackController, FaqController
+from src import AnnouncementsController, TicketController, UserController, feedbackController, FaqController
 
 ticket_controller = TicketController.TicketController()
 user_controller = UserController.UserController()
 feedback_controller = feedbackController.FeedbackController()
 faq_controller = FaqController.FaqController()
+announcements_controller = AnnouncementsController.AnnouncementsController()
 
 @main_bp.route('/')
 def index():
@@ -174,7 +175,7 @@ def feedback():
 		return render_template('feedback.html', name=curr_user_name, isAdmin = isAdmin, all_feedback=all_feedback)
 	
 
-@main_bp.route('/dashboard.html')
+@main_bp.route('/dashboard.html', methods = ['GET', 'POST'])
 @login_required
 def dashboard():
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
@@ -183,9 +184,24 @@ def dashboard():
 	#get the most recently submitted ticket
 	recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
 	ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+	announcement = announcements_controller.get_announcement()
 	
+	if request.method == 'GET':
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+		isAdmin = user_controller.is_user_admin(current_user.net_id)
+		
+		return render_template('dashboard.html', ticket=ticket, name=curr_user_name, isAdmin = isAdmin, announcement = announcement)
+		
+	if request.method == 'POST':
+		announce_title = request.form['Announce_Title']
+		announce_descrip = request.form['Announce_Descrip']
 
-	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin)
+		announcements_controller.create_announcement(
+			announce_title = announce_title,
+           	announce_descrip = announce_descrip
+		)
+
+	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin, announcement = announcement)
 
 @main_bp.route('/faq.html',  methods = ['GET', 'POST'])
 @login_required
