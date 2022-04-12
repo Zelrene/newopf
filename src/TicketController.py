@@ -150,6 +150,21 @@ class TicketController():
             
         return total_tickets
 
+    def get_number_of_tickets_with_matching_status(self, status):
+        tickets_num = database.get_tickets_num_with_matching_status(status = status)
+        return tickets_num
+
+  
+    def get_number_of_tickets_with_matching_statuslist(self, statuslist):
+        statuslist = statuslist
+        total_tickets = []
+        
+        for status in statuslist:
+            ticket_num = self.get_number_of_tickets_with_matching_status(status)
+            total_tickets.append(ticket_num)
+            
+        return total_tickets
+
     def get_ticket_submission_dates_list( self):
         submission_dates_list = database.select_ticket_submission_dates()
 
