@@ -10,6 +10,7 @@ class AnnouncementsController():
            announce_title = announce_title,
            announce_descrip = announce_descrip
         )
+        
     def get_announcement(self):
         announcements = database.select_announcements()
         return announcements

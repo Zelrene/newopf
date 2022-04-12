@@ -260,7 +260,7 @@ class DB_Connector():
         db.session.commit()
 
     def select_announcements(self):
-        all_announcements = Faq.query.all()
+        all_announcements = Announcements.query.all()
         return all_announcements
 
 

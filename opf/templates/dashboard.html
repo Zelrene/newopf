@@ -52,8 +52,13 @@
         </div>
       </div>  
     </div>
-    <h1>Hello: {{announcement.announce_title}}</h1>
-    <h1>Hello: {{announcement.announce_descrip}}</h1>
+    <h1>Hello: </h1>
+    <h1>Hello: </h1>
+    {% for a in announcements %} 
+    <h1>{{a.announce_title}}</h1>
+    <h1>{{a.announce_descrip}}</h1>
+    {% endfor %} 
+
     <form action = "/dashboard.html" method = "POST">
     <input type = "text" 
     name = "Announce_Title" 
