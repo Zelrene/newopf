@@ -5,9 +5,11 @@ from flask import Flask, Blueprint, abort, render_template, request, redirect, f
 
 from flask_login import login_required, current_user, logout_user
 
+
 from .auth import admin_permission, student_permission
 
 import plotly.express as px
+import plotly.graph_objects as go
 import plotly
 import pandas as pd
 import json
@@ -17,10 +19,12 @@ main_bp = Blueprint(
 	static_folder="static", 
 	template_folder="templates")
 
-from src import TicketController, UserController
+from src import TicketController, UserController, feedbackController, FaqController
 
 ticket_controller = TicketController.TicketController()
 user_controller = UserController.UserController()
+feedback_controller = feedbackController.FeedbackController()
+faq_controller = FaqController.FaqController()
 
 @main_bp.route('/')
 def index():
@@ -42,7 +46,7 @@ def create_tickets():
 		creator_id = current_user.id
 		
 		#if not title or not description or not location or not building or not unit:
-		if not title or not description or not request.form['Location'] or not request.form['Building'] or not request.form['Severity_level'] or not unit:
+		if not title or not description or not request.form.get('Location') or not request.form.get('Building') or not request.form.get('Severity_level') or not unit:
 			flash('Not all required fields are filled. Please fill all required fields before submitting your ticket.')
 			return redirect(url_for('main_bp.create_tickets'))
 
@@ -107,26 +111,67 @@ def view_single_ticket(ticket_id):
 	if request.method == 'POST':
 		status = request.form['Status']
 		appointment_date = request.form['Appointment_date']
+		appointment_time = request.form['Appointment_time']
 		admin_message = request.form['Admin_message']
-		
-		if ticket.status != status:
-			ticket_controller.update_ticket_status(
-				ticket_id = ticket_id, 
-				new_status = status)
+		experience_rate = request.form['Experience_Rate']
+		satisfied_level = request.form['Satisfied_Level']
+		additional_comments = request.form['Additional_Comments']
 
-		if appointment_date and (appointment_date != str(ticket.appointment_date)):
-			ticket_controller.update_appointment_date(
-				ticket_id = ticket_id, 
-				new_date = appointment_date)
+		if  request.form['submit_btn'] == 'Delete Ticket':
+			ticket_controller.delete_ticket(ticket_id = ticket_id)
 
-		if admin_message and (admin_message != ticket.admin_message):
-			ticket_controller.update_ticket_admin_message(
-				ticket_id = ticket_id,
-				new_admin_message = admin_message)
+		if  request.form['submit_btn'] == 'Resubmit Ticket':
+			ticket_controller.resubmit_ticket(ticket_id = ticket_id)
+
+
+
+		if  request.form['submit_btn'] == 'Submit':
+
+			feedback_controller.create_feedback(
+					ticket_id = ticket_id,
+					experience_rate = experience_rate,
+					satisfied_level = satisfied_level,
+					additional_comments = additional_comments
+					)
 		
+		if  request.form['submit_btn'] == 'Save Changes':
+				
+			if ticket.status != status:
+				ticket_controller.update_ticket_status(
+					ticket_id = ticket_id, 
+					new_status = status)
+
+			if appointment_date and (appointment_date != str(ticket.appointment_date)):
+				ticket_controller.update_appointment_date(
+					ticket_id = ticket_id, 
+					new_date = appointment_date)
+
+			if appointment_time and (appointment_time != str(ticket.appointment_time)):
+				ticket_controller.update_appointment_time(
+					ticket_id = ticket_id,
+					new_time = appointment_time)
+
+			if admin_message and (admin_message != ticket.admin_message):
+				ticket_controller.update_ticket_admin_message(
+					ticket_id = ticket_id,
+					new_admin_message = admin_message)
+			
 
 		return redirect(url_for('main_bp.view_tickets'))
 
+
+@main_bp.route('/feedback.html',  methods = ['GET'])
+@login_required
+def feedback():
+	#feedback = feedback_controller.get_single_feedback(feedback_id)
+	all_feedback = feedback_controller.get_all_feedback()
+
+
+	if request.method == 'GET':
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+		isAdmin = user_controller.is_user_admin(current_user.net_id)
+		
+		return render_template('feedback.html', name=curr_user_name, isAdmin = isAdmin, all_feedback=all_feedback)
 	
 
 @main_bp.route('/dashboard.html')
@@ -134,14 +179,54 @@ def view_single_ticket(ticket_id):
 def dashboard():
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('dashboard.html', name=curr_user_name, isAdmin=isAdmin)
 
-@main_bp.route('/faq.html')
+	#get the most recently submitted ticket
+	recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
+	ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+	
+
+	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin)
+
+@main_bp.route('/faq.html',  methods = ['GET', 'POST'])
 @login_required
 def faq():
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	return render_template('faq.html', name=curr_user_name, isAdmin=isAdmin)
+
+	all_faq = []
+	'''
+	all_faq = [
+		{"question": "who are we?",
+		"answer": "we are OPF."},
+		{"question": "how to contact us?",
+		"answer": "thorugh email."},
+		{"question": "can we resubmit a ticket",
+		"answer": "yes you will be able to do that."},
+		{"question": "How long will it take?",
+		"answer": "we do not know at the moment."},
+	]
+	'''
+	all_faq = faq_controller.get_all_faq()
+
+	if request.method == 'GET':
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+		isAdmin = user_controller.is_user_admin(current_user.net_id)
+		
+		return render_template('faq.html', all_faq = all_faq, name=curr_user_name, isAdmin = isAdmin)
+		
+	if request.method == 'POST':
+
+		faq_question = request.form['faq_question']
+		faq_answer = request.form['faq_answer']
+
+		if  request.form['submit_btn'] == 'Submit':
+			faq_controller.create_faq(
+				question = faq_question,
+				answer = faq_answer
+			)
+
+
+	return render_template('faq.html', all_faq = all_faq, name=curr_user_name, isAdmin=isAdmin)
 
 	
 @main_bp.route('/log_out')
@@ -158,7 +243,8 @@ def analytics():
 
 	with admin_permission.require():
 		isAdmin = user_controller.is_user_admin(current_user.net_id)
-		
+		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+
 		dorms = ['Argenta Hall', 
 				'Canada Hall',
 				'Great Basin Hall',
@@ -175,17 +261,31 @@ def analytics():
 			"Ticket Count": total_tickets
 		})
 
-		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", title="All Tickets per Residence Halls")
-		graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", 
+						title="All Tickets per Residence Halls")
+		
+		
+
+		table1 = go.Figure(data=[go.Table(
+			header = dict(values = [['Dorms'],['# of Tickets']],
+				fill_color = 'paleturquoise',
+				align=['center', 'center']
+			),
+			cells = dict(
+				values = [dorms, total_tickets],
+				align = ['center', 'center']
+			)
+		)])
+		
 
 		genders = ['Female',
 					'Male',
-					'Did not want to disclose']
+					'Did Not Disclose']
 		
 		genders_to_send = ['F',
 						'M',
 						'NA']
-		residents = ticket_controller.get_resident_num_with_matching_genders(genders=genders_to_send)
+		residents = user_controller.get_resident_num_with_matching_genders(genders=genders_to_send)
 		
 		df_2 = pd.DataFrame({
 			"Genders": genders,
@@ -193,6 +293,56 @@ def analytics():
 		})
 		
 		fig2 = px.pie(df_2, values=residents, names=genders, hole=0.5, title="Genders in Residence Halls")
+		
+		
+		table2 = go.Figure(data=[go.Table(
+			header = dict(values = [['Gender'],['# of Residents']],
+				fill_color = 'paleturquoise',
+				align=['center', 'center']
+			),
+			cells = dict(
+				values = [genders, residents],
+				align = ['center', 'center']
+			)
+		)])
+		
+		# Update Chart sizes
+		fig1.update_layout(
+			width=400,
+			height=400,
+			margin=dict(t=60, b=40)
+		)
+		table1.update_layout(
+			width=400,
+			height=400,
+			margin=dict(t=60, b=40)
+		)
+		fig2.update_layout(
+			width=400,
+			height=400,
+			margin=dict(t=60, b=40),
+			legend=dict(
+				orientation="h",
+				yanchor="bottom",
+				xanchor="right"
+			)
+		)
+		table2.update_layout(
+			width=400,
+			height=400,
+			margin=dict(t=60, b=40)
+		)
+
+		# Make charts to individual JSON objects
+		graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+		table1JSON = json.dumps(table1, cls=plotly.utils.PlotlyJSONEncoder)
 		graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-	
-		return render_template('analytics.html', graph1JSON=graph1JSON, graph2JSON=graph2JSON, isAdmin=isAdmin)
+		table2JSON = json.dumps(table2, cls=plotly.utils.PlotlyJSONEncoder)
+		
+		return render_template('analytics.html', 
+								name=curr_user_name,
+								graph1JSON=graph1JSON, 
+								table1JSON=table1JSON, 
+								graph2JSON=graph2JSON, 
+								table2JSON=table2JSON, 
+								isAdmin=isAdmin)

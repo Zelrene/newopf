@@ -1,13 +1,26 @@
-thead{
+body{
+    color: white;
+}
+
+/* Bootstrap 5 Styling Override */
+.table-striped thead{
     background-color: #98c1d9;
     color: rgb(255, 255, 255);
     padding: 10px;
 }
 
-tbody tr:hover{
+.table-striped tbody tr:hover{
     background-color: rgb(211, 229, 250);
 }
 
-table{
-    width: auto;
+.table-striped tbody {
+    background-color: rgb(255, 255, 255);
+}
+
+.dataTables_filter {
+    float: right;
+}
+
+.dataTables_paginate {
+    float: right;
 }

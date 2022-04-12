@@ -1,4 +1,3 @@
-from sqlalchemy import false, true
 from src.db_connector import DB_Connector
 
 database = DB_Connector()
@@ -111,3 +110,20 @@ class UserController():
             return True
         else:
             return False
+
+    
+    def get_resident_num_with_matching_gender(self, gender):
+        resident_num = database.get_residents_num_with_matching_gender(gender = gender)
+        return resident_num
+
+    def get_resident_num_with_matching_genders(self, genders):
+        genders = genders
+        total_residents = []
+        
+        for gender in genders:
+            resident_num = self.get_resident_num_with_matching_gender(gender)
+            total_residents.append(resident_num)
+            
+        return total_residents
+
+        

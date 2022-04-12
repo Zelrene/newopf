@@ -1,18 +1,15 @@
-<!doctype html>
 {% extends "layout.html" %}
 
-{%block css %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css">
+{% block css %}
+    <link rel="stylesheet" href="/static/tickets_table.css"/> 
 {% endblock %}
 
+{% block title %} View Tickets {% endblock %}
+
 {% block content %}
-    <div>
-        {% block title %}{% endblock %}
-    </div>
     <br>
     <h1>View all tickets</h1>
-    <table id = "ticketstable" class ="table table=striped">
+    <table id = "ticketstable" class = "table table-striped">
         <thead> 
             <tr>
                 <th>Title</th>
@@ -53,12 +50,12 @@
         $(document).ready(function () {
             $('#ticketstable').DataTable({
                 columns: [
-                    {orderable: false},
+                    null,
                     {orderable: false},
                     null,
                     null,
                     {orderable: false},
-                    {orderable: false},
+                    null,
                     {orderable: false, searchable: false}
                 ]
 

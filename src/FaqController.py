@@ -10,8 +10,8 @@ class FaqController():
             answer = answer)
 
     def get_all_faq(self):
-        faqs = database.select_all_faq()
-        return faqs
+        all_faq = database.select_all_faq()
+        return all_faq
 
     def delete_faq(self, faq_id):
         database.delete_faq(faq_id)

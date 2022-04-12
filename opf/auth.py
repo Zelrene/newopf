@@ -92,7 +92,7 @@ def sign_up():
 		user_e = user_controller.get_user_info_with_matching_email(contact_email)
 
 		# Error Message for Sign Up
-		if not first_name or not last_name or request.form['User_Role'] or request.form['Gender'] or request.form['Year'] or not contact_email or not password:
+		if not request.form.get('User_Role') or	not request.form.get('Gender') or not request.form.get('Year') or not first_name or not last_name or not contact_email or not password:
 			flash('Not all fields are filled. Please complete all required fields before signing up.')
 
 			if net_id and user_n:

@@ -1,9 +1,62 @@
-<!doctype html>
 {% extends "layout.html" %}
 
+{% block css %}
+<head>
+    <link rel="stylesheet" href="/static/dashboard.css"/>
+    <title>Dashboard</title>
+</head>
+{% endblock %}
+
+{% block title %} Dashboard {% endblock %}
+
 {% block content %}
-<h1>
-    Welcome back, {{ name }}
-</h1>
+<body>
+    <h1>Your Dashboard</h1>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <label>Recent Activity</label>
+        <div class="card" style="width: 500px;">
+          <div class="card-body">
+            <h5 class="card-title">{{ ticket.title}} </h5>
+            <h6 class="card-subtitle mb-2">Submitted on {{ticket.submission_date}}</h6>
+            <div class="right">
+            <div class="status">
+              <p>{{ticket.status}}</p>
+            </div>
+            </div>
+            <p class="card-text">Ticket ID: {{ticket.id }}</p>
+            <p class="card-text">Location: {{ticket.building}}</p>
+            <a href="{{ url_for('main_bp.view_single_ticket', ticket_id=ticket.id) }}">view more</a>
+            <p class="card-text">Description:<br> {{ticket.description}}</p>
+          </div>
+        </div>
+      </div>   
+      <div class="col-sm-6">
+        <label>Upcoming Appointments</label>
+        <div class="card" style="width:400px; height: 209px;">
+          <div class="card-body">
+            <h5 class="card-title">Reminder!</h5>
+            <p class="card-text">Your upcoming appointment for {{ticket.title}} is coming up on...</p>
+            <p class="card-text">Date & Time</p>
+            {% if isAdmin %}
+            <a style=" font-size: 14px; width: 150px; padding: 2px;"href="{{ url_for('main_bp.view_single_ticket', ticket_id=ticket.id) }}">Edit Appointment</a>
+            {% endif %}
+            <div class="date">
+            <p class="card-text">{{ticket.appointment_date}}</p>
+            </div>
+            <div class="time">
+            <p class="card-text">{{ticket.appointment_time}}</p>
+            </div>
+          </div>
+        </div>
+      </div>  
+    
+     
+    </div>
+    
+     
+</body>
+
 
 {% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<head>
+    <link rel="stylesheet" href="/static/feedback.css"/>
+    <title>Feedback</title>
+</head>
+{% endblock %}
+
+{% block content %}
+
+
+
+    {% for feedback in all_feedback %}
+
+    <p>
+        Feedback id: {{feedback.id}}
+        Feedback experinect experience rate: {{feedback.experience_rate}}
+        Feedback satisfied level: {{feedback.satisfied_level}}
+        additional comments : {{ feedback.additional_comments}}
+    
+    </p>
+
+    {% endfor %}
+
+
+
+
+
+{% endblock %}

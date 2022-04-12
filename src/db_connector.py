@@ -7,6 +7,7 @@ from src.models.ticket import Ticket
 #from src.models.user import Role, User
 from src.models.user import User
 from src.models.faq import Faq
+from src.models.feedback import Feedback
 
 class DB_Connector():
     def __init__(self):
@@ -81,8 +82,24 @@ class DB_Connector():
         name = first_name + " " + last_name
         return name
 
+    def select_ticket_submission_dates(self):
+        tickets = Ticket.query.all()
+        submission_dates_list = []
+        for ticket in tickets:
+            submission_dates_list.append(ticket.submission_date)
+        
+        return submission_dates_list
+    
+    def select_ticket_with_matching_submission_date(self, submission_date):
+        ticket = Ticket.query.filter_by(submission_date = submission_date).first()
+        return ticket
+
+
     def delete_ticket(self, ticket_id):
         ticket_to_del = Ticket.query.filter_by(id = ticket_id).first()
+        feedback_to_del = Feedback.query.filter_by(ticket_id = ticket_id).first()
+        if (feedback_to_del):
+            db.session.delete(feedback_to_del)
         db.session.delete(ticket_to_del)
         db.session.commit()
 
@@ -100,8 +117,8 @@ class DB_Connector():
     def update_ticket_appointment_time(self, ticket_id, new_time):
         ticket = Ticket.query.filter_by(id = ticket_id).first()
         #the format(%H:%M:S) might need to changed depending on what is being sent to the user 
-        new_time = datetime.strptime(new_time, '%H:%M:%S')
-        ticket.appointment_date = new_time
+        new_time = datetime.strptime(new_time, '%H:%M').time()
+        ticket.appointment_time = new_time
         db.session.commit() 
     
     def update_ticket_admin_message(self, ticket_id, new_admin_message):
@@ -218,3 +235,30 @@ class DB_Connector():
         faq_to_del = Faq.query.filter_by(id = faq_id).first()
         db.session.delete(faq_to_del)
         db.session.commit()
+
+
+    '''feedback model functions'''
+    def insert_feedback(self, ticket_id, experience_rate, satisfied_level, additional_comments):
+        new_feedback = Feedback(
+            ticket_id = ticket_id,
+            experience_rate = experience_rate,
+            satisfied_level = satisfied_level,
+            additional_comments = additional_comments
+        )
+
+        db.session.add(new_feedback)
+        db.session.commit()
+
+    def select_all_feedback(self):
+        all_feedback = Feedback.query.all()
+        return all_feedback
+
+    def select_single_feedback(self, feedback_id):
+        feedback = Feedback.query.filter_by(id = feedback_id).first()
+        return feedback
+
+    def delete_feedback(self, feedback_id):
+        feedback_to_del = Feedback.query.filter_by(id = feedback_id).first()
+        db.session.delete(feedback_to_del)
+        db.session.commit()  
+    

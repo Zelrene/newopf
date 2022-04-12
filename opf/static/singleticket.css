@@ -1,31 +1,43 @@
-.singleticket-container{
-  background-color: rgb(255, 255, 255);
-  margin-right: 20px;
-  padding: 50px;
-  border-radius: 5px;
-  border-color: rgb(0, 0, 0);
-  box-shadow: #ee6c4d;
-}
+
 
 h2{
     color: #ee6c4d;
-    text-align: center;
-    font-size: 20px;
+    font-size: 26px;
+    
 }
 
+.card{
+    margin-left: 20px;
+    height: 36rem;
+}
+
+.card-body{
+    display: flexbox;
+    justify-content: space-between;
+    margin-left: 20px;
+}
+.card-title{
+    font-size: 14px;
+}
 
 h1{
-    text-align: center;
+    color: #1d1d1d;
+    font-size: 18px;
+    font-weight: bold;
 }
 
+.headings{
+    background-color: #1d1d1d60;
+    border-radius: 10px;
+}
 .submission-date{
     text-align: center;
     color:rgb(133, 133, 133)
 }
 
 .appt-heading{
-    text-align: center;
     color: #D12727;
+    text-align: center;
 }
 
 .appt{
@@ -35,14 +47,19 @@ h1{
 
 .msg{
     color: #D12727;
+    font-weight: bold;
 }
+
 
 .ticket-details{
     margin-right: 100px;
+    display: block;
+    justify-content: space-between;
 }
 
 .ticket-details p{
     padding-bottom: 10px;
+    background-color: red;
 }
 
 .admincontrols .select{
@@ -51,6 +68,87 @@ h1{
     font-family: effra, sans-serif;
     border-radius: 5px;
     border-color: #d2d3d4;
+    margin-bottom: 15px;
 }
 
+.admincontrols input[type=date]{
+    background-color: white;
+    padding: 2px 20px;
+    font-family: effra, sans-serif;
+    border-radius: 5px;
+    border-color: #d2d3d4;
+    margin-bottom: 15px;
+}
+
+.admincontrols textarea{
+    margin-bottom: 15px;
+}
+.admincontrols{
+    background-color: #1d1d1d90;
+    padding: 20px 30px;
+    border-radius: 5px;
+    width: 25%;
+    margin-top: -24.3rem;
+    margin-left: 65rem;
+
+}
+
+.admincontrols p{
+    color: white;
+}
+
+.admincontrols .note{
+    color: white;
+    font-size: 12px;
+}
+
+.admincontrols input[type=time]{
+    border-radius: 5px;
+    padding: 2px 2px;
+}
+
+.actions{
+    margin-left: 34.5rem;
+    display:flex;
+}
+
+.actions .btn{
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.actions .deletetix .btn{
+    background-color: #D12727;
+    margin-right: 6px;
+}
+.btn {
+    background-color: #ee6c4d;
+    font-weight: 700;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 7px 20px;
+    cursor: pointer;
+}
+
+.container .btn{
+    float: right;
+    margin-top: -95px;
+    margin-right: 10px;
+    font-size: 12px;
+    background-color: #174473;
+}
+
+ .box-right{
+    float: right;
+    margin-right: 80px; 
+    background-color: #7eb7f560;
+    border-radius: 5px;
+    padding: 20px 20px;
+    color: #1d1d1d;
+ }
+
+ .box-right hr{
+     color: #1d1d1d;
+ }
 

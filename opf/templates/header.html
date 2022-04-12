@@ -1,21 +1,14 @@
-   <!-- <div class="header-left">
-        <p>Welcome, {{ name }}</p>
-    </div>
-    <img class="user" src="/static/user-img.png">
-    <div class="header-right">
-        <a href="{{url_for('main_bp.log_out')}}">Sign out</a>
-    </div>-->
-    <div class="header-left">
-        <p>Optimum Property Fix</p>
-    </div>
-    <img class="user" src="/static/user-img.png">
-<div class="dropdown">
-<div class="header-right">
-    <button class="username">Welcome, {{ name }}</button>
-    <div class="dropdown-content">
-   
-    <a href="{{url_for('main_bp.log_out')}}">Sign Out</a>
-    </div>
+<div class="header-left">
+    <p>Optimum Property Fix</p>
 </div>
+
+
+<div class="dropdown">
+    <div class="header-right">
+        <button class="username">Welcome, {{ name }}</button>
+        <div class="dropdown-content">
+            <a href="{{url_for('main_bp.log_out')}}">Sign Out</a>
+        </div>
+    </div>
 </div>
 

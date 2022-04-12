@@ -9,31 +9,37 @@
 .form-container {
     position: absolute;
 	top: 0;
-	left: 380px;
 	width: 100%;
 	height: 100%; 
     background-color: #293241;
     color: white;
+    
 }
 
+.overlay-container .overlay{
+    background-color: white;
+    width: 350px;
+    height: 100vh;
+    position: relative;
+    top: -10px;
+}
 .overlay h1{
    color:#313131;
-   padding-right: 1070px;
+    padding-top: 250px;
    text-align: center;
-   padding-top: 200px;
+
 }
 
 .overlay p{
     color: #313131;
     text-align: center;
-    padding-right: 1100px;
-    padding-right: 1070px;
+
     font-size: 14px;
 }
 
 .overlay img{
     width: 250px;
-    padding-left: 50px;
+    padding-left: 40px;
     padding-top: 20px;
 }
 
@@ -41,9 +47,8 @@
  font-weight: bold;
  color: #313131;
  text-align: center;
- padding-right: 1070px;
- padding-top: 220px;
  font-size: 12px;
+ padding-top: calc(100% - 70px);
 }
 
 form {
@@ -53,6 +58,7 @@ form {
 	flex-direction: column;
 	height: 100%;
 	text-align: center;
+    padding-left: 400px;
 }
 
 .overlay .btn{
@@ -63,7 +69,7 @@ form {
     border-radius: 8px;
     padding: 5px 30px;
     cursor: pointer; 
-    margin-left: 130px;
+    margin-left: 120px;
 }
 
 
