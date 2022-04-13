@@ -249,11 +249,12 @@ class DB_Connector():
 
     '''announcements model functions'''
 
-    def insert_announcements(self, announce_title, announce_descrip):
+    def insert_announcements(self, announce_title, announce_descrip, submission_dateTime):
         
         new_announcements = Announcements(
             announce_title = announce_title,
-            announce_descrip = announce_descrip
+            announce_descrip = announce_descrip,
+            submission_dateTime = submission_dateTime
             )
         
         db.session.add(new_announcements)
@@ -263,6 +264,31 @@ class DB_Connector():
         all_announcements = Announcements.query.all()
         return all_announcements
 
+    def delete_announcement(self, announcement_id):
+        announcement_to_del = Announcements.query.filter_by(id = announcement_id).first()
+        db.session.delete(announcement_to_del)
+        db.session.commit()
+
+    def update_announce_title(self, announcement_id, new_title):
+        announcement = Announcements.query.filter_by(id = announcement_id).first()
+        announcement.announce_title = new_title
+        db.session.commit()
+
+    def update_announce_descrip(self, announcement_id, new_descrip):
+        announcement = Announcements.query.filter_by(id = announcement_id).first()
+        announcement.announce_descrip = new_descrip
+        db.session.commit()
+    
+    def update_announce_info(self, announcement_id, new_title, new_descrip):
+        announcement = Announcements.query.filter_by(id = announcement_id).first()
+        announcement.announce_title = new_title
+        announcement.announce_descrip = new_descrip
+        db.session.commit()
+
+
+    def select_announcement_with_matching_submission_dateTime(self, submission_dateTime):
+        announcement = Announcements.query.filter_by(submission_dateTime = submission_dateTime).first()
+        return announcement
 
     '''feedback model functions'''
     def insert_feedback(self, ticket_id, experience_rate, satisfied_level, additional_comments):

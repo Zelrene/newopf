@@ -184,13 +184,17 @@ def dashboard():
 	#get the most recently submitted ticket
 	recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
 	ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+	
 	announcements = announcements_controller.get_announcement()
+	recent_announce_submit_dateTime = announcements_controller.get_recent_announcement_submission_dateTime()
+	recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
+		submission_dateTime = recent_announce_submit_dateTime)
 	
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 		isAdmin = user_controller.is_user_admin(current_user.net_id)
 		
-		return render_template('dashboard.html', ticket=ticket, name=curr_user_name, isAdmin = isAdmin, announcements = announcements)
+		return render_template('dashboard.html', ticket=ticket, name=curr_user_name, isAdmin = isAdmin, recent_announcement = recent_announcement)
 		
 	if request.method == 'POST':
 		announce_title = request.form['Announce_Title']
@@ -201,7 +205,7 @@ def dashboard():
            	announce_descrip = announce_descrip
 		)
 
-	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin, announcements = announcements)
+	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin, recent_announcement = recent_announcement)
 
 @main_bp.route('/faq.html',  methods = ['GET', 'POST'])
 @login_required
