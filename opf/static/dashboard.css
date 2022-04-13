@@ -69,7 +69,7 @@ button{
     border-radius: 5px;
 }
 
-.card a{
+.card a#button{
     color: white;
     float: right;
     margin-top: 20px;
