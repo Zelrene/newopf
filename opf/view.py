@@ -243,6 +243,7 @@ def dashboard():
 				recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
 					submission_dateTime = recent_announce_submit_dateTime)
 
+				# display activity, remind, and announcement
 				return render_template('dashboard.html', 
 										graph1JSON=graph1JSON, 
 										name=curr_user_name, 
@@ -253,6 +254,7 @@ def dashboard():
 										display_remind=display_remind,
 										display_announce=display_announce)
 
+			# display activity and remind
 			return render_template('dashboard.html', 
 									graph1JSON=graph1JSON, 
 									name=curr_user_name, 
@@ -266,6 +268,7 @@ def dashboard():
 			recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
 					submission_dateTime = recent_announce_submit_dateTime)
 
+			# display announcement
 			return render_template('dashboard.html', 
 									graph1JSON=graph1JSON, 
 									name=curr_user_name, 
@@ -275,6 +278,7 @@ def dashboard():
 									display_remind=display_remind,
 									display_announce=display_announce)
 		
+		#display default stuff
 		return render_template('dashboard.html', 
 								graph1JSON=graph1JSON, 
 								name=curr_user_name, 
