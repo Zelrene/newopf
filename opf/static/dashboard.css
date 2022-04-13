@@ -82,7 +82,7 @@ button{
     
 }
 
-.card a:hover{
+.card #button:hover{
     background-color: #7eb7f560;
 
 }
@@ -117,4 +117,11 @@ button{
 
 #announcementcard{
     margin-left: 20rem;
+}
+
+
+form .btn{
+   color: white;
+   float: right;
+    margin-top: 16px;
 }
