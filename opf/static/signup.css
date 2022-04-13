@@ -14,7 +14,6 @@
 	height: 100%; 
     background-color: #293241;
     color: white;
-    
 }
 
 .overlay-container .overlay{
@@ -54,7 +53,7 @@
 
 form {
 	display: block;
-	text-align: center;
+    text-align: center;
     padding-left: 400px;
     justify-content: center;
 }
@@ -92,6 +91,7 @@ form {
     color: #313131;
     margin-top: 15px;
     margin-right: 12px;
+    width: 5rem;
 }
 
 .form-container input[type=password]{
@@ -101,10 +101,21 @@ form {
     border-radius: 5px;
     color: #313131;
     margin-top: 15px;
+    width: 13rem;
+}
+
+.form-container input[type=email]{
+    border-color: white;
+    border-width: 1px;
+    padding: 5px 40px;
+    border-radius: 5px;
+    color: #313131;
+    margin-top: 15px;
+    width: 13rem;
 }
 .form-container h1{
     font-size: 40px;
-    padding-top: 12rem;
+    padding-top: 10rem;
 }
 
 
@@ -114,6 +125,6 @@ form {
     background: none;
     color: white;
     margin-top: 15px;
-    margin-left: 10px;
-   
-    }
+    margin-right: 10px;
+    width: 9rem;
+}
