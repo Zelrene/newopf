@@ -252,6 +252,15 @@ def dashboard():
 										display_activity=display_activity,
 										display_remind=display_remind,
 										display_announce=display_announce)
+
+			return render_template('dashboard.html', 
+									graph1JSON=graph1JSON, 
+									name=curr_user_name, 
+									isAdmin=isAdmin,
+									ticket = ticket, 
+									display_activity=display_activity,
+									display_remind=display_remind,
+									display_announce=display_announce)
 		
 		elif display_announce:
 			recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
