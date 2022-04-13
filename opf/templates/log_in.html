@@ -4,36 +4,34 @@
     <title>Log In</title>
 </head>
 
-{% block content %}
+<body>
 <div class="container">
     <div class="form-container">
        
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="notification-danger">
-                {{ messages[0] }}
-            </div>
-        {% endif %}
-    {% endwith%}
-    <form action="/log_in.html" method="POST">
-        <h1>Welcome To 
-            <br>Optimum Property Fix</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith%}
+        <form action="/log_in.html" method="POST">
+            <h1>Welcome To 
+                <br>Optimum Property Fix</h1>
 
-    <p>Please sign in to continue.</p>
+            <p>Please sign in to continue.</p>
             <input type="text"
-            name="Net_Id"
-            placeholder="Net Id"
-            value="{{ request.form['Net_Id'] }}">
-            </input>
+                name="Net_Id"
+                placeholder="Net Id"
+                value="{{ request.form['Net_Id'] }}"></input>
             <br>
             <input type="password"
-            name="Password"
-            placeholder="Password"
-            value="{{ request.form['Password'] }}">
-            </input>
+                name="Password"
+                placeholder="Password"
+                value="{{ request.form['Password'] }}"></input>
             <br> 
-            <!--button class="btn" type="submit" name="log-in" value="go-to-user-page">Log In</button-->
             <input class="btn" type="submit" name="submit_btn" value="Log In">
+        </form>
     </div>
 
     <div class="overlay-container">
@@ -50,5 +48,5 @@
         </div>
     </div>
 </div>
-    </form>
-{% endblock %}
+    
+</body>

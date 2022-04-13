@@ -137,3 +137,7 @@ form {
     margin-right: 10px;
     width: 9rem;
 }
+
+.form-container option{
+    color: #313131;
+}
