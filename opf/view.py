@@ -184,6 +184,7 @@ def dashboard():
 	# get the most recently submitted ticket date
 	recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
 	
+<<<<<<< HEAD
 	# get the most recently submiited announcements datetime
 	recent_announce_submit_dateTime = announcements_controller.get_recent_announcement_submission_dateTime()
 
@@ -218,8 +219,35 @@ def dashboard():
 
 			return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin, recent_announcement = recent_announcement, display = True)
 	
+=======
+	# check if ticket (via date) exists
+	if not recent_submission_date:
+		return render_template('dashboard.html', name=curr_user_name, isAdmin=isAdmin, display=False)
+		
+	ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+>>>>>>> main
 	
-	return render_template('dashboard.html', name=curr_user_name, isAdmin=isAdmin, display=False)
+	status_list = ['Submitted',
+				'In Progress',
+				'Denied',
+				'Completed']
+	total_tickets = ticket_controller.get_number_of_tickets_with_matching_statuslist(statuslist=status_list)
+
+	df_1 = pd.DataFrame({
+		"Statuses": status_list,
+		"Ticket Count": total_tickets
+	})
+	fig1 = px.bar(df_1, x="Statuses", y="Ticket Count", 
+						title="Tickets Per Status")
+
+	graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+
+	return render_template('dashboard.html', 
+							ticket = ticket, 
+							graph1JSON=graph1JSON, 
+							name=curr_user_name, 
+							isAdmin=isAdmin, 
+							display=True)
 
 @main_bp.route('/faq.html',  methods = ['GET', 'POST'])
 @login_required
