@@ -186,30 +186,40 @@ def dashboard():
 	
 	# get the most recently submiited announcements datetime
 	recent_announce_submit_dateTime = announcements_controller.get_recent_announcement_submission_dateTime()
+	print( recent_submission_date)
+	print ("\n" + str(recent_announce_submit_dateTime) )
 
-	if recent_submission_date and recent_announce_submit_dateTime:
-		ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
-		recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
-			submission_dateTime = recent_announce_submit_dateTime)
-	
-		if request.method == 'GET':
-			curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-			isAdmin = user_controller.is_user_admin(current_user.net_id)
+	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+	isAdmin = user_controller.is_user_admin(current_user.net_id)
 			
 
+	if request.method == 'GET':
+
+		if recent_submission_date and recent_announce_submit_dateTime:
+			ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+			recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
+				submission_dateTime = recent_announce_submit_dateTime)
+
+
+
 			return render_template('dashboard.html', ticket = ticket, recent_announcement = recent_announcement, name=curr_user_name, isAdmin=isAdmin, display=True)
+
 	
-		
-		if request.method == 'POST':
-			announce_title = request.form['Announce_Title']
-			announce_descrip = request.form['Announce_Descrip']
+	if request.method == 'POST':
+		announce_title = request.form['Announce_Title']
+		announce_descrip = request.form['Announce_Descrip']
 
-			announcements_controller.create_announcement(
-				announce_title = announce_title,
-				announce_descrip = announce_descrip
-			)
+		announcements_controller.create_announcement(
+			announce_title = announce_title,
+			announce_descrip = announce_descrip
+		)
 
-		return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin, recent_announcement = recent_announcement, display = True)
+		if recent_submission_date and recent_announce_submit_dateTime:
+			ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+			recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(submission_dateTime = recent_announce_submit_dateTime)
+
+			return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin, recent_announcement = recent_announcement, display = True)
+	
 	
 	return render_template('dashboard.html', name=curr_user_name, isAdmin=isAdmin, display=False)
 
