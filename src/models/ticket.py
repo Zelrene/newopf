@@ -14,7 +14,7 @@ class Ticket(db.Model):
     unit = db.Column(db.String(25), nullable = False)
     location = db.Column(db.String(50), nullable = False)
     additionalNotes = db.Column(db.Text, nullable = True)
-    submission_date = db.Column(db.Date, nullable = False)
+    submission_date = db.Column(db.DateTime, nullable = False)
     appointment_date = db.Column(db.Date, nullable = True)
     appointment_time = db.Column(db.Time, nullable = True)
     admin_message = db.Column(db.Text, nullable = False)

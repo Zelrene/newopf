@@ -186,8 +186,6 @@ def dashboard():
 	
 	# get the most recently submiited announcements datetime
 	recent_announce_submit_dateTime = announcements_controller.get_recent_announcement_submission_dateTime()
-	print( recent_submission_date)
-	print ("\n" + str(recent_announce_submit_dateTime) )
 
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 	isAdmin = user_controller.is_user_admin(current_user.net_id)

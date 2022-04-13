@@ -15,7 +15,7 @@ class TicketController():
         
         status = "Submitted"
         admin_message = "NA"
-        submission_date = date.today()
+        submission_date = datetime.now()
         appointment_date = None
         appointment_time = None
 
@@ -175,7 +175,7 @@ class TicketController():
         for ticket in tickets:
             submission_dates_list.append(ticket.submission_date)
         
-        today = date.today()
+        today = datetime.now()
         if (len(submission_dates_list) > 0):
 
             recent_submission_date = max(submission_dates_list)
