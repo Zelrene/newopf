@@ -24,6 +24,13 @@ h1{
     background-color: #1d1d1d90;
 }
 
+.card:hover{
+   
+    background-color: #1d1d1d90;
+    box-shadow: 4px 2px 7px #00000060;
+}
+
+
 .col-sm-6{
     width: 37%;
 }
