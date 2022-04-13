@@ -14,7 +14,7 @@
         <label>Recent Activity</label>
         <div class="card" style="width: 500px;">
           <div class="card-body">
-            {% if display %}
+            {% if display_activity %}
               <h5 class="card-title">{{ ticket.title}}</h5>
               <h6 class="card-subtitle mb-2">Submitted on {{ticket.submission_date}}</h6>
               <div class="right">
@@ -37,7 +37,7 @@
         <div class="card" style="width:400px; height: 209px;">
           <div class="card-body">
             <h5 class="card-title">Reminder!</h5>
-            {% if display %}
+            {% if display_remind %}
               <p class="card-text">Your upcoming appointment for {{ticket.title}} is coming up on...</p>
               <p class="card-text">Date & Time</p>
               {% if isAdmin %}
@@ -56,31 +56,38 @@
         </div>
       </div>  
     </div>
-    {% if display %}
-    <h1>Title: {{ recent_announcement.announce_title }}</h1>
-    <h1>Description: {{ recent_announcement.announce_descrip }} </h1>
-    {% else %}
-    <p class="card-text">No announcement</p>
-    {% endif %}
- 
-    <form action = "/dashboard.html" method = "POST">
-    <input type = "text" 
-    name = "Announce_Title" 
-    value="{{ request.form['Announce_Title'] }}">
-    </input>
-    <input type = "text" 
-    name = "Announce_Descrip" 
-    value="{{ request.form['Announce_Descrip'] }}">
-    </input>
-    <input class="btn" type="submit" name="submit_btn" value="Submit">
-  </form>
-  
-     
 
-    
-      <div class="card">
+      <div class="card" style="max-width: fit-content;">
           <div class="card-body">
               <div id="chart1"></div>
+          </div>
+      </div>
+
+      <div class="card" style="width:400px; height: 209px;">
+          <div class="card-body">
+              <h5 class="card-title">Announcement!</h5>
+              {% if display_announce %}
+                <p class="card-text">Title: {{ recent_announcement.announce_title }}</p>
+                <p class="card-text">Description: {{ recent_announcement.announce_descrip }}</p>
+              {% else %}
+                <p class="card-text">No announcements</p>
+              {% endif %}
+
+              {% if isAdmin %}
+                <form action = "/dashboard.html" method = "POST">
+                  <input type = "text" 
+                    name = "Announce_Title" 
+                    placeholder="Title"
+                    value="{{ request.form['Announce_Title'] }}">
+                  </input>
+                  <input type = "text" 
+                    name = "Announce_Descrip" 
+                    placeholder="Description"
+                    value="{{ request.form['Announce_Descrip'] }}">
+                  </input>
+                  <input class="btn" type="submit" name="submit_btn" value="Submit">
+                </form>
+              {% endif %}
           </div>
       </div>
 

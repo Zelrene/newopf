@@ -187,9 +187,6 @@ def dashboard():
 	# get the most recently submiited announcements datetime
 	recent_announce_submit_dateTime = announcements_controller.get_recent_announcement_submission_dateTime()
 
-	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-	isAdmin = user_controller.is_user_admin(current_user.net_id)
-
 	status_list = ['Submitted',
 				'In Progress',
 				'Denied',
@@ -206,38 +203,70 @@ def dashboard():
 
 	graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
 			
+	# Variable Declaration for Defaults
+	display_activity, display_announce, display_remind = False, False, False
+
+	if recent_announce_submit_dateTime:
+		display_announce = True
+
+	if recent_submission_date:
+		display_activity, display_remind = True, True
 
 	if request.method == 'GET':
 
-		if recent_submission_date and recent_announce_submit_dateTime:
+		if display_activity:
 			ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+			
+			if display_announce:
+				recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
+					submission_dateTime = recent_announce_submit_dateTime)
+
+				return render_template('dashboard.html', 
+										graph1JSON=graph1JSON, 
+										name=curr_user_name, 
+										isAdmin=isAdmin,
+										ticket = ticket, 
+										recent_announcement = recent_announcement,
+										display_activity=display_activity,
+										display_remind=display_remind,
+										display_announce=display_announce)
+		
+		elif display_announce:
 			recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
-				submission_dateTime = recent_announce_submit_dateTime)
+					submission_dateTime = recent_announce_submit_dateTime)
 
 			return render_template('dashboard.html', 
-									ticket = ticket, 
 									graph1JSON=graph1JSON, 
 									name=curr_user_name, 
 									isAdmin=isAdmin,
 									recent_announcement = recent_announcement,
-									display=True)
-
+									display_activity=display_activity,
+									display_remind=display_remind,
+									display_announce=display_announce)
+		
+		return render_template('dashboard.html', 
+								graph1JSON=graph1JSON, 
+								name=curr_user_name, 
+								isAdmin=isAdmin,
+								display_activity=display_activity,
+								display_remind=display_remind,
+								display_announce=display_announce)
 
 	
 	if request.method == 'POST':
-		announce_title = request.form['Announce_Title']
-		announce_descrip = request.form['Announce_Descrip']
+		
+		if request.form.get('Announce_Title') and request.form.get('Announce_Descrip'):
+		
+			announce_title = request.form['Announce_Title']
+			announce_descrip = request.form['Announce_Descrip']
 
-		announcements_controller.create_announcement(
-			announce_title = announce_title,
-			announce_descrip = announce_descrip
-		)
+			# Update announcement
+			announcements_controller.create_announcement(
+				announce_title = announce_title,
+				announce_descrip = announce_descrip
+			)
 
-		if recent_submission_date and recent_announce_submit_dateTime:
-			ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
-			recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(submission_dateTime = recent_announce_submit_dateTime)
-
-			return render_template('dashboard.html', ticket = ticket, name=curr_user_name, graph1JSON=graph1JSON, isAdmin=isAdmin, recent_announcement = recent_announcement, display = True)
+		return redirect(url_for('main_bp.dashboard'))
 	
 	
 
