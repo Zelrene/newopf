@@ -180,12 +180,15 @@ def dashboard():
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 
-	#get the most recently submitted ticket
+	# get the most recently submitted ticket
 	recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
-	ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
 	
-
-	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin)
+	# check if ticket (via date) exists
+	if recent_submission_date:
+		ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+		return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin, display=True)
+	
+	return render_template('dashboard.html', name=curr_user_name, isAdmin=isAdmin, display=False)
 
 @main_bp.route('/faq.html',  methods = ['GET', 'POST'])
 @login_required
