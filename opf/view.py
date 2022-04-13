@@ -181,31 +181,37 @@ def dashboard():
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 
-	#get the most recently submitted ticket
+	# get the most recently submitted ticket date
 	recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
-	ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
 	
-	announcements = announcements_controller.get_announcement()
+	# get the most recently submiited announcements datetime
 	recent_announce_submit_dateTime = announcements_controller.get_recent_announcement_submission_dateTime()
-	recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
-		submission_dateTime = recent_announce_submit_dateTime)
+
+	if recent_submission_date and recent_announce_submit_dateTime:
+		ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+		recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
+			submission_dateTime = recent_announce_submit_dateTime)
 	
-	if request.method == 'GET':
-		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-		isAdmin = user_controller.is_user_admin(current_user.net_id)
-		
-		return render_template('dashboard.html', ticket=ticket, name=curr_user_name, isAdmin = isAdmin, recent_announcement = recent_announcement)
-		
-	if request.method == 'POST':
-		announce_title = request.form['Announce_Title']
-		announce_descrip = request.form['Announce_Descrip']
+		if request.method == 'GET':
+			curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
+			isAdmin = user_controller.is_user_admin(current_user.net_id)
+			
 
-		announcements_controller.create_announcement(
-			announce_title = announce_title,
-           	announce_descrip = announce_descrip
-		)
+			return render_template('dashboard.html', ticket = ticket, recent_announcement = recent_announcement, name=curr_user_name, isAdmin=isAdmin, display=True)
+	
+		
+		if request.method == 'POST':
+			announce_title = request.form['Announce_Title']
+			announce_descrip = request.form['Announce_Descrip']
 
-	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin, recent_announcement = recent_announcement)
+			announcements_controller.create_announcement(
+				announce_title = announce_title,
+				announce_descrip = announce_descrip
+			)
+
+		return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin, recent_announcement = recent_announcement, display = True)
+	
+	return render_template('dashboard.html', name=curr_user_name, isAdmin=isAdmin, display=False)
 
 @main_bp.route('/faq.html',  methods = ['GET', 'POST'])
 @login_required
@@ -325,21 +331,24 @@ def analytics():
 				align = ['center', 'center']
 			)
 		)])
-		
+		'''
+		width = 600
+		height = 400
+
 		# Update Chart sizes
 		fig1.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40)
 		)
 		table1.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40)
 		)
 		fig2.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40),
 			legend=dict(
 				orientation="h",
@@ -348,11 +357,11 @@ def analytics():
 			)
 		)
 		table2.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40)
 		)
-
+		'''
 		# Make charts to individual JSON objects
 		graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
 		table1JSON = json.dumps(table1, cls=plotly.utils.PlotlyJSONEncoder)

@@ -1,5 +1,6 @@
 h1{
     color: white;
+    text-align: center;
 }
 
 
@@ -14,31 +15,40 @@ body{
 display: flex;
 justify-content: center;
 flex-direction: column;
+margin-left: 20px;
 
 }
 .hr-line{
   width: 60%;
   margin: auto;
+  color: white;
 }
 /* Style the buttons that are used to open and close the faq-page body */
 .faq-page {
     /* background-color: #eee; */
-    color: #444;
+    color: #ee6c4d;
     cursor: pointer;
-    padding: 30px 20px;
+    padding: 20px 20px;
     width: 60%;
-    border: none;
+    border-radius: 5px 5px 0px 0px;
     outline: none;
-    transition: 0.4s;
+    transition: 0.1s;
     margin: auto;
+    background-color: #1d1d1d90;
+    margin-top: 10px;
+    font-weight: bold;
+    
 
 }
 .faq-body{
-    margin: auto;
-    /* text-align: center; */
-   width: 50%; 
-   padding: auto;
-   
+    color: #1d1d1d;
+    cursor: pointer;
+    padding: 20px 20px;
+    width: 60%;
+    border-radius: 0px 0px 5px 5px;
+    outline: none;
+    margin: auto;   
+    
 }
 
 
@@ -46,6 +56,7 @@ flex-direction: column;
 .active,
 .faq-page:hover {
     background-color: #F9F9F9;
+    color: #ee6c4d;
 }
 
 /* Style the faq-page panel. Note: hidden by default */
@@ -58,9 +69,10 @@ flex-direction: column;
 
 .faq-page:after {
     content: '\02795';
+    
     /* Unicode character for "plus" sign (+) */
     font-size: 13px;
-    color: #777;
+    color: #1d1d1d;
     float: right;
     margin-left: 5px;
 }
@@ -68,4 +80,9 @@ flex-direction: column;
 .active:after {
     content: "\2796";
     /* Unicode character for "minus" sign (-) */
+}
+
+
+button{
+    background-color: #1d1d1d;
 }
