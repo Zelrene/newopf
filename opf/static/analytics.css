@@ -1,20 +1,6 @@
-.diagrams {
-    padding: 20px
-}
-
-.chart-container {
-    overflow: auto;
+.card {
     float: left;
-    width: 50%;
-    max-width: fit-content;
-}
-
-.table-container {
-    overflow: auto;
-    float: left;
-    width: 50%;
-    max-width: fit-content;
-    justify-content: center;
+    margin: 0.5em;
 }
 
 .btn-download {
@@ -22,9 +8,9 @@
     padding: 5px 10px;
     border-radius: 2px;
     border: none;
+    max-width: fit-content;
 }
 
 h1{
     color: white;
-
 }

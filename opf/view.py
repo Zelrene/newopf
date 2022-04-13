@@ -305,21 +305,24 @@ def analytics():
 				align = ['center', 'center']
 			)
 		)])
-		
+		'''
+		width = 600
+		height = 400
+
 		# Update Chart sizes
 		fig1.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40)
 		)
 		table1.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40)
 		)
 		fig2.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40),
 			legend=dict(
 				orientation="h",
@@ -328,11 +331,11 @@ def analytics():
 			)
 		)
 		table2.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40)
 		)
-
+		'''
 		# Make charts to individual JSON objects
 		graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
 		table1JSON = json.dumps(table1, cls=plotly.utils.PlotlyJSONEncoder)
