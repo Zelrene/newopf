@@ -110,7 +110,11 @@ button{
     margin-left: 30px;
 }
 
+#chart1{
+    width: 45rem;
+    height: 22rem;
+}
 
-
-
-
+#announcementcard{
+    margin-left: 20rem;
+}
