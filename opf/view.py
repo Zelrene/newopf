@@ -187,19 +187,41 @@ def dashboard():
 	# get the most recently submiited announcements datetime
 	recent_announce_submit_dateTime = announcements_controller.get_recent_announcement_submission_dateTime()
 
-	status_list = ['Submitted',
-				'In Progress',
-				'Denied',
-				'Completed']
+	fig1 = None
 
-	total_tickets = ticket_controller.get_number_of_tickets_with_matching_statuslist(statuslist=status_list)
+	if isAdmin:
+		dorms = ['Argenta Hall', 
+				'Canada Hall',
+				'Great Basin Hall',
+				'Juniper Hall',
+				'Living Learning Community',
+				'Manzanita Hall',
+				'Nye Hall',
+				'Peavine Hall',
+				'Sierra Hall']
+		total_tickets = ticket_controller.get_number_of_tickets_with_matching_buildings(dorms=dorms)
 
-	df_1 = pd.DataFrame({
-		"Statuses": status_list,
-		"Ticket Count": total_tickets
-	})
-	fig1 = px.bar(df_1, x="Statuses", y="Ticket Count", 
-						title="Tickets Per Status")
+		df_1 = pd.DataFrame({
+			"Dorms": dorms,
+			"Ticket Count": total_tickets
+		})
+
+		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", 
+						title="All Tickets per Residence Halls")
+	else:
+		status_list = ['Submitted',
+					'In Progress',
+					'Denied',
+					'Completed']
+
+		total_tickets = ticket_controller.get_number_of_tickets_with_matching_statuslist(statuslist=status_list)
+
+		df_1 = pd.DataFrame({
+			"Statuses": status_list,
+			"Ticket Count": total_tickets
+		})
+		fig1 = px.bar(df_1, x="Statuses", y="Ticket Count", 
+							title="Tickets Per Status")
 
 	graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
 			
