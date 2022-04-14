@@ -101,19 +101,30 @@ def view_single_ticket(ticket_id):
 	else:
 		ticket_id = curr_ticket_id
 
+	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	ticket = ticket_controller.get_single_ticket_with_matching_ticket_id(ticket_id)
 
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-		isAdmin = user_controller.is_user_admin(current_user.net_id)
 		
 		return render_template('view_single_ticket.html', ticket=ticket, name=curr_user_name, isAdmin = isAdmin)
 		
 	if request.method == 'POST':
-		status = request.form['Status']
-		appointment_date = request.form['Appointment_date']
-		appointment_time = request.form['Appointment_time']
-		admin_message = request.form['Admin_message']
+		
+		status, appointment_date, appointment_time, admin_message = None, None, None, None
+
+		if isAdmin:
+			status = request.form['Status']
+			appointment_date = request.form['Appointment_date']
+			appointment_time = request.form['Appointment_time']
+			admin_message = request.form['Admin_message']
+		
+		else:
+			status = ticket.status
+			appointment_date = ticket.appointment_date
+			appointment_time = ticket.appointment_time
+			admin_message = ticket.admin_message
+
 		experience_rate = request.form['Experience_Rate']
 		satisfied_level = request.form['Satisfied_Level']
 		additional_comments = request.form['Additional_Comments']
