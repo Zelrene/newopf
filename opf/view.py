@@ -343,8 +343,7 @@ def faq():
 				answer = faq_answer
 			)
 
-
-	return render_template('faq.html', all_faq = all_faq, name=curr_user_name, isAdmin=isAdmin)
+		return redirect(url_for('main_bp.faq'))
 
 	
 @main_bp.route('/log_out')
