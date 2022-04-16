@@ -92,7 +92,7 @@ button{
 }
 
 .card-body .date {
-    background: url(calendar-check.svg) no-repeat ;
+    background: url(assets/calendar-check.svg) no-repeat ;
     margin-bottom: 10px;
 
   }
@@ -102,7 +102,7 @@ button{
 }
 
 .card-body .time {
-    background: url(clock.svg) no-repeat ;
+    background: url(assets/clock.svg) no-repeat ;
  
   }
 

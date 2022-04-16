@@ -54,22 +54,22 @@ a {
   
 }
 .sidebar ul .nav-item1{
-  background: url(house-door-fill.svg) no-repeat 15%;
+  background: url(assets/house-door-fill.svg) no-repeat 15%;
 }
 .sidebar ul .nav-item2{
-  background: url(pencil-square.svg) no-repeat 15% ;
+  background: url(assets/pencil-square.svg) no-repeat 15% ;
 }
 .sidebar ul .nav-item3{
-  background: url(view-stacked.svg) no-repeat 15%;
+  background: url(assets/view-stacked.svg) no-repeat 15%;
 }
 .sidebar ul .nav-item4{
-  background: url(question-circle.svg) no-repeat 15% ;
+  background: url(assets/question-circle.svg) no-repeat 15% ;
 }
 .sidebar ul .nav-item5{
-  background: url(bar-chart-fill.svg) no-repeat 15% ;
+  background: url(assets/bar-chart-fill.svg) no-repeat 15% ;
 }
 .sidebar ul .nav-item6{
-  background: url(chat-left-text.svg) no-repeat 15% ;
+  background: url(assets/chat-left-text.svg) no-repeat 15% ;
 }
 
 .sidebar ul li:hover{
