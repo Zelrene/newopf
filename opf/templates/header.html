@@ -5,7 +5,11 @@
 
 <div class="dropdown">
     <div class="header-right">
-        <button class="username">Welcome, {{ name }}</button>
+        {% if isAdmin %}
+            <button class="username">Welcome, Admin {{ name }}</button>
+        {% else %}
+            <button class="username">Welcome, Student {{ name }}</button>
+        {% endif %}
         <div class="dropdown-content">
             <a href="{{url_for('main_bp.log_out')}}">Sign Out</a>
         </div>
