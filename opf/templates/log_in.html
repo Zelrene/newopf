@@ -15,7 +15,7 @@
                 </div>
             {% endif %}
         {% endwith%}
-        <form action="/log_in.html" method="POST">
+        <form class="main" action="/log_in.html" method="POST">
             <h1>Welcome To 
                 <br>Optimum Property Fix</h1>
 
@@ -23,30 +23,37 @@
             <input type="text"
                 name="Net_Id"
                 placeholder="Net Id"
-                value="{{ request.form['Net_Id'] }}"></input>
+                value="{{ request.form['Net_Id'] }}" 
+                oninvalid="this.setCustomValidity('Required!')" 
+                oninput="this.setCustomValidity('')"
+                required><!--/input-->
             <br>
             <input type="password"
                 name="Password"
                 placeholder="Password"
-                value="{{ request.form['Password'] }}"></input>
+                value="{{ request.form['Password'] }}" 
+                oninvalid="this.setCustomValidity('Required!')" 
+                oninput="this.setCustomValidity('')"
+                required><!--/input-->
             <br> 
             <input class="btn" type="submit" name="submit_btn" value="Log In">
-        
+        </form>
     </div>
 
     <div class="overlay-container">
         <div class="overlay">
-            <div class="overlay-panel overlay-left">
-                <img class="logo-image" src="/static/assets/OPF (1).png">
-                <h1>New Here?</h1>
-                <p>Sign up now to report your first maintenance <br>issue and receive Optimum Service!</p>
-                <!--button class="btn" type="submit">Sign Up</button-->
-                <input class="btn" type="submit" name="submit_btn" value="Sign Up">
-                <br>
-                <p class="footer">Optimum Maintenance Service <br>for your University's Housing</p>
-            </div>
+            <form action="/log_in.html" method="POST">
+                <div class="overlay-panel overlay-left">
+                    <img class="logo-image" src="/static/assets/OPF (1).png">
+                    <h1>New Here?</h1>
+                    <p>Sign up now to report your first maintenance <br>issue and receive Optimum Service!</p>
+                    <input class="btn" type="submit" name="submit_btn" value="Sign Up">
+                    <br>
+                    <p class="footer">Optimum Maintenance Service <br>for your University's Housing</p>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-</form>
+
 </body>
