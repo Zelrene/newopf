@@ -7,91 +7,116 @@
 <body>
 <div class="container">
     <div class="form-container">
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="notification-danger">
-                {% for message in messages %}
-                    {{ message }}
-                    {% if not loop.last %}
-                        <br>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith%}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification-danger">
+                    {% for message in messages %}
+                        {{ message }}
+                        {% if not loop.last %}
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith%}
 
-    <form action = "/sign_up.html" method = "POST">
-        <h1>Welcome! <br>Create An Account</h1>
-        <input type = "text"
-        name = "Net_Id"
-        placeholder = "Net ID"
-        value = "{{ request.form['Net_Id'] }}">
-        </input>
-        <select class="select" name ="User_Role"
-        value="{{ request.form['User_Role'] }}">
-        <option value="None" selected disabled hidden>Who Are You?</option>
-        <option>Student</option>
-        <option>Admin</option>
-        </select>
-        <br>
-        <input type = "text"
-        name = "First_Name"
-        placeholder = "First Name"
-        value = "{{ request.form['First_Name'] }}">
-        </input>
-        <input type = "text"
-        name = "Last_Name"
-        placeholder = "Last Name"
-        value = "{{ request.form['Last_Name'] }}">
-        </input>
-        <br>
-        <select class="select" name = "Gender"
-        value="{{ request.form['Gender'] }}">
-        <option value="None" selected disabled hidden>Gender</option>
-        <option>Male</option>
-        <option>Female</option>
-        <option>Do not wish to answer</option>
-        </select>
-        <select class ="select" name="Year"
-        value="{{ request.form['Year'] }}">
-        <option value="None" selected disabled hidden>Year</option>
-        <option>Freshman</option>
-        <option>Sophomore</option>
-        <option>Junior</option>
-        <option>Senior</option>
-        <option>Not Applicable</option>
-        </select>
-        <br>
-        <input type = "email"
-        name = "Contact_Email"
-        placeholder = "Email Address"
-        value = "{{ request.form['Contact_Email'] }}">
-        </input>
-        <br>
-        <input type = "password"
-        name = "Password"
-        placeholder = "Password"
-        value = "{{ request.form['Password'] }}">
-        </input>
-        <br>
-        <a href = log_in.html>
-        <!--<button type="submit" class="btn btn-default">Sign Up</button>-->
-        <input class="btn" type="submit" name="submit_btn" value="Sign Up">
-    </a>
+        <form class="main" action = "/sign_up.html" method = "POST">
+            <h1>Welcome! <br>Create An Account</h1>
+            <input type = "text"
+                    name = "Net_Id"
+                    placeholder = "Net ID"
+                    value = "{{ request.form['Net_Id'] }}" 
+                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninput="this.setCustomValidity('')"
+                    required>
+            <!--/input-->
+            <select class="select" name ="User_Role"
+                    value="{{ request.form['User_Role'] }}" 
+                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninput="this.setCustomValidity('')"
+                    required>
+                <option value="" selected disabled hidden>Who Are You?</option>
+                <option>Student</option>
+                <option>Admin</option>
+            </select>
+            <br>
+            <input type = "text"
+                    name = "First_Name"
+                    placeholder = "First Name"
+                    value = "{{ request.form['First_Name'] }}" 
+                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninput="this.setCustomValidity('')"
+                    required>
+            <!--/input-->
+            <input type = "text"
+                    name = "Last_Name"
+                    placeholder = "Last Name"
+                    value = "{{ request.form['Last_Name'] }}" 
+                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninput="this.setCustomValidity('')"
+                    required>
+            <!--/input-->
+            <br>
+            <select class="select" name = "Gender"
+                    value="{{ request.form['Gender'] }}" 
+                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninput="this.setCustomValidity('')"
+                    required>
+                <option value="" selected disabled hidden>Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Do not wish to answer</option>
+            </select>
+            <select class ="select" name="Year"
+                    value="{{ request.form['Year'] }}"  
+                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninput="this.setCustomValidity('')"
+                    required>
+                <option value="" selected disabled hidden>Year</option>
+                <option>Freshman</option>
+                <option>Sophomore</option>
+                <option>Junior</option>
+                <option>Senior</option>
+                <option>Not Applicable</option>
+            </select>
+            <br>
+            <input type = "email"
+                    name = "Contact_Email"
+                    placeholder = "Email Address"
+                    value = "{{ request.form['Contact_Email'] }}" 
+                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninput="this.setCustomValidity('')"
+                    required>
+            <!--/input-->
+            <br>
+            <input type = "password"
+                    name = "Password"
+                    placeholder = "Password"
+                    value = "{{ request.form['Password'] }}" 
+                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninput="this.setCustomValidity('')"
+                    required>
+            <!--/input-->
+            <br>
+            <a href = log_in.html>
+                <input class="btn" type="submit" name="submit_btn" value="Sign Up">
+            </a>
+        </form>
     </div>
     <div class="overlay-container">
         <div class="overlay">
-            <div class="overlay-panel overlay-left">
-                <img class="logo-image" src="/static/assets/OPF (1).png">
-        <br>
-        <h1>Already Here?</h1>
-        <p>Log in to your existing account to access dashboard</p>
-        <input class="btn" type="submit" name="submit_btn" value="Log In">
-        <p class="footer">Optimum Maintenance Service <br>for your University's Housing</p>
-        </div>
-            </div>
+            <form action = "/sign_up.html" method = "POST">
+                <div class="overlay-panel overlay-left">
+                    <img class="logo-image" src="/static/assets/OPF (1).png">
+                    <br>
+                    <h1>Already Here?</h1>
+                    <p>Log in to your existing account to access dashboard</p>
+                    <input class="btn" type="submit" name="submit_btn" value="Log In">
+                    <p class="footer">Optimum Maintenance Service <br>for your University's Housing</p>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-    </form>
+    
 </body>

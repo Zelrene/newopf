@@ -51,7 +51,7 @@
  padding-top: calc(100% - 40px);
 }
 
-form {
+form.main {
 	display: block;
     text-align: center;
     padding-left: 400px;
