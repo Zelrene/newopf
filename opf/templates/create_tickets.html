@@ -24,22 +24,30 @@
                     <p>Title
                     <span>ex. "Faucet Leak"</span>
                     <br> <input type = "text" 
-                        name = "Title" 
-                        value="{{ request.form['Title'] }}">
-                    </input></p>
+                                name = "Title" 
+                                value="{{ request.form['Title'] }}"
+                                oninvalid="this.setCustomValidity('Required!')" 
+                                oninput="this.setCustomValidity('')"
+                                required>
+                    <!--/input--></p>
                     
                     <p>Please describe the problem <br>
-                        <textarea
-                        name = "Description"
-                        value="{{ request.form['Description'] }}">
-                        </textarea>
+                        <textarea name = "Description"
+                                value="{{ request.form['Description'] }}"
+                                oninvalid="this.setCustomValidity('Required!')" 
+                                oninput="this.setCustomValidity('')"
+                                required></textarea>
                     </p>
 
                     <p>Severity of the problem <br></p> 
                     <div class="dropdown">
-                        <select class="select" name = "Severity_level"
-                        value="{{request.form['Severity_level']}}">
-                            <option value="none" selected disabled hidden>-- Select Severity --</option>
+                        <select class="select" 
+                                name = "Severity_level"
+                                value="{{request.form['Severity_level']}}"
+                                oninvalid="this.setCustomValidity('Required!')" 
+                                oninput="this.setCustomValidity('')"
+                                required>
+                            <option value="" selected disabled hidden>-- Select Severity --</option>
                             <option>LOW</option>
                             <option>MILD</option>
                             <option>HIGH</option>
@@ -50,8 +58,11 @@
                     <p>Location of problem <br></p> 
                     <div class="dropdown">
                         <select class="select" name = "Location"
-                        value="{{ request.form['Location'] }}">
-                            <option value="none" selected disabled hidden>-- Select Location --</option>
+                                value="{{ request.form['Location'] }}"
+                                oninvalid="this.setCustomValidity('Required!')" 
+                                oninput="this.setCustomValidity('')"
+                                required>
+                            <option value="" selected disabled hidden>-- Select Location --</option>
                             <option>Bathroom</option>
                             <option>Bedroom</option>
                             <option>Kitchen</option>
@@ -63,8 +74,11 @@
                 <p>Your Building <br> 
                 <div class="dropdown">
                     <select class="select" name="Building"
-                    value="{{ request.form['Building'] }}">
-                        <option value="none" selected disabled hidden>-- Select Building --</option>
+                            value="{{ request.form['Building'] }}"
+                            oninvalid="this.setCustomValidity('Required!')" 
+                            oninput="this.setCustomValidity('')"
+                            required>
+                        <option value="" selected disabled hidden>-- Select Building --</option>
                         <option>Argenta Hall</option>
                         <option>Canada Hall</option>
                         <option>Great Basin Hall</option>
@@ -79,15 +93,17 @@
                 <br>
                 <p>Your Unit # 
                     <input type ="text" 
-                    name = "Unit#"  
-                    value="{{ request.form['Unit#'] }}">
-                </input></p>
+                            name = "Unit#"  
+                            value="{{ request.form['Unit#'] }}"
+                            oninvalid="this.setCustomValidity('Required!')" 
+                            oninput="this.setCustomValidity('')"
+                            required>
+                <!--/input--></p>
 
                 <p>Additional Notes <br>
                     <textarea 
                     name = "AdditionalNotes"  
-                    value="{{ request.form['AdditionalNotes'] }}">
-                </textarea></p>
+                    value="{{ request.form['AdditionalNotes'] }}"></textarea></p>
 
                 <input class="btn" type="submit" name="submit_btn" value="Submit Ticket">
             </div>

@@ -54,6 +54,7 @@ input[type=text]{
     display: block;
     height: 20px;
     width: 200px;
+    padding: 5px 20px;
 } 
 
 textarea{
@@ -63,6 +64,7 @@ textarea{
     height: 150px;
     width: 300px;
     font-family: effra, sans-serif;
+    padding: 12px 20px;
 } 
 
 
