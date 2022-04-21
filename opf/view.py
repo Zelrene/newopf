@@ -96,11 +96,19 @@ def view_single_ticket(ticket_id):
 
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	ticket = ticket_controller.get_single_ticket_with_matching_ticket_id(ticket_id)
+	isUser = False
+
+	if ticket.creator_id == current_user.id:
+		isUser = True
 
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 		
-		return render_template('view_single_ticket.html', ticket=ticket, name=curr_user_name, isAdmin = isAdmin)
+		return render_template('view_single_ticket.html', 
+								ticket=ticket, 
+								name=curr_user_name, 
+								isAdmin = isAdmin,
+								isUser = isUser)
 		
 	if request.method == 'POST':
 		

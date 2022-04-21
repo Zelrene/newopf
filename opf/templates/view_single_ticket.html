@@ -29,57 +29,69 @@
           <p>Severity: {{ticket.severity_level}}</p>
           <p>Location: {{ticket.location}}</p>
           <p>Building: {{ticket.building}}</p>
-        <p>Unit#: {{ticket.unit}}</p>
-        <p>Description: <br> {{ticket.description}}</p>
-        <p>Additional Notes: <br> {{ticket.additionalNotes}}</p>
-         <p class="msg">Message from Facility</p>
-         <div class="message">
-          <p>{{ ticket.admin_message }}</p>
+          <p>Unit#: {{ticket.unit}}</p>
+          <p>Description: <br> {{ticket.description}}</p>
+          <p>Additional Notes: <br> {{ticket.additionalNotes}}</p>
+          <p class="msg">Message from Facility</p>
+          <div class="message">
+            <p>{{ ticket.admin_message }}</p>
+          </div>
         </div>
-      </div>
 
-      <div class = "actions">
-        <div class="deletetix">
-        <input class="btn" type="submit" name="submit_btn" value="Delete Ticket">
-      </div>
-        <input class="btn" type="submit" name="submit_btn" value="Resubmit Ticket">
-      </div>
+        <!-- Only display Buttons if the user is the ticket owner -->
+        {% if isUser %}
+          <div class = "actions">
+            <div class="deletetix">
+              <input class="btn" type="submit" name="submit_btn" value="Delete Ticket">
+            </div>
+            <input class="btn" type="submit" name="submit_btn" value="Resubmit Ticket">
+            <div class="feedbacktix">
+              <input class="btn" type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#myModal"
+                    value="Submit Feedback"> 
+            </div>
+          </div>
 
-      <div class="container mt-5">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Submit Feedback</button>
-        <div class="modal" id="myModal">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Submit Feedback</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                 
-                    <div class="mb-3">
-                        <label class="form-label required">Rate Your Experience</label>
-                        <input type="text"  name = "Experience_Rate"
-                        value="{{ request.form['Experience_Rate'] }}"class="form-control">
+          <div class="container mt-5">
+            <!--button type="button" class="btn btn-primary" 
+                    data-bs-toggle="modal" data-bs-target="#myModal">
+                    Submit Feedback
+            </button-->
+            <div class="modal" id="myModal">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Submit Feedback</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label required">Were you satisfied with our service?</label>
-                        <input type="text"  name = "Satisfied_Level"
-                        value="{{ request.form['Satisfied_Level'] }}"class="form-control">
+                    <div class="modal-body">
+                    
+                        <div class="mb-3">
+                            <label class="form-label required">Rate Your Experience</label>
+                            <input type="text"  name = "Experience_Rate"
+                            value="{{ request.form['Experience_Rate'] }}"class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label required">Were you satisfied with our service?</label>
+                            <input type="text"  name = "Satisfied_Level"
+                            value="{{ request.form['Satisfied_Level'] }}"class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label required">Additional comments or concerns</label>
+                            <textarea class="form-control"  name = "Additional_Comments"
+                            value="{{ request.form['Additional_Comments'] }}"></textarea>
+                        </div>
+      
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label required">Additional comments or concerns</label>
-                        <textarea class="form-control"  name = "Additional_Comments"
-                        value="{{ request.form['Additional_Comments'] }}"></textarea>
+                    <div class="modal-footer">
+                      <input class="btn" type="submit" name="submit_btn" value="Submit">
                     </div>
-  
-                </div>
-                <div class="modal-footer">
-                  <input class="btn" type="submit" name="submit_btn" value="Submit">
-                </div>
+                  </div>
               </div>
             </div>
           </div>
-        </div>
+        {% endif %}
       </div>
      
       {% if isAdmin %}
@@ -118,4 +130,10 @@
       return $(this).text() == text;
     }).prop('selected', true);
   </script>
+  <!--script>
+    function manage(submit_btn)
+    {
+      var btn = dcoument.getElementById
+    }
+  </script-->
 {% endblock %}

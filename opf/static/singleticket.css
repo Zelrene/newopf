@@ -121,6 +121,10 @@ h1{
     background-color: #D12727;
     margin-right: 6px;
 }
+.actions .feedbacktix .btn{
+    background-color: #004B7F;
+    margin-left: 6px;
+}
 .btn {
     background-color: #ee6c4d;
     font-weight: 700;
