@@ -8,7 +8,7 @@
 
 body {
   background-color: #293241;
-  font-family: effra, sans-serif;
+  font-family: 'Avenir', sans-serif;
 }
 
 a {
@@ -160,7 +160,7 @@ hr{
   border-radius: 5px;
   border: none;
   font-size: 16px;
-  font-family: effra, sans-serif;
+  font-family: 'Avenir', sans-serif;
   font-weight: bold;
 }
 
@@ -172,7 +172,7 @@ hr{
     border-radius: 5px;
     border: none;
     font-size: 16px;
-    font-family: effra, sans-serif;
+    font-family: 'Avenir', sans-serif;
 }
 
 .main_content {

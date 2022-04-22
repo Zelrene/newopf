@@ -15,7 +15,7 @@ form{
 
 h1{
     font-size: 26px;
-    font-family: effra, sans-serif;
+    font-family: 'Avenir', sans-serif;
     color: #ffffff;
 }
 
@@ -25,7 +25,7 @@ h1{
 }
 
 p{
-    font-family: effra, sans-serif;
+    font-family: 'Avenir', sans-serif;
     font-weight: bold;
     color: #ffffff;
     font-size: 14px;
@@ -63,7 +63,7 @@ textarea{
     margin: 10px 0;
     height: 150px;
     width: 300px;
-    font-family: effra, sans-serif;
+    font-family: 'Avenir', sans-serif;
     padding: 12px 20px;
 } 
 
@@ -71,7 +71,7 @@ textarea{
 .dropdown .select{
     background-color: white;
     padding: 2px 20px;
-    font-family: effra, sans-serif;
+    font-family: 'Avenir', sans-serif;
     border-radius: 5px;
     border-color: #d2d3d4;
 }
