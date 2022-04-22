@@ -9,6 +9,10 @@ body{
     padding: 10px;
 }
 
+th.sortable{
+    cursor: pointer;
+}
+
 .table-striped tbody tr:hover{
     background-color: rgb(211, 229, 250);
 }
