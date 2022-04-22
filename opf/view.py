@@ -240,7 +240,10 @@ def dashboard():
 					'Denied',
 					'Completed']
 
-		total_tickets = ticket_controller.get_number_of_tickets_with_matching_statuslist(statuslist=status_list)
+		#total_tickets = ticket_controller.get_number_of_tickets_with_matching_statuslist(statuslist=status_list)
+		total_tickets = ticket_controller.get_number_of_tickets_with_matching_statuslist_for_single_user(
+			statuslist=status_list, 
+			user_id=current_user.id)
 
 		df_1 = pd.DataFrame({
 			"Statuses": status_list,
