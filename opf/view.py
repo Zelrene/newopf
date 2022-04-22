@@ -125,17 +125,10 @@ def view_single_ticket(ticket_id):
 		status, appointment_date, appointment_time, admin_message = None, None, None, None
 		experience_rate, satisfied_level, additional_comments = None, None, None
 
-		if isAdmin:
-			status = request.form['Status']
-			appointment_date = request.form['Appointment_date']
-			appointment_time = request.form['Appointment_time']
-			admin_message = request.form['Admin_message']
-		
-		else:
-			status = ticket.status
-			appointment_date = ticket.appointment_date
-			appointment_time = ticket.appointment_time
-			admin_message = ticket.admin_message
+		status = ticket.status
+		appointment_date = ticket.appointment_date
+		appointment_time = ticket.appointment_time
+		admin_message = ticket.admin_message
 
 		if  request.form['submit_btn'] == 'Delete Ticket':
 			ticket_controller.delete_ticket(ticket_id = ticket_id)
@@ -143,12 +136,10 @@ def view_single_ticket(ticket_id):
 		if  request.form['submit_btn'] == 'Resubmit Ticket':
 			ticket_controller.resubmit_ticket(ticket_id = ticket_id)
 
-		if request.form['submit_btn'] == 'Submit Feedback':
+		if  request.form['submit_btn'] == 'Submit':
 			experience_rate = request.form['Experience_Rate']
 			satisfied_level = request.form['Satisfied_Level']
 			additional_comments = request.form['Additional_Comments']
-
-		if  request.form['submit_btn'] == 'Submit':
 
 			if request.form.get('Additional_Comments'):
 				feedback_controller.update_feedback(
@@ -165,7 +156,11 @@ def view_single_ticket(ticket_id):
 				)
 		
 		if  request.form['submit_btn'] == 'Save Changes':
-				
+			status = request.form['Status']
+			appointment_date = request.form['Appointment_date']
+			appointment_time = request.form['Appointment_time']
+			admin_message = request.form['Admin_message']
+
 			if ticket.status != status:
 				ticket_controller.update_ticket_status(
 					ticket_id = ticket_id, 
