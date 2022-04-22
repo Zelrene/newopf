@@ -8,6 +8,7 @@ from src.models.ticket import Ticket
 from src.models.user import User
 from src.models.faq import Faq
 from src.models.feedback import Feedback
+from src.models.announcements import Announcements
 
 class DB_Connector():
     def __init__(self):
@@ -246,22 +247,78 @@ class DB_Connector():
         db.session.delete(faq_to_del)
         db.session.commit()
 
+    '''announcements model functions'''
+
+    def insert_announcements(self, announce_title, announce_descrip, submission_dateTime):
+        
+        new_announcements = Announcements(
+            announce_title = announce_title,
+            announce_descrip = announce_descrip,
+            submission_dateTime = submission_dateTime
+            )
+        
+        db.session.add(new_announcements)
+        db.session.commit()
+
+    def select_announcements(self):
+        all_announcements = Announcements.query.all()
+        return all_announcements
+
+    def delete_announcement(self, announcement_id):
+        announcement_to_del = Announcements.query.filter_by(id = announcement_id).first()
+        db.session.delete(announcement_to_del)
+        db.session.commit()
+
+    def update_announce_title(self, announcement_id, new_title):
+        announcement = Announcements.query.filter_by(id = announcement_id).first()
+        announcement.announce_title = new_title
+        db.session.commit()
+
+    def update_announce_descrip(self, announcement_id, new_descrip):
+        announcement = Announcements.query.filter_by(id = announcement_id).first()
+        announcement.announce_descrip = new_descrip
+        db.session.commit()
+    
+    def update_announce_info(self, announcement_id, new_title, new_descrip):
+        announcement = Announcements.query.filter_by(id = announcement_id).first()
+        announcement.announce_title = new_title
+        announcement.announce_descrip = new_descrip
+        db.session.commit()
+
+
+    def select_announcement_with_matching_submission_dateTime(self, submission_dateTime):
+        announcement = Announcements.query.filter_by(submission_dateTime = submission_dateTime).first()
+        return announcement
 
     '''feedback model functions'''
-    def insert_feedback(self, ticket_id, experience_rate, satisfied_level, additional_comments):
+    def insert_feedback(self, ticket_id, experience_rate, satisfied_level, additional_comments, is_completed):
         new_feedback = Feedback(
             ticket_id = ticket_id,
             experience_rate = experience_rate,
             satisfied_level = satisfied_level,
-            additional_comments = additional_comments
+            additional_comments = additional_comments,
+            is_completed = is_completed
         )
 
         db.session.add(new_feedback)
         db.session.commit()
 
+    def update_feedback(self, ticket_id, experience_rate, satisfied_level, additional_comments, is_completed):
+        feedback = Feedback.query.filter_by(id = ticket_id).first()
+        feedback.experience_rate = experience_rate
+        feedback.satisfied_level = satisfied_level
+        feedback.additional_comments = additional_comments
+        feedback.is_completed = is_completed
+
+        db.session.commit()
+
     def select_all_feedback(self):
         all_feedback = Feedback.query.all()
         return all_feedback
+
+    def select_all_completed_feedback(self):
+        completed_feedback = Feedback.query.filter_by(is_completed = True).all()
+        return completed_feedback
 
     def select_single_feedback(self, feedback_id):
         feedback = Feedback.query.filter_by(id = feedback_id).first()

@@ -4,51 +4,57 @@
     <title>Log In</title>
 </head>
 
-{% block content %}
+<body>
 <div class="container">
     <div class="form-container">
        
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="notification-danger">
-                {{ messages[0] }}
-            </div>
-        {% endif %}
-    {% endwith%}
-    <form action="/log_in.html" method="POST">
-        <h1>Welcome To 
-            <br>Optimum Property Fix</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith%}
+        <form class="main" action="/log_in.html" method="POST">
+            <h1>Welcome To 
+                <br>Optimum Property Fix</h1>
 
-    <p>Please sign in to continue.</p>
+            <p>Please sign in to continue.</p>
             <input type="text"
-            name="Net_Id"
-            placeholder="Net Id"
-            value="{{ request.form['Net_Id'] }}">
-            </input>
+                name="Net_Id"
+                placeholder="Net Id"
+                value="{{ request.form['Net_Id'] }}" 
+                oninvalid="this.setCustomValidity('Required!')" 
+                oninput="this.setCustomValidity('')"
+                required><!--/input-->
             <br>
             <input type="password"
-            name="Password"
-            placeholder="Password"
-            value="{{ request.form['Password'] }}">
-            </input>
+                name="Password"
+                placeholder="Password"
+                value="{{ request.form['Password'] }}" 
+                oninvalid="this.setCustomValidity('Required!')" 
+                oninput="this.setCustomValidity('')"
+                required><!--/input-->
             <br> 
-            <!--button class="btn" type="submit" name="log-in" value="go-to-user-page">Log In</button-->
             <input class="btn" type="submit" name="submit_btn" value="Log In">
+        </form>
     </div>
 
     <div class="overlay-container">
         <div class="overlay">
-            <div class="overlay-panel overlay-left">
-                <img class="logo-image" src="/static/OPF (1).png">
-                <h1>New Here?</h1>
-                <p>Sign up now to report your first maintenance <br>issue and receive Optimum Service!</p>
-                <!--button class="btn" type="submit">Sign Up</button-->
-                <input class="btn" type="submit" name="submit_btn" value="Sign Up">
-                <br>
-                <p class="footer">Optimum Maintenance Service <br>for your University's Housing</p>
-            </div>
+            <form action="/log_in.html" method="POST">
+                <div class="overlay-panel overlay-left">
+                    <img class="logo-image" src="/static/assets/OPF (1).png">
+                    <h1>New Here?</h1>
+                    <p>Sign up now to report your first maintenance <br>issue and receive Optimum Service!</p>
+                    <input class="btn" type="submit" name="submit_btn" value="Sign Up">
+                    <br>
+                    
+                </div>
+            </form>
+            <footer class="footer">Optimum Maintenance Service <br>for your University's Housing</footer>
         </div>
     </div>
 </div>
-    </form>
-{% endblock %}
+
+</body>

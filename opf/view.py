@@ -19,12 +19,13 @@ main_bp = Blueprint(
 	static_folder="static", 
 	template_folder="templates")
 
-from src import TicketController, UserController, feedbackController, FaqController
+from src import AnnouncementsController, TicketController, UserController, feedbackController, FaqController
 
 ticket_controller = TicketController.TicketController()
 user_controller = UserController.UserController()
 feedback_controller = feedbackController.FeedbackController()
 faq_controller = FaqController.FaqController()
+announcements_controller = AnnouncementsController.AnnouncementsController()
 
 @main_bp.route('/')
 def index():
@@ -41,32 +42,25 @@ def create_tickets():
 	if request.method == 'POST':
 		title = request.form['Title']
 		description = request.form['Description']
+		severity_level = request.form['Severity_level']
+		location = request.form['Location']
+		building = request.form['Building']
 		unit = request.form['Unit#']
-		additonalNotes = request.form['AdditionalNotes']
+		additionalNotes = request.form['AdditionalNotes']
 		creator_id = current_user.id
-		
-		#if not title or not description or not location or not building or not unit:
-		if not title or not description or not request.form.get('Location') or not request.form.get('Building') or not request.form.get('Severity_level') or not unit:
-			flash('Not all required fields are filled. Please fill all required fields before submitting your ticket.')
-			return redirect(url_for('main_bp.create_tickets'))
 
-		else:
-			location = request.form['Location']
-			building = request.form['Building']
-			severity_level = request.form['Severity_level']
+		ticket_controller.create_ticket(
+			title = title,
+			description = description, 
+			location = location,
+			building = building,
+			severity_level = severity_level,
+			unit = unit,
+			additionalNotes = additionalNotes,
+			creator_id = creator_id,
+		)
 
-			ticket_controller.create_ticket(
-				title = title,
-				description = description, 
-				location = location,
-				building = building,
-				severity_level = severity_level,
-				unit = unit,
-				additionalNotes = additonalNotes,
-				creator_id = creator_id,
-				)
-
-			return redirect(url_for('main_bp.view_tickets'))
+		return redirect(url_for('main_bp.view_tickets'))
 
 @main_bp.route('/view_tickets.html', methods = ['GET', 'POST'])
 @login_required
@@ -100,22 +94,45 @@ def view_single_ticket(ticket_id):
 	else:
 		ticket_id = curr_ticket_id
 
+	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	ticket = ticket_controller.get_single_ticket_with_matching_ticket_id(ticket_id)
+	feedback = feedback_controller.get_single_feedback(ticket_id)
+	isUser = False
+
+	if ticket.creator_id == current_user.id:
+		isUser = True
+
+	if feedback == None:
+		feedback_controller.create_feedback(ticket_id = ticket_id)
+		feedback = feedback_controller.get_single_feedback(ticket_id)
+
 
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
-		isAdmin = user_controller.is_user_admin(current_user.net_id)
 		
-		return render_template('view_single_ticket.html', ticket=ticket, name=curr_user_name, isAdmin = isAdmin)
+		return render_template('view_single_ticket.html', 
+								ticket=ticket, 
+								name=curr_user_name, 
+								isAdmin = isAdmin,
+								isUser = isUser,
+								hasFeedback = feedback.is_completed)
 		
 	if request.method == 'POST':
-		status = request.form['Status']
-		appointment_date = request.form['Appointment_date']
-		appointment_time = request.form['Appointment_time']
-		admin_message = request.form['Admin_message']
-		experience_rate = request.form['Experience_Rate']
-		satisfied_level = request.form['Satisfied_Level']
-		additional_comments = request.form['Additional_Comments']
+		
+		status, appointment_date, appointment_time, admin_message = None, None, None, None
+		experience_rate, satisfied_level, additional_comments = None, None, None
+
+		if isAdmin:
+			status = request.form['Status']
+			appointment_date = request.form['Appointment_date']
+			appointment_time = request.form['Appointment_time']
+			admin_message = request.form['Admin_message']
+		
+		else:
+			status = ticket.status
+			appointment_date = ticket.appointment_date
+			appointment_time = ticket.appointment_time
+			admin_message = ticket.admin_message
 
 		if  request.form['submit_btn'] == 'Delete Ticket':
 			ticket_controller.delete_ticket(ticket_id = ticket_id)
@@ -123,16 +140,26 @@ def view_single_ticket(ticket_id):
 		if  request.form['submit_btn'] == 'Resubmit Ticket':
 			ticket_controller.resubmit_ticket(ticket_id = ticket_id)
 
-
+		if request.form['submit_btn'] == 'Submit Feedback':
+			experience_rate = request.form['Experience_Rate']
+			satisfied_level = request.form['Satisfied_Level']
+			additional_comments = request.form['Additional_Comments']
 
 		if  request.form['submit_btn'] == 'Submit':
 
-			feedback_controller.create_feedback(
+			if request.form.get('Additional_Comments'):
+				feedback_controller.update_feedback(
 					ticket_id = ticket_id,
 					experience_rate = experience_rate,
 					satisfied_level = satisfied_level,
 					additional_comments = additional_comments
-					)
+				)
+			else:
+				feedback_controller.update_feedback(
+					ticket_id = ticket_id,
+					experience_rate = experience_rate,
+					satisfied_level = satisfied_level
+				)
 		
 		if  request.form['submit_btn'] == 'Save Changes':
 				
@@ -164,7 +191,7 @@ def view_single_ticket(ticket_id):
 @login_required
 def feedback():
 	#feedback = feedback_controller.get_single_feedback(feedback_id)
-	all_feedback = feedback_controller.get_all_feedback()
+	all_feedback = feedback_controller.get_all_completed_feedback()
 
 
 	if request.method == 'GET':
@@ -174,18 +201,135 @@ def feedback():
 		return render_template('feedback.html', name=curr_user_name, isAdmin = isAdmin, all_feedback=all_feedback)
 	
 
-@main_bp.route('/dashboard.html')
+@main_bp.route('/dashboard.html', methods = ['GET', 'POST'])
 @login_required
 def dashboard():
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 
-	#get the most recently submitted ticket
+	# get the most recently submitted ticket date
 	recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
-	ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
 	
+	# get the most recently submiited announcements datetime
+	recent_announce_submit_dateTime = announcements_controller.get_recent_announcement_submission_dateTime()
 
-	return render_template('dashboard.html', ticket = ticket, name=curr_user_name, isAdmin=isAdmin)
+	fig1 = None
+
+	if isAdmin:
+		dorms = ['Argenta Hall', 
+				'Canada Hall',
+				'Great Basin Hall',
+				'Juniper Hall',
+				'Living Learning Community',
+				'Manzanita Hall',
+				'Nye Hall',
+				'Peavine Hall',
+				'Sierra Hall']
+		total_tickets = ticket_controller.get_number_of_tickets_with_matching_buildings(dorms=dorms)
+
+		df_1 = pd.DataFrame({
+			"Dorms": dorms,
+			"Ticket Count": total_tickets
+		})
+
+		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", 
+						title="All Tickets per Residence Halls")
+	else:
+		status_list = ['Submitted',
+					'In Progress',
+					'Denied',
+					'Completed']
+
+		total_tickets = ticket_controller.get_number_of_tickets_with_matching_statuslist(statuslist=status_list)
+
+		df_1 = pd.DataFrame({
+			"Statuses": status_list,
+			"Ticket Count": total_tickets
+		})
+		fig1 = px.bar(df_1, x="Statuses", y="Ticket Count", 
+							title="Tickets Per Status")
+
+	graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+			
+	# Variable Declaration for Defaults
+	display_activity, display_announce, display_remind = False, False, False
+
+	if recent_announce_submit_dateTime:
+		display_announce = True
+
+	if recent_submission_date:
+		display_activity, display_remind = True, True
+
+	if request.method == 'GET':
+
+		if display_activity:
+			ticket = ticket_controller.get_ticket_with_matching_submitted_date(recent_submission_date)
+			
+			if display_announce:
+				recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
+					submission_dateTime = recent_announce_submit_dateTime)
+
+				# display activity, remind, and announcement
+				return render_template('dashboard.html', 
+										graph1JSON=graph1JSON, 
+										name=curr_user_name, 
+										isAdmin=isAdmin,
+										ticket = ticket, 
+										recent_announcement = recent_announcement,
+										display_activity=display_activity,
+										display_remind=display_remind,
+										display_announce=display_announce)
+
+			# display activity and remind
+			return render_template('dashboard.html', 
+									graph1JSON=graph1JSON, 
+									name=curr_user_name, 
+									isAdmin=isAdmin,
+									ticket = ticket, 
+									display_activity=display_activity,
+									display_remind=display_remind,
+									display_announce=display_announce)
+		
+		elif display_announce:
+			recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
+					submission_dateTime = recent_announce_submit_dateTime)
+
+			# display announcement
+			return render_template('dashboard.html', 
+									graph1JSON=graph1JSON, 
+									name=curr_user_name, 
+									isAdmin=isAdmin,
+									recent_announcement = recent_announcement,
+									display_activity=display_activity,
+									display_remind=display_remind,
+									display_announce=display_announce)
+		
+		#display default stuff
+		return render_template('dashboard.html', 
+								graph1JSON=graph1JSON, 
+								name=curr_user_name, 
+								isAdmin=isAdmin,
+								display_activity=display_activity,
+								display_remind=display_remind,
+								display_announce=display_announce)
+
+	
+	if request.method == 'POST':
+		
+		if request.form.get('Announce_Title') and request.form.get('Announce_Descrip'):
+		
+			announce_title = request.form['Announce_Title']
+			announce_descrip = request.form['Announce_Descrip']
+
+			# Update announcement
+			announcements_controller.create_announcement(
+				announce_title = announce_title,
+				announce_descrip = announce_descrip
+			)
+
+		return redirect(url_for('main_bp.dashboard'))
+	
+	
 
 @main_bp.route('/faq.html',  methods = ['GET', 'POST'])
 @login_required
@@ -225,8 +369,7 @@ def faq():
 				answer = faq_answer
 			)
 
-
-	return render_template('faq.html', all_faq = all_faq, name=curr_user_name, isAdmin=isAdmin)
+		return redirect(url_for('main_bp.faq'))
 
 	
 @main_bp.route('/log_out')
@@ -305,21 +448,24 @@ def analytics():
 				align = ['center', 'center']
 			)
 		)])
-		
+		'''
+		width = 600
+		height = 400
+
 		# Update Chart sizes
 		fig1.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40)
 		)
 		table1.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40)
 		)
 		fig2.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40),
 			legend=dict(
 				orientation="h",
@@ -328,11 +474,11 @@ def analytics():
 			)
 		)
 		table2.update_layout(
-			width=400,
-			height=400,
+			width=width,
+			height=height,
 			margin=dict(t=60, b=40)
 		)
-
+		'''
 		# Make charts to individual JSON objects
 		graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
 		table1JSON = json.dumps(table1, cls=plotly.utils.PlotlyJSONEncoder)

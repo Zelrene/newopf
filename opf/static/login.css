@@ -1,5 +1,6 @@
 .container{
-        font-family: effra, sans-serif;
+    font-family: 'Avenir', sans-serif;
+    position: relative;
  }
 
 .container p {
@@ -19,9 +20,8 @@
 .overlay-container .overlay{
     background-color: white;
     width: 350px;
-    height: 100vh;
+    height: 100%;
     position: relative;
-    top: -10px;
 }
 .overlay h1{
    color:#313131;
@@ -48,10 +48,11 @@
  color: #313131;
  text-align: center;
  font-size: 12px;
- padding-top: calc(100% - 70px);
+ padding-top: calc(100% - 80px);
+ padding-bottom: 15px;
 }
 
-form {
+form.main {
 	display: flex;
 	align-items: center;
 	justify-content: center;

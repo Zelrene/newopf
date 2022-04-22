@@ -19,10 +19,25 @@ h1{
     margin-top: -10px;
 }
 
+.col-sm-6{
+    float: left;
+    margin-left: 0.5em;
+    width: 100%;
+}
+
 .card{
     margin-left: 10px;
     background-color: #1d1d1d90;
+    margin-bottom: 10px;
+    float: left;
 }
+
+.card:hover{
+   
+    background-color: #1d1d1d90;
+    box-shadow: 4px 2px 7px #00000060;
+}
+
 
 .col-sm-6{
     width: 37%;
@@ -40,9 +55,6 @@ h1{
 .card-text{
     color: white;
     font-size: 14px;
-}
-button{
-    float: right;
 }
 
 .right{
@@ -62,7 +74,7 @@ button{
     border-radius: 5px;
 }
 
-.card a{
+.card a#button, input#button{
     color: white;
     float: right;
     margin-top: 20px;
@@ -75,7 +87,7 @@ button{
     
 }
 
-.card a:hover{
+.card #button:hover{
     background-color: #7eb7f560;
 
 }
@@ -85,7 +97,7 @@ button{
 }
 
 .card-body .date {
-    background: url(calendar-check.svg) no-repeat ;
+    background: url(assets/calendar-check.svg) no-repeat ;
     margin-bottom: 10px;
 
   }
@@ -95,7 +107,7 @@ button{
 }
 
 .card-body .time {
-    background: url(clock.svg) no-repeat ;
+    background: url(assets/clock.svg) no-repeat ;
  
   }
 
@@ -103,7 +115,18 @@ button{
     margin-left: 30px;
 }
 
+#chart1{
+    width: 45rem;
+    height: 22rem;
+}
+
+#announcementcard{
+    margin-left: 20rem;
+}
 
 
-
-
+form .btn{
+   color: white;
+   float: right;
+    margin-top: 16px;
+}

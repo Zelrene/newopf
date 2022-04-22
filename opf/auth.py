@@ -82,30 +82,26 @@ def sign_up():
 		if request.form['submit_btn'] == 'Log In':
 			return redirect(url_for('auth_bp.log_in'))
 
+		net_id = request.form['Net_Id']
+		user_role = request.form['User_Role']
 		first_name = request.form['First_Name']
 		last_name = request.form['Last_Name']
+		gender = request.form['Gender']
+		student_year = request.form['Year']
 		contact_email= request.form['Contact_Email']
-		net_id = request.form['Net_Id']
 		password = request.form['Password']
 
 		user_n = user_controller.get_user_info_with_matching_netid(net_id)
 		user_e = user_controller.get_user_info_with_matching_email(contact_email)
 
 		# Error Message for Sign Up
-		if not request.form.get('User_Role') or	not request.form.get('Gender') or not request.form.get('Year') or not first_name or not last_name or not contact_email or not password:
-			flash('Not all fields are filled. Please complete all required fields before signing up.')
-
-			if net_id and user_n:
-				flash('A user with the same NETID already exists. Please use a different NETID.')
-			
-			if contact_email and user_e:
-				flash('A user with the email already exists. Please use a different email.')
-
+		if user_n:
+			flash('A user with the same NETID already exists. Please use a different NETID.')
 			return redirect(url_for('auth_bp.sign_up'))
 
-		user_role = request.form['User_Role']
-		gender = request.form['Gender']
-		student_year = request.form['Year']
+		if user_e:
+			flash('A user with the email already exists. Please use a different email.')
+			return redirect(url_for('auth_bp.sign_up'))
 
 		user_controller.create_user( 
 			first_name = first_name,
