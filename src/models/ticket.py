@@ -18,12 +18,15 @@ class Ticket(db.Model):
     appointment_date = db.Column(db.Date, nullable = True)
     appointment_time = db.Column(db.Time, nullable = True)
     admin_message = db.Column(db.Text, nullable = False)
+    img = db.Column(db.Text, nullable = True)
+    img_name = db.Column(db.Text, nullable = True)
+    img_mimetype = db.Column(db.Text, nullable = True)
 
     #define the ticekt feedback relationship
     # 1 ticket can have only 1 feedback and vice versa (one-to-one reationship)
     ticket_feedback = db.relationship('Feedback', backref = 'ticket', uselist = False )
     
-    def __init__(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, submission_date, appointment_date, appointment_time, admin_message):
+    def __init__(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, submission_date, appointment_date, appointment_time, admin_message, img, img_name, img_mimetype):
         self.title = title
         self.creator_id = creator_id
         self.status = status
@@ -37,6 +40,9 @@ class Ticket(db.Model):
         self.appointment_date = appointment_date
         self.appointment_time = appointment_time  
         self.admin_message = admin_message
+        self.img = img
+        self.img_name = img_name
+        self.img_mimetype = img_mimetype
 
     def get_id(self):
         return self.id

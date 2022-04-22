@@ -48,6 +48,8 @@ def create_tickets():
 		unit = request.form['Unit#']
 		additionalNotes = request.form['AdditionalNotes']
 		creator_id = current_user.id
+		pic = request.files['pic']
+ 
 
 		ticket_controller.create_ticket(
 			title = title,
@@ -58,6 +60,7 @@ def create_tickets():
 			unit = unit,
 			additionalNotes = additionalNotes,
 			creator_id = creator_id,
+			pic = pic
 		)
 
 		return redirect(url_for('main_bp.view_tickets'))
