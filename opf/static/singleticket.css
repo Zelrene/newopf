@@ -8,7 +8,7 @@ h2{
 
 .card{
     margin-left: 20px;
-    height: 36rem;
+    height: 38rem;
 }
 
 .card-body{
@@ -114,12 +114,13 @@ h1{
 
 .actions .btn{
     font-size: 12px;
-    margin-bottom: 15px;
+   
 }
 
 .actions .deletetix .btn{
     background-color: #D12727;
     margin-right: 6px;
+    
 }
 .actions .feedbacktix .btn{
     background-color: #004B7F;

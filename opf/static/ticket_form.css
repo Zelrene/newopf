@@ -75,3 +75,8 @@ textarea{
     border-radius: 5px;
     border-color: #d2d3d4;
 }
+
+input[type=file]{
+    border-radius: 5px;
+   cursor: pointer;
+}
