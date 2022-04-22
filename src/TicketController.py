@@ -13,7 +13,7 @@ database = DB_Connector()
 
 class TicketController(): 
 
-    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes, pic): 
+    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes, pic=None): 
         
         status = "Submitted"
         admin_message = "NA"
@@ -21,14 +21,14 @@ class TicketController():
         appointment_date = None
         appointment_time = None
 
-        img = pic.read()
-        filename = secure_filename(pic.filename)
-        mimetype = pic.mimetype
-        
-        if not filename or not mimetype:
-            img = None
-            filename = None
-            mimetype = None
+        img = None
+        filename = None
+        mimetype = None
+
+        if pic:
+            img = pic.read()
+            filename = secure_filename(pic.filename)
+            mimetype = pic.mimetype
 
         database.insert_ticket(
             title = title,
