@@ -16,7 +16,7 @@
         {% endif %}
     {% endwith%}
     <div class="formcontainer">
-        <form action = "/create_tickets.html" method = "POST">
+        <form action = "/create_tickets.html" enctype = "multipart/form-data" method = "POST">
             <div class="container-left">
                     <h1>Create New Ticket</h1>
                     <br><hr><br>
@@ -104,6 +104,11 @@
                     <textarea 
                     name = "AdditionalNotes"  
                     value="{{ request.form['AdditionalNotes'] }}"></textarea></p>
+                
+                <p> Upload an image of the issue</p>
+                <div>
+                    <input type ="file" name ="pic" />
+                </div>
 
                 <input class="btn" type="submit" name="submit_btn" value="Submit Ticket">
             </div>

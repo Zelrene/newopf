@@ -1,3 +1,5 @@
+from werkzeug.utils import secure_filename
+
 from src.db_connector import DB_Connector
 
 from src.extra_functionality import Extra_functionality 
@@ -11,13 +13,22 @@ database = DB_Connector()
 
 class TicketController(): 
 
-    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes): 
+    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes, pic): 
         
         status = "Submitted"
         admin_message = "NA"
         submission_date = datetime.now()
         appointment_date = None
         appointment_time = None
+
+        img = pic.read()
+        filename = secure_filename(pic.filename)
+        mimetype = pic.mimetype
+        
+        if not filename or not mimetype:
+            img = None
+            filename = None
+            mimetype = None
 
         database.insert_ticket(
             title = title,
@@ -33,7 +44,9 @@ class TicketController():
             appointment_date = appointment_date, 
             appointment_time= appointment_time,
             admin_message = admin_message,
-            
+            img = img, 
+            img_name = filename,
+            img_mimetype = mimetype
             )
 
     ''' 

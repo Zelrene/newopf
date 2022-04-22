@@ -16,7 +16,7 @@ class DB_Connector():
 
     '''ticket model functions'''
 
-    def insert_ticket(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, submission_date, appointment_date, appointment_time, admin_message):
+    def insert_ticket(self, title, creator_id, status, description, severity_level, building, unit, location, additionalNotes, submission_date, appointment_date, appointment_time, admin_message, img, img_name, img_mimetype):
         
         new_ticket = Ticket(
             title = title,
@@ -31,7 +31,11 @@ class DB_Connector():
             submission_date = submission_date,
             appointment_date = appointment_date,
             appointment_time = appointment_time,
-            admin_message = admin_message)
+            admin_message = admin_message,
+            img = img,
+            img_name = img_name,
+            img_mimetype = img_mimetype
+            )
 
         db.session.add(new_ticket)
         db.session.commit()
