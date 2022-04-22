@@ -19,9 +19,17 @@ h1{
     margin-top: -10px;
 }
 
+.col-sm-6{
+    float: left;
+    margin-left: 0.5em;
+    width: 100%;
+}
+
 .card{
     margin-left: 10px;
     background-color: #1d1d1d90;
+    margin-bottom: 10px;
+    float: left;
 }
 
 .card:hover{
@@ -69,7 +77,7 @@ button{
     border-radius: 5px;
 }
 
-.card a#button{
+.card a#button, input#button{
     color: white;
     float: right;
     margin-top: 20px;

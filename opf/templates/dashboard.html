@@ -9,8 +9,8 @@
 {% block content %}
     <h1>Your Dashboard</h1>
     <br>
-    <div class="row">
-      <div class="col-sm-6">
+    <!--div class="row"-->
+      <div class="col-sm-6" style="width: 550px;">
         <label>Recent Activity</label>
         <div class="card" style="width: 500px;">
           <div class="card-body">
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>   
-      <div class="col-sm-6">
+      <div class="col-sm-6" style="width: 450px;">
         <label>Upcoming Appointments</label>
         <div class="card" style="width:400px; height: 209px;">
           <div class="card-body">
@@ -41,7 +41,7 @@
               <p class="card-text">Your upcoming appointment for {{ticket.title}} is coming up on...</p>
               <p class="card-text">Date & Time</p>
               {% if isAdmin %}
-              <a id="button" style=" font-size: 14px; width: 150px; padding: 2px;"href="{{ url_for('main_bp.view_single_ticket', ticket_id=ticket.id) }}">Edit Appointment</a>
+              <a id="button" style=" font-size: 14px; width: 150px; padding: 2px;" href="{{ url_for('main_bp.view_single_ticket', ticket_id=ticket.id) }}">Edit Appointment</a>
               {% endif %}
               <div class="date">
               <p class="card-text">{{ticket.appointment_date}}</p>
@@ -54,35 +54,40 @@
             {% endif %}
           </div>
         </div>
-      </div>  
-      <label style=" margin-left: 61.4rem; margin-top: -15.1rem;">New Announcement</label>
-      <div class="card" style="width:400px; height: 190px; margin-left: 62rem; margin-top: -13rem; ">
-        <div class="card-body">
-            {% if display_announce %}
-              <h5 class="card-title" style=" color:#D12727; ">{{ recent_announcement.announce_title }}</h5>
-              <p class="card-text">Description: <br> {{ recent_announcement.announce_descrip }}</p>
-            {% else %}
-              <h5 class="card-title" style=" color:#D12727; ">No Announcement</h5>
-            {% endif %}
+      </div>
+      <div class="col-sm-6" style="width: 450px;">
+        <label>New Announcement</label>
+        <div class="card" style="width:400px; height: 190px;">
+          <div class="card-body">
+              {% if display_announce %}
+                <h5 class="card-title" style=" color:#D12727; ">{{ recent_announcement.announce_title }}</h5>
+                <p class="card-text">Description: <br> {{ recent_announcement.announce_descrip }}</p>
+              {% else %}
+                <h5 class="card-title" style=" color:#D12727; ">No Announcement</h5>
+              {% endif %}
 
-            {% if isAdmin %}
-              <form action = "/dashboard.html" method = "POST">
-                <input type = "text" 
-                  name = "Announce_Title" 
-                  placeholder="Title"
-                  value="{{ request.form['Announce_Title'] }}">
-                </input>
-                <input type = "text" 
-                  name = "Announce_Descrip" 
-                  placeholder="Description"
-                  value="{{ request.form['Announce_Descrip'] }}">
-                </input>
-                <input class="btn" type="submit" name="submit_btn" value="Submit">
-              </form>
-            {% endif %}
+              {% if isAdmin %}
+                <form action = "/dashboard.html" method = "POST">
+                  <input type = "text" 
+                    name = "Announce_Title" 
+                    placeholder="Title"
+                    value="{{ request.form['Announce_Title'] }}">
+                  </input>
+                  <input type = "text" 
+                    name = "Announce_Descrip" 
+                    placeholder="Description"
+                    value="{{ request.form['Announce_Descrip'] }}">
+                  </input>
+                  <input class="btn" id="button" 
+                        type="submit" name="submit_btn" 
+                        style=" font-size: 14px; width: 150px; padding: 2px;"
+                        value="Submit">
+                </form>
+              {% endif %}
+          </div>
         </div>
-    </div>
-    </div>
+      </div>
+    <!--/div-->
       <div class="card" style="max-width: fit-content; margin-top: 1rem;">
           <div class="card-body">
               <div id="chart1"></div>

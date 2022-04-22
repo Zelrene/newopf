@@ -93,7 +93,6 @@ hr{
 
   padding-top: 10px;
   margin-right: 20px;
-  
 }
 
 .header-right {
@@ -136,13 +135,16 @@ hr{
   width: 100%;
   overflow: auto;
   border-radius: 5px;
+  position: relative;
 }
 .dropdown:hover .dropdown-content {
   display: block;
+  background-color: #1d1d1d;
 }
 .dropdown-content a {
   display: block;
-  color: #293241;
+  /*color: #293241;*/
+  color: #ffffff;
   padding: 5px;
   text-decoration: none;
   font-weight: bold;
@@ -150,6 +152,22 @@ hr{
 .dropdown-content a:hover {
   color: #ffffff;
 
+}
+
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  background-color: #1d1d1d;
+}
+.dropdown-menu {
+  width: 100%;
+  border-radius: 5px;
+  overflow: auto;
+}
+.dropdown-menu a{
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .header-right button{
