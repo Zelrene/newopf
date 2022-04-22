@@ -135,7 +135,7 @@ hr{
   width: 100%;
   overflow: auto;
   border-radius: 5px;
-  position: relative;
+  position: absolute;
 }
 .dropdown:hover .dropdown-content {
   display: block;
