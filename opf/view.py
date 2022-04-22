@@ -50,15 +50,15 @@ def create_tickets():
 		creator_id = current_user.id
 
 		ticket_controller.create_ticket(
-				title = title,
-				description = description, 
-				location = location,
-				building = building,
-				severity_level = severity_level,
-				unit = unit,
-				additionalNotes = additionalNotes,
-				creator_id = creator_id,
-				)
+			title = title,
+			description = description, 
+			location = location,
+			building = building,
+			severity_level = severity_level,
+			unit = unit,
+			additionalNotes = additionalNotes,
+			creator_id = creator_id,
+		)
 
 		return redirect(url_for('main_bp.view_tickets'))
 
@@ -96,10 +96,16 @@ def view_single_ticket(ticket_id):
 
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	ticket = ticket_controller.get_single_ticket_with_matching_ticket_id(ticket_id)
+	feedback = feedback_controller.get_single_feedback(ticket_id)
 	isUser = False
 
 	if ticket.creator_id == current_user.id:
 		isUser = True
+
+	if feedback == None:
+		feedback_controller.create_feedback(ticket_id = ticket_id)
+		feedback = feedback_controller.get_single_feedback(ticket_id)
+
 
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
@@ -108,11 +114,13 @@ def view_single_ticket(ticket_id):
 								ticket=ticket, 
 								name=curr_user_name, 
 								isAdmin = isAdmin,
-								isUser = isUser)
+								isUser = isUser,
+								hasFeedback = feedback.is_completed)
 		
 	if request.method == 'POST':
 		
 		status, appointment_date, appointment_time, admin_message = None, None, None, None
+		experience_rate, satisfied_level, additional_comments = None, None, None
 
 		if isAdmin:
 			status = request.form['Status']
@@ -126,26 +134,32 @@ def view_single_ticket(ticket_id):
 			appointment_time = ticket.appointment_time
 			admin_message = ticket.admin_message
 
-		experience_rate = request.form['Experience_Rate']
-		satisfied_level = request.form['Satisfied_Level']
-		additional_comments = request.form['Additional_Comments']
-
 		if  request.form['submit_btn'] == 'Delete Ticket':
 			ticket_controller.delete_ticket(ticket_id = ticket_id)
 
 		if  request.form['submit_btn'] == 'Resubmit Ticket':
 			ticket_controller.resubmit_ticket(ticket_id = ticket_id)
 
-
+		if request.form['submit_btn'] == 'Submit Feedback':
+			experience_rate = request.form['Experience_Rate']
+			satisfied_level = request.form['Satisfied_Level']
+			additional_comments = request.form['Additional_Comments']
 
 		if  request.form['submit_btn'] == 'Submit':
 
-			feedback_controller.create_feedback(
+			if request.form.get('Additional_Comments'):
+				feedback_controller.update_feedback(
 					ticket_id = ticket_id,
 					experience_rate = experience_rate,
 					satisfied_level = satisfied_level,
 					additional_comments = additional_comments
-					)
+				)
+			else:
+				feedback_controller.update_feedback(
+					ticket_id = ticket_id,
+					experience_rate = experience_rate,
+					satisfied_level = satisfied_level
+				)
 		
 		if  request.form['submit_btn'] == 'Save Changes':
 				
@@ -177,7 +191,7 @@ def view_single_ticket(ticket_id):
 @login_required
 def feedback():
 	#feedback = feedback_controller.get_single_feedback(feedback_id)
-	all_feedback = feedback_controller.get_all_feedback()
+	all_feedback = feedback_controller.get_all_completed_feedback()
 
 
 	if request.method == 'GET':

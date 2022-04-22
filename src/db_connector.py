@@ -291,20 +291,34 @@ class DB_Connector():
         return announcement
 
     '''feedback model functions'''
-    def insert_feedback(self, ticket_id, experience_rate, satisfied_level, additional_comments):
+    def insert_feedback(self, ticket_id, experience_rate, satisfied_level, additional_comments, is_completed):
         new_feedback = Feedback(
             ticket_id = ticket_id,
             experience_rate = experience_rate,
             satisfied_level = satisfied_level,
-            additional_comments = additional_comments
+            additional_comments = additional_comments,
+            is_completed = is_completed
         )
 
         db.session.add(new_feedback)
         db.session.commit()
 
+    def update_feedback(self, ticket_id, experience_rate, satisfied_level, additional_comments, is_completed):
+        feedback = Feedback.query.filter_by(id = ticket_id).first()
+        feedback.experience_rate = experience_rate
+        feedback.satisfied_level = satisfied_level
+        feedback.additional_comments = additional_comments
+        feedback.is_completed = is_completed
+
+        db.session.commit()
+
     def select_all_feedback(self):
         all_feedback = Feedback.query.all()
         return all_feedback
+
+    def select_all_completed_feedback(self):
+        completed_feedback = Feedback.query.filter_by(is_completed = True).all()
+        return completed_feedback
 
     def select_single_feedback(self, feedback_id):
         feedback = Feedback.query.filter_by(id = feedback_id).first()

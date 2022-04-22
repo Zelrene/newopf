@@ -8,7 +8,7 @@
 
 {% block content %}
   <div class="formcontainer">
-    <form action = "/view_single_ticket.html" method = "POST">
+
       <div class="card" style="width: 60rem;">
         <div class="card-header">
          Ticket {{ ticket.id}} details
@@ -40,84 +40,58 @@
 
         <!-- Only display Buttons if the user is the ticket owner -->
         {% if isUser %}
+        <form action = "/view_single_ticket.html" method = "POST">
           <div class = "actions">
             <div class="deletetix">
               <input class="btn" type="submit" name="submit_btn" value="Delete Ticket">
             </div>
             <input class="btn" type="submit" name="submit_btn" value="Resubmit Ticket">
             <div class="feedbacktix">
-              <input class="btn" type="button"
+              <input class="btn" type="button" name="submit_btn"
                     data-bs-toggle="modal"
                     data-bs-target="#myModal"
+                    id="submit_feedback"
                     value="Submit Feedback"> 
             </div>
           </div>
 
           <div class="container mt-5">
-            <!--button type="button" class="btn btn-primary" 
-                    data-bs-toggle="modal" data-bs-target="#myModal">
-                    Submit Feedback
-            </button-->
             <div class="modal" id="myModal">
               <div class="modal-dialog">
                   <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Submit Feedback</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                    
-                        <div class="mb-3">
-                            <label class="form-label required">Rate Your Experience</label>
-                            <input type="text"  name = "Experience_Rate"
-                            value="{{ request.form['Experience_Rate'] }}"class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label required">Were you satisfied with our service?</label>
-                            <input type="text"  name = "Satisfied_Level"
-                            value="{{ request.form['Satisfied_Level'] }}"class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label required">Additional comments or concerns</label>
-                            <textarea class="form-control"  name = "Additional_Comments"
-                            value="{{ request.form['Additional_Comments'] }}"></textarea>
-                        </div>
-      
-                    </div>
-                    <div class="modal-footer">
-                      <input class="btn" type="submit" name="submit_btn" value="Submit">
-                    </div>
+                    {% include "feedback_form.html" %}
                   </div>
               </div>
             </div>
           </div>
+        </form>
         {% endif %}
       </div>
      
       {% if isAdmin %}
-      <form action = "/view_single_ticket.html" method = "POST">
-      <div class="admincontrols">
-        <p>Edit Status</p>
-        <select class="select"name="Status" value="{{request.form['Status']}}">
-          <option class="option1">Submitted</option>
-          <option class="option2">In Progress</option>
-          <option class="option3">Denied</option>
-          <option class="option4">Completed</option>
-        </select>
-  
-        <p>Make an appointment</p>
-        <input type="date" name="Appointment_date" value="{{request.form['Appointment_date']}}">
-        <input type="time" name="Appointment_time" value="{{ request.form['Appoint_time']}}">
+        <form action = "/view_single_ticket.html" method = "POST">
+          <div class="admincontrols">
+            <p>Edit Status</p>
+            <select class="select"name="Status" value="{{request.form['Status']}}">
+              <option class="option1">Submitted</option>
+              <option class="option2">In Progress</option>
+              <option class="option3">Denied</option>
+              <option class="option4">Completed</option>
+            </select>
+      
+            <p>Make an appointment</p>
+            <input type="date" name="Appointment_date" value="{{request.form['Appointment_date']}}">
+            <input type="time" name="Appointment_time" value="{{ request.form['Appoint_time']}}">
 
-        <p class="addmsg">Add a message</p>
-        <textarea name="Admin_message" value="{{request.form['Admin_message']}}"></textarea>
-        <br>
-        <p class="note">Note: Changes will be sent to the user via email</p>
-        <input class="btn" type="submit" name="submit_btn" value="Save Changes">
-      </div>
-    {% endif %}
+            <p class="addmsg">Add a message</p>
+            <textarea name="Admin_message" value="{{request.form['Admin_message']}}"></textarea>
+            <br>
+            <p class="note">Note: Changes will be sent to the user via email</p>
+            <input class="btn" type="submit" name="submit_btn" value="Save Changes">
+          </div>
+        </form>
+      {% endif %}
 
-  </form>
   </div>
 {% endblock %}
 
@@ -130,10 +104,17 @@
       return $(this).text() == text;
     }).prop('selected', true);
   </script>
-  <!--script>
-    function manage(submit_btn)
+  <script>
+    var btn = document.getElementById('submit_feedback');
+    let status = '{{ ticket.status }}';
+    let hasFeedback = '{{ hasFeedback }}';
+    if(status == 'Completed' && hasFeedback == 'False')
     {
-      var btn = dcoument.getElementById
+      btn.disabled = false;
     }
-  </script-->
+    else
+    {
+      btn.disabled = true;
+    }
+  </script>
 {% endblock %}
