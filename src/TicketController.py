@@ -150,6 +150,21 @@ class TicketController():
             
         return total_tickets
 
+    def get_number_of_tickets_with_matching_single_building_for_single_user(self, dorm, user_id):
+        tickets_num = database.get_tickets_num_with_matching_single_building_for_single_user(dorm = dorm, user_id = user_id)
+        return tickets_num
+
+
+    def get_number_of_tickets_with_matching_buildings_for_single_user(self, dorms, user_id):
+        dorms = dorms
+        total_tickets = []
+        
+        for dorm in dorms:
+            ticket_num = self.get_number_of_tickets_with_matching_single_building_for_single_user(dorm = dorm, user_id = user_id)
+            total_tickets.append(ticket_num)
+            
+        return total_tickets
+
     def get_number_of_tickets_with_matching_status(self, status):
         tickets_num = database.get_tickets_num_with_matching_status(status = status)
         return tickets_num
@@ -161,6 +176,21 @@ class TicketController():
         
         for status in statuslist:
             ticket_num = self.get_number_of_tickets_with_matching_status(status)
+            total_tickets.append(ticket_num)
+            
+        return total_tickets
+
+    def get_number_of_tickets_with_matching_status_for_single_user(self, status, user_id):
+        tickets_num = database.get_tickets_num_with_matching_status_for_single_user(status = status, user_id =user_id)
+        return tickets_num
+
+  
+    def get_number_of_tickets_with_matching_statuslist_for_single_user(self, statuslist, user_id):
+        statuslist = statuslist
+        total_tickets = []
+        
+        for status in statuslist:
+            ticket_num = self.get_number_of_tickets_with_matching_status_for_single_user(status = status, user_id = user_id)
             total_tickets.append(ticket_num)
             
         return total_tickets

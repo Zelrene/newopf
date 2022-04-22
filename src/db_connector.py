@@ -137,6 +137,18 @@ class DB_Connector():
         
         return tickets_num
 
+
+    def get_tickets_num_with_matching_single_building_for_single_user(self, dorm, user_id):
+        tickets_num = Ticket.query.filter_by(building = dorm, creator_id = user_id).count()
+        
+        if(tickets_num):
+            tickets_num = tickets_num
+        else:
+            tickets_num = 0
+        
+        return tickets_num
+
+
     def get_tickets_num_with_matching_status(self, status):
         tickets_num = Ticket.query.filter_by(status = status).count()
         
@@ -147,6 +159,15 @@ class DB_Connector():
         
         return tickets_num
 
+    def get_tickets_num_with_matching_status_for_single_user(self, status, user_id):
+        tickets_num = Ticket.query.filter_by(status = status, creator_id = user_id).count()
+        
+        if(tickets_num):
+            tickets_num = tickets_num
+        else:
+            tickets_num = 0
+        
+        return tickets_num
 
 
     '''user model functions'''
