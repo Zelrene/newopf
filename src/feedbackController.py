@@ -37,6 +37,10 @@ class FeedbackController():
         feedback = database.select_single_feedback(feedback_id = feedback_id)
         return feedback
 
+    def get_feedback_status(self, feedback_id):
+        status = database.select_status_with_feedback_id(feedback_id)
+        return status
+
     def delete_feedback(self, feedback_id):
         database.delete_feedback(feedback_id = feedback_id)
 

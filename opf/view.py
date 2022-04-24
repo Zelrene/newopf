@@ -63,6 +63,9 @@ def create_tickets():
 			pic = pic
 		)
 
+		ticket_id = ticket_controller.get_most_recent_ticket_id()
+		feedback_controller.create_feedback(ticket_id)
+
 		return redirect(url_for('main_bp.view_tickets'))
 
 @main_bp.route('/view_tickets.html', methods = ['GET', 'POST'])
@@ -99,16 +102,12 @@ def view_single_ticket(ticket_id):
 
 	isAdmin = user_controller.is_user_admin(current_user.net_id)
 	ticket = ticket_controller.get_single_ticket_with_matching_ticket_id(ticket_id)
-	feedback = feedback_controller.get_single_feedback(ticket_id)
 	isUser = False
+
+	feedback_status = feedback_controller.get_feedback_status(ticket_id)
 
 	if ticket.creator_id == current_user.id:
 		isUser = True
-
-	if feedback == None:
-		feedback_controller.create_feedback(ticket_id = ticket_id)
-		feedback = feedback_controller.get_single_feedback(ticket_id)
-
 
 	if request.method == 'GET':
 		curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
@@ -118,7 +117,7 @@ def view_single_ticket(ticket_id):
 								name=curr_user_name, 
 								isAdmin = isAdmin,
 								isUser = isUser,
-								hasFeedback = feedback.is_completed)
+								hasFeedback = feedback_status)
 		
 	if request.method == 'POST':
 		

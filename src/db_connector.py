@@ -99,6 +99,10 @@ class DB_Connector():
         ticket = Ticket.query.filter_by(submission_date = submission_date).first()
         return ticket
 
+    def select_most_recent_ticket_id(self):
+        ticket = Ticket.query.order_by(Ticket.id.desc()).first()
+        return ticket.id
+
 
     def delete_ticket(self, ticket_id):
         ticket_to_del = Ticket.query.filter_by(id = ticket_id).first()
@@ -324,7 +328,6 @@ class DB_Connector():
             additional_comments = additional_comments,
             is_completed = is_completed
         )
-
         db.session.add(new_feedback)
         db.session.commit()
 
@@ -348,6 +351,11 @@ class DB_Connector():
     def select_single_feedback(self, feedback_id):
         feedback = Feedback.query.filter_by(id = feedback_id).first()
         return feedback
+
+    def select_status_with_feedback_id(self, feedback_id):
+        feedback = self.select_single_feedback(feedback_id)
+        status = feedback.is_completed
+        return status
 
     def delete_feedback(self, feedback_id):
         feedback_to_del = Feedback.query.filter_by(id = feedback_id).first()
