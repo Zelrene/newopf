@@ -2,6 +2,7 @@ from werkzeug.utils import secure_filename
 
 from src.db_connector import DB_Connector
 
+from src.feedbackController import FeedbackController
 from src.extra_functionality import Extra_functionality 
 
 from datetime import datetime
@@ -10,6 +11,7 @@ from datetime import date
 from src.models.ticket import Ticket
 
 database = DB_Connector()
+feedback = FeedbackController()
 
 class TicketController(): 
 
@@ -48,6 +50,9 @@ class TicketController():
             img_name = filename,
             img_mimetype = mimetype
             )
+
+        new_ticket_id = self.get_most_recent_ticket_id()
+        feedback.create_feedback(ticket_id = new_ticket_id)
 
     ''' 
     def create_admin_message(self, admin_message):
