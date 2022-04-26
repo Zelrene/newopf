@@ -236,6 +236,22 @@ class TicketController():
 
         return recent_submission_date
 
+    def get_recent_ticket_submission_date_of_user(self, user_id):
+        tickets = database.select_all_tickets_with_matching_user_id(user_id)
+        submission_dates_list = []
+
+        for ticket in tickets:
+            submission_dates_list.append(ticket.submission_date)
+        
+        today = datetime.now()
+        if (len(submission_dates_list) > 0):
+
+            recent_submission_date = max(submission_dates_list)
+        else:
+            recent_submission_date = None
+
+        return recent_submission_date
+
     def get_ticket_with_matching_submitted_date(self, submission_date):
         ticket = database.select_ticket_with_matching_submission_date(submission_date = submission_date)
         return ticket

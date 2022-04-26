@@ -202,7 +202,7 @@ def dashboard():
 	curr_user_name= user_controller.get_firstLast_name_with_matching_netid(current_user.net_id)
 
 	# get the most recently submitted ticket date
-	recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
+	recent_submission_date = None #ticket_controller.get_recent_ticket_submission_date()
 	
 	# get the most recently submiited announcements datetime
 	recent_announce_submit_dateTime = announcements_controller.get_recent_announcement_submission_dateTime()
@@ -210,6 +210,10 @@ def dashboard():
 	fig1 = None
 
 	if isAdmin:
+		# Get the most recently submitted ticket date (in general)
+		recent_submission_date = ticket_controller.get_recent_ticket_submission_date()
+
+		# Analytics Graph
 		dorms = ['Argenta Hall', 
 				'Canada Hall',
 				'Great Basin Hall',
@@ -229,6 +233,10 @@ def dashboard():
 		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", 
 						title="All Tickets per Residence Halls")
 	else:
+		# Get the most recently submitted ticket date (of the user)
+		recent_submission_date = ticket_controller.get_recent_ticket_submission_date_of_user(current_user.id)
+
+		# Analytics Graph
 		status_list = ['Submitted',
 					'In Progress',
 					'Denied',
