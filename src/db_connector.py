@@ -1,6 +1,7 @@
 from opf import db
 from datetime import datetime
 from datetime import date
+from sqlalchemy import not_
 
 from src.models.ticket import Ticket
 #from src.models.ticket import Status
@@ -41,7 +42,8 @@ class DB_Connector():
         db.session.commit()
 
     def select_all_tickets(self):
-        tickets = Ticket.query.all()
+        #tickets = Ticket.query.all()
+        tickets = Ticket.query.filter(not_(Ticket.status.contains('Deleted'))).all()
         return tickets
 
     '''
@@ -54,7 +56,8 @@ class DB_Connector():
     '''
 
     def select_all_tickets_with_matching_user_id(self, user_id):
-        tickets = Ticket.query.filter_by(creator_id = user_id).all()
+        #tickets = Ticket.query.filter_by(creator_id = user_id).all()
+        tickets = Ticket.query.filter(Ticket.creator_id == user_id, not_(Ticket.status.contains('Deleted'))).all()
         return tickets
 
     def select_single_ticket_with_matching_user_id(self, user_id):
@@ -103,7 +106,7 @@ class DB_Connector():
         ticket = Ticket.query.order_by(Ticket.id.desc()).first()
         return ticket.id
 
-
+    '''
     def delete_ticket(self, ticket_id):
         ticket_to_del = Ticket.query.filter_by(id = ticket_id).first()
         feedback_to_del = Feedback.query.filter_by(ticket_id = ticket_id).first()
@@ -111,6 +114,12 @@ class DB_Connector():
             db.session.delete(feedback_to_del)
         db.session.delete(ticket_to_del)
         db.session.commit()
+    '''
+    def delete_ticket(self, ticket_id):
+        self.update_ticket_status(
+            ticket_id = ticket_id,
+            new_status = "Deleted"
+            )
 
     def update_ticket_status(self, ticket_id, new_status):
         ticket = Ticket.query.filter_by(id = ticket_id).first()
