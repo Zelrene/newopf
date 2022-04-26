@@ -1,5 +1,9 @@
 <div class="header-left">
-    <p>Optimum Property Fix</p>
+    {% if isAdmin %}
+        <p>Optimum Property Fix - Admin</p>
+    {% else %}
+        <p>Optimum Property Fix - Student</p>
+    {% endif %}
 </div>
 
 
@@ -8,11 +12,7 @@
 
         <div class="dropdown">
             <button class="username btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                {% if isAdmin %}
-                    Welcome, Admin {{ name }}
-                {% else %}
-                    Welcome, Student {{ name }}
-                {% endif %}
+                Welcome, {{ name }}
             </button>
             <ul class="dropdown-content dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="{{url_for('main_bp.log_out')}}">Sign Out</a></li>
