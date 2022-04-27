@@ -83,6 +83,11 @@ class DB_Connector():
         creator_email =  ticket.user.contact_email
         return creator_email
 
+    def select_creator_phone_number_with_matching_ticket_id(self, ticket_id):
+        ticket = Ticket.query.filter_by(id = ticket_id).first()
+        phone_number =  ticket.user.phone_number
+        return phone_number
+
     def select_creator_name_with_matching_ticket_id(self, ticket_id):
         ticket = Ticket.query.filter_by(id = ticket_id).first()
         first_name = ticket.user.first_name
@@ -189,7 +194,7 @@ class DB_Connector():
 
     '''user model functions'''
 
-    def insert_user(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password):
+    def insert_user(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password, phone_number):
         new_user = User(
             first_name = first_name,
             last_name = last_name,
@@ -199,6 +204,7 @@ class DB_Connector():
             gender = gender,
             student_year = student_year,
             password = password,
+            phone_number = phone_number
             )
 
 

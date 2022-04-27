@@ -1,6 +1,7 @@
 from flask_login import UserMixin
-#from sqlalchemy import PrimaryKeyConstraint
 from opf import db
+
+#from sqlalchemy import PrimaryKeyConstraint
 
 '''
 # Define the UserRoles association table
@@ -66,13 +67,14 @@ class User(db.Model, UserMixin):
     gender = db.Column(db.Enum('M', 'F', 'NA'), nullable = False)
     student_year = db.Column(db.String(50))
     password = db.Column(db.String(500), nullable = False)
+    phone_number = db.Column(db.String(50), nullable = False)
 
 
     # Define the user ticket relationship to Role via tickets
     # a user can have multiple tickets (one to many relationstip)
     tickets = db.relationship('Ticket', backref ='user', lazy = 'dynamic')
 
-    def __init__(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password):
+    def __init__(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password, phone_number):
         self.first_name = first_name
         self.last_name = last_name
         self.user_role = user_role
@@ -81,6 +83,7 @@ class User(db.Model, UserMixin):
         self.gender = gender
         self.student_year = student_year
         self.password = password
+        self.phone_number = phone_number
     
 
     def get_id(self):

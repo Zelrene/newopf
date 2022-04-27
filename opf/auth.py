@@ -90,6 +90,7 @@ def sign_up():
 		student_year = request.form['Year']
 		contact_email= request.form['Contact_Email']
 		password = request.form['Password']
+		phone_number = request.form['Contact_phone_number']
 
 		user_n = user_controller.get_user_info_with_matching_netid(net_id)
 		user_e = user_controller.get_user_info_with_matching_email(contact_email)
@@ -111,7 +112,8 @@ def sign_up():
 			net_id = net_id,
 			gender = gender,
 			student_year = student_year,
-			password = generate_password_hash(password)
+			password = generate_password_hash(password),
+			phone_number = phone_number
 			)
 			
 		return redirect(url_for('auth_bp.log_in'))

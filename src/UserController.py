@@ -4,7 +4,7 @@ database = DB_Connector()
 
 class UserController(): 
 
-    def create_user(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password): 
+    def create_user(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password, phone_number): 
         
         if gender == 'Male':
             gender = 'M'
@@ -21,7 +21,8 @@ class UserController():
             net_id = net_id,
             gender = gender,
             student_year = student_year,
-            password = password
+            password = password,
+            phone_number = phone_number
             )
 
     def get_all_users(self):
