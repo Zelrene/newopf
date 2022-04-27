@@ -32,6 +32,7 @@ pip install python-dotenv
 pip install Flask-Mail
 pip install plotly
 pip install pandas
+pip install vonage
 ```
 
 ### Run the Project

@@ -189,7 +189,7 @@ class DB_Connector():
 
     '''user model functions'''
 
-    def insert_user(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password):
+    def insert_user(self, first_name, last_name, user_role, contact_email, net_id, gender, student_year, password, phone_number):
         new_user = User(
             first_name = first_name,
             last_name = last_name,
@@ -199,6 +199,7 @@ class DB_Connector():
             gender = gender,
             student_year = student_year,
             password = password,
+            phone_number = phone_number
             )
 
 

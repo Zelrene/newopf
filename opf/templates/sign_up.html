@@ -89,6 +89,16 @@
                     required>
             <!--/input-->
             <br>
+            <input type = "tel"
+                name = "Contact_phone_number"
+                placeholder = "Phone Number: 123-456-7890"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                value = "{{ request.form['Contact_Phone_number'] }}" 
+                oninvalid="this.setCustomValidity('Required!')" 
+                oninput="this.setCustomValidity('')"
+                required>
+            <!--/input-->
+            <br>
             <input type = "password"
                     name = "Password"
                     placeholder = "Password"

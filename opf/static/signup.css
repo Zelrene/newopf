@@ -105,6 +105,16 @@ form.main {
     width: 13rem;
 }
 
+.form-container input[type=tel]{
+    border-color: white;
+    border-width: 1px;
+    padding: 5px 40px;
+    border-radius: 5px;
+    color: #313131;
+    margin-top: 15px;
+    width: 13rem;
+}
+
 .form-container input[type=email]{
     border-color: white;
     border-width: 1px;
