@@ -15,17 +15,13 @@ feedback = FeedbackController()
 
 class TicketController(): 
 
-    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes, pic=None): 
+    def create_ticket(self, title, creator_id, description, severity_level, building, unit, location, additionalNotes, pic=None, img=None, filename=None, mimetype=None): 
         
         status = "Submitted"
         admin_message = "NA"
         submission_date = datetime.now()
         appointment_date = None
         appointment_time = None
-
-        img = None
-        filename = None
-        mimetype = None
 
         if pic:
             img = pic.read()
@@ -266,6 +262,9 @@ class TicketController():
         unit = ticket_info.unit
         location = ticket_info.location
         additionalNotes = ticket_info.additionalNotes
+        img = ticket_info.img
+        filename = ticket_info.img_name
+        mimetype = ticket_info.img_mimetype
 
 
         #send email 
@@ -289,7 +288,10 @@ class TicketController():
             building = building, 
             unit = unit, 
             location = location,
-            additionalNotes = additionalNotes
+            additionalNotes = additionalNotes,
+            img = img,
+            filename = filename,
+            mimetype = mimetype
         )
 
 
