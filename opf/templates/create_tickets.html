@@ -108,10 +108,11 @@
                     value="{{ request.form['AdditionalNotes'] }}"></textarea></p>
                 
                 <p> Upload an image of the issue</p>
-                <div>
-                    <input type ="file" name ="pic" />
-                </div>
-                <br>
+                <dl>
+                    <p>
+                        <input type ="file" name ="pic" autocomplte="off"/>
+                    </p>
+                </dl>
                 <input class="btn" type="submit" name="submit_btn" value="Submit Ticket">
             </div>
         </form>
