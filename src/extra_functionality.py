@@ -1,27 +1,21 @@
 from flask_mail import Message
 from opf import mail
 
-'''
-#for send notifiation through message
-from dotenv import load_dotenv
+
 import vonage
-from .util import env_var, extract_error
 
-#load environmental variables from a .env file:
-load_dotenv('.env')
-
-#load in config from env variables:
-VONAGE_API_KEY = env_var('VONAGE_API_KEY')
-VONAGE_API_SECRET = env_var('VONAGE_API_SECRET')
-VONAGE_NUMBER = env_var('VONAGE_NUMBER')
+from config import Config
 
 #create a new vonage client obj:
 vonage_client = vonage.Client(
-    api_key = VONAGE_API_KEY,
-    api_secret = VONAGE_API_SECRET
+    key = 'd576fb48',
+    secret = 'l28b1nI0Opk2ujtJ',
+    signature_secret = 'BYzr4KcMg8TMRAfXgfSTxjHy87lCRp5PbjI3bljdhXDiF5gxgr'
     )
 
-'''
+
+
+
 
 class Extra_functionality():
 
@@ -29,3 +23,13 @@ class Extra_functionality():
         msg = Message(email_subj, sender = 'opf@gmail.com', recipients = [recipient_email] )
         msg.body = email_body
         mail.send(msg)
+
+
+    def send_sms_message(to_number, message):
+        sms = vonage_client.send_message({ 
+            "to": to_number,
+            "from": "775-440-8695",
+            "text": message,
+        })
+
+ 

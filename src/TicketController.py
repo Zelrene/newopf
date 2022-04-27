@@ -117,6 +117,16 @@ class TicketController():
             email_body = email_body
             )
 
+
+        #send sms 
+        recipeint_phone_number = database.select_creator_phone_number_with_matching_ticket_id(ticket_id)
+        recipeint_name = database.select_creator_name_with_matching_ticket_id(ticket_id)
+        message = email_body
+        Extra_functionality.send_sms_message(
+            to_number = recipeint_phone_number,
+            message = message,
+        )
+
     
     def update_appointment_date(self, ticket_id, new_date):
         database.update_ticket_appointment_date(ticket_id = ticket_id, new_date = new_date)

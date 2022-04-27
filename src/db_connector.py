@@ -83,6 +83,11 @@ class DB_Connector():
         creator_email =  ticket.user.contact_email
         return creator_email
 
+    def select_creator_phone_number_with_matching_ticket_id(self, ticket_id):
+        ticket = Ticket.query.filter_by(id = ticket_id).first()
+        phone_number =  ticket.user.phone_number
+        return phone_number
+
     def select_creator_name_with_matching_ticket_id(self, ticket_id):
         ticket = Ticket.query.filter_by(id = ticket_id).first()
         first_name = ticket.user.first_name
