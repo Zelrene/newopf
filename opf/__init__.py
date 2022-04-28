@@ -4,7 +4,7 @@ from flask_login import LoginManager
 #from flask_session import Session
 from flask_principal import Principal
 from flask_mail import Mail
-import vonage
+from vonage import vonage, Sms
 
 
 db = SQLAlchemy()
@@ -13,7 +13,8 @@ principal = Principal()
 mail = Mail()
 vonage_client = vonage.Client(
 	key = 'd576fb48',
-	secret = 'l28b1nI0Opk2ujtJ'
+	secret = 'l28b1nI0Opk2ujtJ',
+	signature_secret = 'BYzr4KcMg8TMRAfXgfSTxjHy87lCRp5PbjI3bljdhXDiF5gxgr'
 )
 sms = vonage.Sms(vonage_client)
 #sess = Session()

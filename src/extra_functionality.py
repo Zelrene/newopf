@@ -14,7 +14,7 @@ class Extra_functionality():
     def send_sms_message(to_number, message):
         response = sms.send_message({ 
             "from": '18663481396',
-            "to": '17754408695',
+            "to": to_number,
             "text": message,
         })
         '''
