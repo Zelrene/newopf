@@ -27,6 +27,10 @@
           <h5>Status: {{ticket.status}}</h5>
           <p>Appointment: {{ticket.appointment_date}} at {{ticket.appointment_time}}</p>
           
+          {% if ticket.img is not none %}
+            <p>Image File: <a target="_blank" href="{{ url_for('main_bp.view_single_ticket_img', ticket_id=ticket.id) }}">Image of Issue</a></p>
+          {% endif %}
+
           <p>Severity: {{ticket.severity_level}}</p>
           <p>Location: {{ticket.location}}</p>
           <p>Building: {{ticket.building}}</p>

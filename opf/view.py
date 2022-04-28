@@ -1,7 +1,7 @@
 from distutils.ccompiler import gen_lib_options
 from operator import ge
 from unicodedata import name
-from flask import Flask, Blueprint, abort, render_template, request, redirect, flash, session, url_for
+from flask import Flask, Blueprint, abort, render_template, request, redirect, flash, session, url_for, Response
 
 from flask_login import login_required, current_user, logout_user
 
@@ -180,6 +180,15 @@ def view_single_ticket(ticket_id):
 
 		return redirect(url_for('main_bp.view_tickets'))
 
+@main_bp.route('/view_single_ticket.html/<int:ticket_id>/img',  methods = ['GET'])
+@login_required
+def view_single_ticket_img(ticket_id):
+	ticket = ticket_controller.get_single_ticket_with_matching_ticket_id(ticket_id)
+
+	if not ticket.img:
+		abort(404)
+
+	return Response(ticket.img, mimetype=ticket.img_mimetype)
 
 @main_bp.route('/feedback.html',  methods = ['GET'])
 @login_required
