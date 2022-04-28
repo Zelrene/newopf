@@ -7,9 +7,23 @@
 
         <div class="mb-3">
             <label class="form-label required">Rate Your Experience</label>
-            <input type="text"  name = "Experience_Rate"
-            value="{{ request.form['Experience_Rate'] }}"class="form-control">
+            <br>
+            <!--input type="text"  name = "Experience_Rate"
+            value="{{ request.form['Experience_Rate'] }}"class="form-control"-->
+            <div class="rating">
+                <input type="radio" name="Experience_Rate" value="5">
+                <input type="radio" name="Experience_Rate" value="4.5">
+                <input type="radio" name="Experience_Rate" value="4">
+                <input type="radio" name="Experience_Rate" value="3.5">
+                <input type="radio" name="Experience_Rate" value="3">
+                <input type="radio" name="Experience_Rate" value="2.5">
+                <input type="radio" name="Experience_Rate" value="2">
+                <input type="radio" name="Experience_Rate" value="1.5">
+                <input type="radio" name="Experience_Rate" value="1">
+                <input type="radio" name="Experience_Rate" value="0.5" checked>
+            </div>
         </div>
+        <br><br>
         <div class="mb-3">
             <label class="form-label required">Were you satisfied with our service?</label>
             <input type="text"  name = "Satisfied_Level"

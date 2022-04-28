@@ -164,3 +164,43 @@ h1{
 .modal-footer {
   margin-bottom: 10px;
 }
+
+/* STAR RATING */
+.rating{
+  position: relative;
+  display: flex;
+  margin: 10px 0;
+  flex-direction: row-reverse ;
+  float: left;
+}
+.rating input{
+  position: relative;
+  width: 20px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-appearance: none;
+  appearance: none;
+  overflow: hidden;
+}
+.rating input::before{
+  content: '\f005';
+  position: absolute;
+  font-family: fontAwesome;
+  font-size: 34px;
+  position: absolute;
+  left: 4px;
+  color: #1d1d1d;
+  transition: 0.5s;
+}
+.rating input:nth-child(2n + 1)::before{
+  right: 4px;
+  left: initial;
+}
+.rating input:hover ~ input::before,
+.rating input:hover::before,
+.rating input:checked ~ input::before,
+.rating input:checked::before{
+  color: #ee6c4d;
+}

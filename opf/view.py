@@ -140,7 +140,7 @@ def view_single_ticket(ticket_id):
 			if request.form.get('Additional_Comments'):
 				feedback_controller.update_feedback(
 					ticket_id = ticket_id,
-					experience_rate = experience_rate,
+					experience_rate = str(experience_rate),
 					satisfied_level = satisfied_level,
 					additional_comments = additional_comments
 				)
