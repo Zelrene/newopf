@@ -1,21 +1,7 @@
 from flask_mail import Message
-from opf import mail
-
-
-import vonage
+from opf import mail, sms
 
 from config import Config
-
-#create a new vonage client obj:
-vonage_client = vonage.Client(
-    key = 'd576fb48',
-    secret = 'l28b1nI0Opk2ujtJ',
-    signature_secret = 'BYzr4KcMg8TMRAfXgfSTxjHy87lCRp5PbjI3bljdhXDiF5gxgr'
-    )
-
-
-
-
 
 class Extra_functionality():
 
@@ -26,10 +12,14 @@ class Extra_functionality():
 
 
     def send_sms_message(to_number, message):
-        sms = vonage_client.send_message({ 
-            "to": to_number,
-            "from": "775-440-8695",
+        response = sms.send_message({ 
+            "from": '18663481396',
+            "to": '17754408695',
             "text": message,
         })
-
- 
+        '''
+        if response["messages"][0]["status"] == "0":
+            print("Message sent successfully.")
+        else:
+            print("Message failed with error: {response['messages'][0]['error-text']}")
+        '''
