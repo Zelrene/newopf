@@ -142,8 +142,8 @@ form.main {
 .form-container select{
     padding: 5px 10px;
     border-radius: 5px;
-    background: none;
-    color: white;
+    background: white;
+    color: rgb(120, 120, 120);
     margin-top: 15px;
     margin-right: 10px;
     width: 10rem;
