@@ -412,25 +412,28 @@ def analytics():
 				'Peavine Hall',
 				'Sierra Hall']
 		total_tickets = ticket_controller.get_number_of_tickets_with_matching_buildings(dorms=dorms)
-
+		
 		df_1 = pd.DataFrame({
 			"Dorms": dorms,
 			"Ticket Count": total_tickets
 		})
 
+		dorms.append("Total Tickets")
+		total_tickets.append(sum(total_tickets))
 		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", 
 						title="All Tickets per Residence Halls")
 		
 		
 
 		table1 = go.Figure(data=[go.Table(
-			header = dict(values = [['Dorms'],['# of Tickets']],
+			header = dict(values = [['<b>Dorms</b>'],['<b># of Tickets</b>']],
 				fill_color = 'paleturquoise',
 				align=['center', 'center']
 			),
 			cells = dict(
 				values = [dorms, total_tickets],
-				align = ['center', 'center']
+				align = ['center', 'center'],
+				height = 22
 			)
 		)])
 		
@@ -451,32 +454,28 @@ def analytics():
 		
 		fig2 = px.pie(df_2, values=residents, names=genders, hole=0.5, title="Genders in Residence Halls")
 		
-		
+		genders.append("Total Residents")
+		residents.append(sum(residents))
 		table2 = go.Figure(data=[go.Table(
-			header = dict(values = [['Gender'],['# of Residents']],
+			header = dict(values = [['<b>Gender</b>'],['<b># of Residents<b>']],
 				fill_color = 'paleturquoise',
 				align=['center', 'center']
 			),
 			cells = dict(
 				values = [genders, residents],
-				align = ['center', 'center']
+				align = ['center', 'center'],
+				height = 22
 			)
 		)])
-		'''
-		width = 600
-		height = 400
+		
 
 		# Update Chart sizes
 		fig1.update_layout(
-			width=width,
-			height=height,
-			margin=dict(t=60, b=40)
+			yaxis = dict(
+				tickformat=",d"
+			)
 		)
-		table1.update_layout(
-			width=width,
-			height=height,
-			margin=dict(t=60, b=40)
-		)
+		'''
 		fig2.update_layout(
 			width=width,
 			height=height,
@@ -486,6 +485,11 @@ def analytics():
 				yanchor="bottom",
 				xanchor="right"
 			)
+		)
+		table1.update_layout(
+			width=width,
+			height=height,
+			margin=dict(t=60, b=40)
 		)
 		table2.update_layout(
 			width=width,
