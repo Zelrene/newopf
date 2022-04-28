@@ -26,8 +26,16 @@
         <br><br>
         <div class="mb-3">
             <label class="form-label required">Were you satisfied with our service?</label>
-            <input type="text"  name = "Satisfied_Level"
-            value="{{ request.form['Satisfied_Level'] }}"class="form-control">
+            <!--input type="text"  name = "Satisfied_Level"
+            value="{{ request.form['Satisfied_Level'] }}"class="form-control"-->
+            <select class="select"name="Satisfied_Level" 
+                    value="{{ request.form['Satisfied_Level'] }}"
+                    class="form-control">
+                <option class="option1" value="Satisfied">Satisfied</option>
+                <option class="option2" value="Mostly Satisfied">Mostly Satisfied</option>
+                <option class="option3" value="Mostly Unsatisfied">Mostly Unsatisfied</option>
+                <option class="option4" value="Unsatisfied">Unsatisfied</option>
+            </select>
         </div>
         <div class="mb-3">
             <label class="form-label required">Additional comments or concerns</label>

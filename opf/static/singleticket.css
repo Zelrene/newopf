@@ -187,7 +187,7 @@ h1{
 .rating input::before{
   content: '\f005';
   position: absolute;
-  font-family: fontAwesome;
+  font-family: FontAwesome;
   font-size: 34px;
   position: absolute;
   left: 4px;

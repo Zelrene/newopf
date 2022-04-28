@@ -15,15 +15,15 @@
   
     <div class="card" style="width: 40rem;">
         <div class="card-header">
-            <a style="color: #22262e; padding: 2px;" href="{{ url_for('main_bp.view_single_ticket', ticket_id=feedback.id) }}">
-              Feedback for ticket #{{feedback.id}}
+            <a style="color: #ee6c4d; padding: 2px;" href="{{ url_for('main_bp.view_single_ticket', ticket_id=feedback.id) }}">
+              Feedback for Ticket #{{feedback.id}}
             </a>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Rate your experience: {{feedback.experience_rate}}</li>
+          <li class="list-group-item"><b>Rated Experience:</b> {{feedback.experience_rate}}</li>
          
-          <li class="list-group-item">Were you satisfied with our service? {{feedback.satisfied_level}}</li>
-          <li class="list-group-item">Any additional comments or concerns? {{ feedback.additional_comments}}</li>
+          <li class="list-group-item"><b>Service Satisfaction: </b> {{feedback.satisfied_level}}</li>
+          <li class="list-group-item"><b>Additional Comments or Concerns: </b> <br>{{ feedback.additional_comments}}</li>
         </ul>
         </ul>
       </div>
