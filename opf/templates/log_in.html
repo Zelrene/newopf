@@ -24,7 +24,7 @@
                 name="Net_Id"
                 placeholder="Net Id"
                 value="{{ request.form['Net_Id'] }}" 
-                oninvalid="this.setCustomValidity('Required!')" 
+                oninvalid="this.setCustomValidity('Required: Enter your NetID.')" 
                 oninput="this.setCustomValidity('')"
                 required><!--/input-->
             <br>
@@ -32,7 +32,7 @@
                 name="Password"
                 placeholder="Password"
                 value="{{ request.form['Password'] }}" 
-                oninvalid="this.setCustomValidity('Required!')" 
+                oninvalid="this.setCustomValidity('Required: Enter your password.')" 
                 oninput="this.setCustomValidity('')"
                 required><!--/input-->
             <br> 

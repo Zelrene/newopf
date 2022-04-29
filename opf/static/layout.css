@@ -15,6 +15,24 @@ a {
   text-decoration: none;
 }
 
+select:required:invalid{
+  background: white;
+  color: rgb(120, 120, 120);
+}
+
+option{
+  color: #313131;
+}
+
+textarea{
+  resize: none;
+  border-radius: 5px;
+  border-color: #dfdfdf;
+  margin: 10px 0;
+  font-family: 'Avenir', sans-serif;
+  padding: 12px 20px;
+}
+
 
 .sidebar {
   position: fixed;

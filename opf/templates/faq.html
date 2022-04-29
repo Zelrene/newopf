@@ -30,12 +30,22 @@
                             <div class="mb-3">
                                 <label class="form-label required">Enter the question you want to submit</label>
                                 <input type="text"  name = "faq_question"
-                                value="{{ request.form['faq_question'] }}"class="form-control">
+                                        value="{{ request.form['faq_question'] }}"
+                                        class="form-control"
+                                        oninvalid="this.setCustomValidity('Required: Enter a question.')" 
+                                        oninput="this.setCustomValidity('')"
+                                        required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label required">Enter the answer for the question</label>
-                                <input type="text"  name = "faq_answer"
-                                value="{{ request.form['faq_answer'] }}"class="form-control">
+                                <!--input type="text"  name = "faq_answer"
+                                value="{{ request.form['faq_answer'] }}"class="form-control"-->
+                                <textarea name = "faq_answer"
+                                        class="form-control"
+                                        value="{{ request.form['faq_answer'] }}"
+                                        oninvalid="this.setCustomValidity('Required: Enter an answer.')" 
+                                        oninput="this.setCustomValidity('')"
+                                        required></textarea>
                             </div>
           
                         </div>

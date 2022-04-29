@@ -27,7 +27,7 @@
                     <br> <input type = "text" 
                                 name = "Title" 
                                 value="{{ request.form['Title'] }}"
-                                oninvalid="this.setCustomValidity('Required!')" 
+                                oninvalid="this.setCustomValidity('Required: Enter ticket title.')" 
                                 oninput="this.setCustomValidity('')"
                                 required>
                     <!--/input--></p>
@@ -35,7 +35,7 @@
                     <p>Please describe the problem <br>
                         <textarea name = "Description"
                                 value="{{ request.form['Description'] }}"
-                                oninvalid="this.setCustomValidity('Required!')" 
+                                oninvalid="this.setCustomValidity('Required: Enter ticket description.')" 
                                 oninput="this.setCustomValidity('')"
                                 required></textarea>
                     </p>
@@ -45,7 +45,7 @@
                         <select class="select" 
                                 name = "Severity_level"
                                 value="{{request.form['Severity_level']}}"
-                                oninvalid="this.setCustomValidity('Required!')" 
+                                oninvalid="this.setCustomValidity('Required: Choose severity level.')" 
                                 oninput="this.setCustomValidity('')"
                                 required>
                             <option value="" selected disabled hidden>-- Select Severity --</option>
@@ -60,7 +60,7 @@
                     <div class="dropdown">
                         <select class="select" name = "Location"
                                 value="{{ request.form['Location'] }}"
-                                oninvalid="this.setCustomValidity('Required!')" 
+                                oninvalid="this.setCustomValidity('Required: Choose location of problem.')" 
                                 oninput="this.setCustomValidity('')"
                                 required>
                             <option value="" selected disabled hidden>-- Select Location --</option>
@@ -77,7 +77,7 @@
                 <div class="dropdown">
                     <select class="select" name="Building"
                             value="{{ request.form['Building'] }}"
-                            oninvalid="this.setCustomValidity('Required!')" 
+                            oninvalid="this.setCustomValidity('Required: Choose building location.')" 
                             oninput="this.setCustomValidity('')"
                             required>
                         <option value="" selected disabled hidden>-- Select Building --</option>
@@ -97,7 +97,7 @@
                     <input type ="text" 
                             name = "Unit#"  
                             value="{{ request.form['Unit#'] }}"
-                            oninvalid="this.setCustomValidity('Required!')" 
+                            oninvalid="this.setCustomValidity('Required: Enter your unit #.')" 
                             oninput="this.setCustomValidity('')"
                             required>
                 <!--/input--></p>

@@ -26,13 +26,13 @@
                     name = "Net_Id"
                     placeholder = "Net ID"
                     value = "{{ request.form['Net_Id'] }}" 
-                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninvalid="this.setCustomValidity('Required: Enter your NetID.')" 
                     oninput="this.setCustomValidity('')"
                     required>
             <!--/input-->
             <select class="select" name ="User_Role"
                     value="{{ request.form['User_Role'] }}" 
-                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninvalid="this.setCustomValidity('Required: Pick your role.')" 
                     oninput="this.setCustomValidity('')"
                     required>
                 <option value="" selected disabled hidden>Who Are You?</option>
@@ -44,7 +44,7 @@
                     name = "First_Name"
                     placeholder = "First Name"
                     value = "{{ request.form['First_Name'] }}" 
-                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninvalid="this.setCustomValidity('Required: Enter your first name.')" 
                     oninput="this.setCustomValidity('')"
                     required>
             <!--/input-->
@@ -52,14 +52,14 @@
                     name = "Last_Name"
                     placeholder = "Last Name"
                     value = "{{ request.form['Last_Name'] }}" 
-                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninvalid="this.setCustomValidity('Required: Enter your last name.')" 
                     oninput="this.setCustomValidity('')"
                     required>
             <!--/input-->
             <br>
             <select class="select" name = "Gender"
                     value="{{ request.form['Gender'] }}" 
-                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninvalid="this.setCustomValidity('Required: Pick your gender.')" 
                     oninput="this.setCustomValidity('')"
                     required>
                 <option value="" selected disabled hidden>Gender</option>
@@ -69,7 +69,7 @@
             </select>
             <select class ="select" name="Year"
                     value="{{ request.form['Year'] }}"  
-                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninvalid="this.setCustomValidity('Required: Pick your year.')" 
                     oninput="this.setCustomValidity('')"
                     required>
                 <option value="" selected disabled hidden>Year</option>
@@ -84,7 +84,7 @@
                     name = "Contact_Email"
                     placeholder = "Email Address"
                     value = "{{ request.form['Contact_Email'] }}" 
-                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninvalid="this.setCustomValidity('Required: Enter your email.')" 
                     oninput="this.setCustomValidity('')"
                     required>
             <!--/input-->
@@ -93,7 +93,7 @@
                 name = "Contact_phone_number"
                 placeholder = "Phone Number"
                 value = "{{ request.form['Contact_Phone_number'] }}" 
-                oninvalid="this.setCustomValidity('Required!')" 
+                oninvalid="this.setCustomValidity('Required: Enter your phone number.')" 
                 oninput="this.setCustomValidity('')"
                 required>
             <!--/input-->
@@ -102,7 +102,7 @@
                     name = "Password"
                     placeholder = "Password"
                     value = "{{ request.form['Password'] }}" 
-                    oninvalid="this.setCustomValidity('Required!')" 
+                    oninvalid="this.setCustomValidity('Required: Enter your password.')" 
                     oninput="this.setCustomValidity('')"
                     required>
             <!--/input-->
