@@ -241,6 +241,14 @@ def dashboard():
 
 		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", 
 						title="All Tickets per Residence Halls")
+
+		if total_tickets[-1] is not 0:
+			fig1.update_layout(
+				yaxis = dict(
+					tickformat=",d"
+				)
+			)
+
 	else:
 		# Get the most recently submitted ticket date (of the user)
 		recent_submission_date = ticket_controller.get_recent_ticket_submission_date_of_user(current_user.id)
@@ -262,6 +270,13 @@ def dashboard():
 		})
 		fig1 = px.bar(df_1, x="Statuses", y="Ticket Count", 
 							title="Tickets Per Status")
+
+		if total_tickets[-1] is not 0:
+			fig1.update_layout(
+				yaxis = dict(
+					tickformat=",d"
+				)
+			)
 
 	graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
 			
@@ -470,11 +485,12 @@ def analytics():
 		
 
 		# Update Chart sizes
-		fig1.update_layout(
-			yaxis = dict(
-				tickformat=",d"
+		if total_tickets[-1] is not 0:
+			fig1.update_layout(
+				yaxis = dict(
+					tickformat=",d"
+				)
 			)
-		)
 		'''
 		fig2.update_layout(
 			width=width,
