@@ -85,7 +85,8 @@ h1{
     height: 26px;
     text-align: center;
     border-radius: 5px;
-    
+    font-size: 14px;
+    padding: 2px;
 }
 
 .card #button:hover{
@@ -131,3 +132,14 @@ form .btn{
    float: right;
     margin-top: 16px;
 }
+
+
+.card-body input[type=text]{
+    border-radius: 5px;
+    border-width: .5px;
+    border-color: #dfdfdf;
+    margin: 10px 0;
+    display: block;
+    height: 25px;
+    padding: 5px 10px;
+} 

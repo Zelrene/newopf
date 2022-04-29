@@ -41,7 +41,7 @@
               <p class="card-text">Your upcoming appointment for {{ticket.title}} is coming up on...</p>
               <p class="card-text">Date & Time</p>
               {% if isAdmin %}
-              <a id="button" style=" font-size: 14px; width: 150px; padding: 2px;" href="{{ url_for('main_bp.view_single_ticket', ticket_id=ticket.id) }}">Edit Appointment</a>
+              <a id="button" style="width: 150px;" href="{{ url_for('main_bp.view_single_ticket', ticket_id=ticket.id) }}">Edit Appointment</a>
               {% endif %}
               <div class="date">
                 <p class="card-text">{{ticket.appointment_date}}</p>
@@ -58,11 +58,11 @@
       
       <div class="col-sm-6" style="width: 450px;">
         <label>New Announcement</label>
-        <div class="card" style="width:400px; height: 190px;">
+        <div class="card" style="width:400px;">
           <div class="card-body">
               {% if display_announce %}
                 <h5 class="card-title" style=" color:#D12727; ">{{ recent_announcement.announce_title }}</h5>
-                <p class="card-text">Description: <br> {{ recent_announcement.announce_descrip }}</p>
+                <p class="card-text">{{ recent_announcement.announce_descrip }}</p>
               {% else %}
                 <h5 class="card-title" style=" color:#D12727; ">No Announcement</h5>
               {% endif %}
@@ -79,7 +79,7 @@
                     value="{{ request.form['Announce_Descrip'] }}">
                   <input class="btn" id="button" 
                         type="submit" name="submit_btn" 
-                        style=" font-size: 14px; width: 150px; padding: 2px;"
+                        style="margin-top: 0; float: none;"
                         value="Submit">
                 </form>
               {% endif %}
