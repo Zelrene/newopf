@@ -83,7 +83,7 @@ form.main {
     left: 50px;
     margin-top: 15px;
 }
-
+/*
 .form-container input[type=text]{
     border-color: white;
     border-width: 1px;
@@ -132,13 +132,49 @@ form.main {
     padding: 5px 40px;
     border-radius: 5px;
     color: #313131;
-}
+}*/
 .form-container h1{
     font-size: 40px;
     padding-top: 14rem;
 }
 
+.form-container select,
+.form-container input[type=text]{
+    border-color: white;
+    border-width: 1px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #313131;
+    margin-top: 15px;
+    margin-right: 12px;
+    width: 10rem;
 
+    /* Make input and select same size*/
+    /* Removes 2px sizing issue */
+    -ms-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    box-sizing:content-box;
+    -webkit-box-sizing:content-box; 
+}
+
+.form-container select:required:invalid{
+    background: white;
+    color: rgb(120, 120, 120);
+}
+
+/* input for email, phone#, and password*/
+.form-container input[type=email],
+.form-container input[type=tel],
+.form-container input[type=password] {
+    border-color: white;
+    border-width: 1px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #313131;
+    margin-top: 15px;
+    width: 15rem;
+}
+/*
 .form-container select{
     padding: 5px 10px;
     border-radius: 5px;
@@ -148,7 +184,7 @@ form.main {
     margin-right: 10px;
     width: 10rem;
 }
-
+*/
 .form-container option{
     color: #313131;
 }

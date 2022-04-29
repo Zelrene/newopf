@@ -85,21 +85,23 @@ form.main {
     cursor: pointer; 
     left: 50px;
 }
-
+/*
 .form-container input[type=text]{
     border-color: white;
     border-width: 1px;
     padding: 5px 40px;
     border-radius: 5px;
     color: #313131
-}
+}*/
 
+.form-container input[type=text],
 .form-container input[type=password]{
     border-color: white;
     border-width: 1px;
-    padding: 5px 40px;
+    padding: 5px 10px;
     border-radius: 5px;
     color: #313131;
+    width: 14rem;
 }
 .form-container h1{
     font-size: 40px;
