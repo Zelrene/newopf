@@ -180,7 +180,7 @@ def view_single_ticket(ticket_id):
 
 		return redirect(url_for('main_bp.view_tickets'))
 
-@main_bp.route('/view_single_ticket.html/<int:ticket_id>/img',  methods = ['GET'])
+@main_bp.route('/view_single_ticket.html/<int:ticket_id>/file_upload',  methods = ['GET'])
 @login_required
 def view_single_ticket_img(ticket_id):
 	ticket = ticket_controller.get_single_ticket_with_matching_ticket_id(ticket_id)
@@ -216,7 +216,7 @@ def dashboard():
 	# get the most recently submiited announcements datetime
 	recent_announce_submit_dateTime = announcements_controller.get_recent_announcement_submission_dateTime()
 
-	fig1 = None
+	fig1, display_analytics = None, False
 
 	if isAdmin:
 		# Get the most recently submitted ticket date (in general)
@@ -241,13 +241,24 @@ def dashboard():
 
 		fig1 = px.bar(df_1, x="Dorms", y="Ticket Count", 
 						title="All Tickets per Residence Halls")
-
-		if total_tickets[-1] is not 0:
+		'''
+		if sum(total_tickets) is not 0:
 			fig1.update_layout(
 				yaxis = dict(
 					tickformat=",d"
 				)
 			)
+		'''
+		fig1.update_layout(
+			yaxis = dict(
+				tickformat=",d",
+				dtick="L1.0",
+				tick0=0
+			)
+		)
+
+		if sum(total_tickets) is not 0:
+			display_analytics = True
 
 	else:
 		# Get the most recently submitted ticket date (of the user)
@@ -271,12 +282,17 @@ def dashboard():
 		fig1 = px.bar(df_1, x="Statuses", y="Ticket Count", 
 							title="Tickets Per Status")
 
-		if total_tickets[-1] is not 0:
-			fig1.update_layout(
-				yaxis = dict(
-					tickformat=",d"
-				)
+		fig1.update_layout(
+			yaxis = dict(
+				tickformat=",d",
+				dtick="L1.0",
+				tick0=0
 			)
+		)
+
+		if sum(total_tickets) is not 0:
+			display_analytics = True
+			
 
 	graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
 			
@@ -307,7 +323,8 @@ def dashboard():
 										recent_announcement = recent_announcement,
 										display_activity=display_activity,
 										display_remind=display_remind,
-										display_announce=display_announce)
+										display_announce=display_announce,
+										display_analytics=display_analytics)
 
 			# display activity and remind
 			return render_template('dashboard.html', 
@@ -317,7 +334,8 @@ def dashboard():
 									ticket = ticket, 
 									display_activity=display_activity,
 									display_remind=display_remind,
-									display_announce=display_announce)
+									display_announce=display_announce,
+									display_analytics=display_analytics)
 		
 		elif display_announce:
 			recent_announcement = announcements_controller.get_announcement_with_matching_submitted_date(
@@ -331,7 +349,8 @@ def dashboard():
 									recent_announcement = recent_announcement,
 									display_activity=display_activity,
 									display_remind=display_remind,
-									display_announce=display_announce)
+									display_announce=display_announce,
+									display_analytics=display_analytics)
 		
 		#display default stuff
 		return render_template('dashboard.html', 
@@ -340,7 +359,8 @@ def dashboard():
 								isAdmin=isAdmin,
 								display_activity=display_activity,
 								display_remind=display_remind,
-								display_announce=display_announce)
+								display_announce=display_announce,
+								display_analytics=display_analytics)
 
 	
 	if request.method == 'POST':
@@ -488,7 +508,9 @@ def analytics():
 		if total_tickets[-1] is not 0:
 			fig1.update_layout(
 				yaxis = dict(
-					tickformat=",d"
+				tickformat=",d",
+				dtick="L1.0",
+				tick0=0
 				)
 			)
 		'''
