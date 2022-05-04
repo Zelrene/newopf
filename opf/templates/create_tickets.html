@@ -26,6 +26,7 @@
                     <span>ex. "Faucet Leak"</span>
                     <br> <input type = "text" 
                                 name = "Title" 
+                                placeholder = "Ticket Title"
                                 value="{{ request.form['Title'] }}"
                                 oninvalid="this.setCustomValidity('Required: Enter ticket title.')" 
                                 oninput="this.setCustomValidity('')"
@@ -34,6 +35,7 @@
                     
                     <p>Please describe the problem <br>
                         <textarea name = "Description"
+                                placeholder = "Problem Description"
                                 value="{{ request.form['Description'] }}"
                                 oninvalid="this.setCustomValidity('Required: Enter ticket description.')" 
                                 oninput="this.setCustomValidity('')"
@@ -96,6 +98,7 @@
                 <p>Your Unit # 
                     <input type ="text" 
                             name = "Unit#"  
+                            placeholder = "Unit #"
                             value="{{ request.form['Unit#'] }}"
                             oninvalid="this.setCustomValidity('Required: Enter your unit #.')" 
                             oninput="this.setCustomValidity('')"
@@ -105,6 +108,7 @@
                 <p>Additional Notes <br>
                     <textarea 
                     name = "AdditionalNotes"  
+                    placeholder = "Additional Notes"
                     value="{{ request.form['AdditionalNotes'] }}"></textarea></p>
                 
                 <p> Upload an image or video of the issue</p>
